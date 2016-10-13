@@ -1,3 +1,4 @@
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "gg.hh"
@@ -8,33 +9,26 @@
 
 static bool run;
 
-/* **stack
- * array of pointer to windows. */
+/* stack
+ * array of pointers to windows. */
 
-static ggWindow **stack;
-
-/* size
- * size of the stack of windows. */
-
-static int size;
+static std::vector<ggWindow*> stack;
 
 /* font
  * pointer to a TTF resource. */
 
 static TTF_Font *font;
 
-
 static gg_fontInfo fi;
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 int gg_init()
 {
-	run   = false;
-	stack = NULL;
-	font  = NULL;
+	run  = false;
+	font = nullptr;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -51,7 +45,7 @@ int gg_init()
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 int gg_loadFont(const char *f, int s)
@@ -67,7 +61,7 @@ int gg_loadFont(const char *f, int s)
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 gg_fontInfo &gg_getFontInfo()
@@ -76,10 +70,10 @@ gg_fontInfo &gg_getFontInfo()
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
-int gg_drawFont(SDL_Renderer *ren, SDL_Rect rc, const char *t)
+void gg_drawFont(SDL_Renderer *ren, SDL_Rect rc, const char *t)
 {
 	SDL_Color color      = { 255, 255, 255 };
 	SDL_Surface *surf    = TTF_RenderText_Solid(font, t, color);
@@ -101,7 +95,7 @@ int gg_drawFont(SDL_Renderer *ren, SDL_Rect rc, const char *t)
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 void gg_freeFont()
@@ -110,7 +104,7 @@ void gg_freeFont()
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 int gg_run()
@@ -126,7 +120,7 @@ int gg_run()
 		}
 		else
 		{
-			for (int i=0; i<size; i++)
+			for (unsigned i=0; i<stack.size(); i++)
 				stack[i]->handle(e);
 		}
 	}
@@ -135,31 +129,25 @@ int gg_run()
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 void gg_add(ggWindow *w)
 {
-	stack = (ggWindow**) realloc(stack, sizeof(*w)*(size+1));
-	if (!stack)
-	{
-		puts("[gg::add] memory realloc error!");
-		return;
-	}
-	stack[size] = w;
-	size++;
-	printf("[gg::add] add window %p, id=%d, stack size %d\n", (void*)w, w->id, size);
+	stack.push_back(w);
+	printf("[gg::add] add window %p, id=%d, stack size %zd\n",
+		(void*)w, w->id, stack.size());
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 void gg_end()
 {
-	for (int i=0; i<size; i++)
+	for (unsigned i=0; i<stack.size(); i++)
 		delete stack[i];
-	free(stack);
+	stack.clear();
 	SDL_Quit();
 	TTF_Quit();
 }

@@ -34,6 +34,6 @@ int  gg_loadFont(const char *f, int size);
 
 gg_fontInfo &gg_getFontInfo();
 
-int  gg_drawFont(SDL_Renderer *ren, SDL_Rect rc, const char *t);
+void gg_drawFont(SDL_Renderer *ren, SDL_Rect rc, const char *t);
 
 void gg_freeFont();
