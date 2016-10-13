@@ -10,8 +10,8 @@ ggWidget::ggWidget(int x, int y, int w, int h, const char *l)
 		_h (h),
 		_xw(x+w),
 		_yh(y+h),
-		window  (NULL),
-		callback(NULL),
+		window  (nullptr),
+		callback(nullptr),
 		label   (l),
 		resizeW (false),
 		resizeH (false)

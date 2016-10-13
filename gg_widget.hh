@@ -50,7 +50,7 @@ protected:
 
 public:
 
-	ggWidget(int x, int y, int w, int h, const char *l=NULL);
+	ggWidget(int x, int y, int w, int h, const char *l=nullptr);
 	virtual ~ggWidget();
 
 	/* xywh()

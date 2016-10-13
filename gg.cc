@@ -91,7 +91,7 @@ void gg_drawFont(SDL_Renderer *ren, SDL_Rect rc, const char *t)
 	rc.w = tw;
 	rc.h = th;
 
-	SDL_RenderCopy(ren, texture, NULL, &rc);
+	SDL_RenderCopy(ren, texture, nullptr, &rc);
 }
 
 

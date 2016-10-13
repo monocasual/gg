@@ -9,8 +9,8 @@ ggWindow::ggWindow(const char *t, int x, int y, int w, int h)
 		_y(y),
 		_w(w),
 		_h(h),
-		win(NULL),
-		ren(NULL),
+		win(nullptr),
+		ren(nullptr),
 		damaged(false),
 		preW(w),
 		preH(h)

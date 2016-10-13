@@ -15,7 +15,7 @@ private:
 
 public:
 
-	ggButton(int x, int y, int w, int h, const char *l=NULL);
+	ggButton(int x, int y, int w, int h, const char *l=nullptr);
 
 	void resize(int w, int h);
 	void draw  ();
