@@ -30,7 +30,7 @@ void ggGroup::draw()
 	SDL_SetRenderDrawColor(window->ren, 255, 255, 255, 255);
 	SDL_Rect rect = {x(), y(), w(), h()};
 	SDL_RenderDrawRect(window->ren, &rect);
-	for (int i=0; i<size; i++)
+	for (unsigned i=0; i<stack.size(); i++)
 		stack[i]->draw();
 }
 
@@ -40,6 +40,6 @@ void ggGroup::draw()
 
 void ggGroup::handle(SDL_Event &e)
 {
-	for (int i=0; i<size; i++)
+	for (unsigned i=0; i<stack.size(); i++)
 		stack[i]->handle(e);
 }

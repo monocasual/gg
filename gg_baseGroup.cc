@@ -2,48 +2,38 @@
 #include "gg_widget.hh"
 
 
-ggBaseGroup::ggBaseGroup()
-	: stack(NULL), size(0)
-{
-}
+ggBaseGroup::ggBaseGroup() {}
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 ggBaseGroup::~ggBaseGroup()
 {
-	for (int i=0; i<size; i++)
+	for (unsigned i=0; i<stack.size(); i++)
 		delete stack[i];
-	free(stack);
+	stack.clear();
 	puts("[~ggBaseGroup] destroyed");
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 int ggBaseGroup::add(ggWidget *w)
 {
-	stack = (ggWidget**) realloc(stack, sizeof(w)*(size+1));
-	if (!stack)
-	{
-		printf("[ggBaseGroup::add] unable to expand stack!\n");
-		return 0;
-	}
-	stack[size] = w;
-	size++;
-	printf("[ggBaseGroup::add] stack expanded, size=%d sizeof(stack)=%d\n", size, sizeof(w)*size);
+	stack.push_back(w);
+	printf("[ggBaseGroup::add] stack expanded, size=%zd\n", stack.size());
 	return 1;
 }
 
 
-/* ------------------------------------------------------------------ */
+/* -------------------------------------------------------------------------- */
 
 
 void ggBaseGroup::drawChildren(int dw, int dh)
 {
-	for (int i=0; i<size; i++)
+	for (unsigned i=0; i<stack.size(); i++)
 	{
 		if (stack[i]->resizableW() && stack[i]->resizableH())
 			stack[i]->resize(stack[i]->w() + dw, stack[i]->h() + dh);

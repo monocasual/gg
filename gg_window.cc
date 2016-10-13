@@ -126,7 +126,7 @@ void ggWindow::handle(SDL_Event &e)
 
 	/* then handle events for each child widget. */
 
-	for (int i=0; i<size; i++)
+	for (unsigned i=0; i<stack.size(); i++)
 		stack[i]->handle(e);
 	if (damaged)
 	{

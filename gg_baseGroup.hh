@@ -1,21 +1,24 @@
 
-/* ggBaseGroup ---------------------------------------------------------
+/* ggBaseGroup -----------------------------------------------------------------
  *
  * A generic base for every group.
  *
- * ------------------------------------------------------------------ */
+ * -------------------------------------------------------------------------- */
 
 
 #ifndef __GG_BASEGROUP_HH__
 #define __GG_BASEGROUP_HH__
 
 
+#include <vector>
+#include "gg_widget.hh"
+
+
 class ggBaseGroup
 {
 protected:
 
-	class ggWidget **stack;
-	int              size;
+	std::vector<ggWidget*> stack;
 
 public:
 
