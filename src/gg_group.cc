@@ -33,8 +33,8 @@ void Group::draw()
 	SDL_SetRenderDrawColor(m_window->ren, 255, 255, 255, 255);
 	SDL_Rect rect = {x(), y(), w(), h()};
 	SDL_RenderDrawRect(m_window->ren, &rect);
-	for (unsigned i=0; i<m_stack.size(); i++)
-		m_stack[i]->draw();
+	for (Widget* w : m_stack)
+		w->draw();
 }
 
 
@@ -43,8 +43,8 @@ void Group::draw()
 
 void Group::handle(const SDL_Event& e)
 {
-	for (unsigned i=0; i<m_stack.size(); i++)
-		m_stack[i]->handle(e);
+	for (Widget* w : m_stack)
+		w->handle(e);
 }
 
 } // gg::

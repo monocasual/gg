@@ -56,12 +56,13 @@ public:
 	/* xywh()
 	Sets and return coordinates. */
 
-	int x() const;
-	int y() const;
-	int w() const;
-	int h() const;
-	void x(int x);
-	void y(int y);
+	int getX() const;
+	int getY() const;
+	int getW() const;
+	int getH() const;
+	
+	void setX(int x);
+	void setY(int y);
 
 	void resize(int w, int h);
 

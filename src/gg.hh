@@ -32,9 +32,9 @@ int run();
 void end();
 
 /* loadFont()
- * load a font for drawing text. */
+Loads a font for drawing text. */
 
-int  loadFont(const char* f, int size);
+int loadFont(const char* f, int size);
 
 FontInfo& getFontInfo();
 

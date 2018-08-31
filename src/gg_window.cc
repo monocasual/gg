@@ -40,12 +40,12 @@ Window::~Window()
 /* -------------------------------------------------------------------------- */
 
 
-int Window::x() const { return m_x; }
-int Window::y() const { return m_y; }
-int Window::w() const { return m_w; }
-int Window::h() const { return m_h; }
-void Window::x(int x) { m_x = x; }
-void Window::y(int y) { m_y = y; }
+int Window::getX() const { return m_x; }
+int Window::getY() const { return m_y; }
+int Window::getW() const { return m_w; }
+int Window::getH() const { return m_h; }
+void Window::setX(int x) { m_x = x; }
+void Window::setY(int y) { m_y = y; }
 
 
 /* -------------------------------------------------------------------------- */
@@ -120,8 +120,7 @@ void Window::drawChildren()
 
 void Window::handle(const SDL_Event& e)
 {
-	/* first handle window events such as shown, a resize, a popup and
-	 * so on. */
+	/* Handle window events such as shown, a resize, a popup and so on. */
 
 	if (e.type == SDL_WINDOWEVENT)
 	{
@@ -138,14 +137,12 @@ void Window::handle(const SDL_Event& e)
 		}
 	}
 
-	/* then handle events for each child widget. */
+	/* Then handle events for each child widget. */
 
-	for (unsigned i=0; i<m_stack.size(); i++)
-		m_stack[i]->handle(e);
+	for (Widget* w : m_stack)
+		w->handle(e);
+	
 	if (damaged)
-	{
-		//puts("[Window::handle] m_damaged, redrawing required");
 		render();
-	}
 }
 } // gg::

@@ -12,8 +12,8 @@ BaseGroup::BaseGroup() {}
 
 BaseGroup::~BaseGroup()
 {
-	for (unsigned i=0; i<m_stack.size(); i++)
-		delete m_stack[i];
+	for (Widget* w : m_stack)
+		delete w;
 	m_stack.clear();
 	puts("[~BaseGroup] destroyed");
 }
@@ -35,20 +35,17 @@ int BaseGroup::add(Widget* w)
 
 void BaseGroup::drawChildren(int dw, int dh)
 {
-	for (unsigned i=0; i<m_stack.size(); i++)
+	for (Widget* w : m_stack)
 	{
-		if (m_stack[i]->resizableW() && m_stack[i]->resizableH())
-			m_stack[i]->resize(m_stack[i]->w() + dw, m_stack[i]->h() + dh);
+		if (w->resizableW() && w->resizableH())
+			w->resize(w->w() + dw, w->h() + dh);
 		else
-		if (m_stack[i]->resizableW())
-			m_stack[i]->resize(m_stack[i]->w() + dw, m_stack[i]->h());
+		if (w->resizableW())
+			w->resize(w->w() + dw, w->h());
 		else
-		if (m_stack[i]->resizableH())
-			m_stack[i]->resize(m_stack[i]->w(), m_stack[i]->h() + dh);
-
-		/* redraw all widgets */
-
-		m_stack[i]->draw();
+		if (w->resizableH())
+			w->resize(w->w(), w->h() + dh);
+		w->draw();  // Redraw all widgets.
 	}
 }
 

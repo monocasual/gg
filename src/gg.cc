@@ -123,8 +123,8 @@ int run()
 		}
 		else
 		{
-			for (unsigned i=0; i<stack.size(); i++)
-				stack[i]->handle(e);
+			for (Window* w : stack)
+				w->handle(e);
 		}
 	}
 	end();
@@ -148,8 +148,8 @@ void add(Window* w)
 
 void end()
 {
-	for (unsigned i=0; i<stack.size(); i++)
-		delete stack[i];
+	for (Window* w : stack)
+		delete w;
 	stack.clear();
 	SDL_Quit();
 	TTF_Quit();
