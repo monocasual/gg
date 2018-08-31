@@ -96,11 +96,10 @@ void Window::clear()
 
 void Window::render()
 {
-	if (damaged)
-	{
-		SDL_RenderPresent(ren);   // update render on screen
-		damaged = false;
-	}
+	if (!damaged)
+		return;
+	SDL_RenderPresent(ren);   // update render on screen
+	damaged = false;
 }
 
 
@@ -142,7 +141,6 @@ void Window::handle(const SDL_Event& e)
 	for (Widget* w : m_stack)
 		w->handle(e);
 	
-	if (damaged)
-		render();
+	render();
 }
 } // gg::

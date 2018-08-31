@@ -18,6 +18,7 @@ namespace gg
 {
 class Window;
 
+
 class Widget
 {
 protected:
