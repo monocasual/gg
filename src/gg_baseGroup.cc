@@ -37,14 +37,14 @@ void BaseGroup::drawChildren(int dw, int dh)
 {
 	for (Widget* w : m_stack)
 	{
-		if (w->resizableW() && w->resizableH())
-			w->resize(w->w() + dw, w->h() + dh);
+		if (w->isResizableW() && w->isResizableH())
+			w->resize(w->getW() + dw, w->getH() + dh);
 		else
-		if (w->resizableW())
-			w->resize(w->w() + dw, w->h());
+		if (w->isResizableW())
+			w->resize(w->getW() + dw, w->getH());
 		else
-		if (w->resizableH())
-			w->resize(w->w(), w->h() + dh);
+		if (w->isResizableH())
+			w->resize(w->getW(), w->getH() + dh);
 		w->draw();  // Redraw all widgets.
 	}
 }

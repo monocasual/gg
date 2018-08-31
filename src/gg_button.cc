@@ -54,10 +54,10 @@ void Button::handle(const SDL_Event& e)
 		int mx, my;
 		SDL_GetMouseState(&mx, &my);
 
-		if (mx < m_xw && mx > m_x && my < m_yh && my > m_y)
+		if (mx < getXW() && mx > getX() && my < getYH() && my > getY())
 		{
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				doCallback();
+				//doCallback();
 				drawDown();
 			}
 			else

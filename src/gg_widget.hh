@@ -25,7 +25,7 @@ protected:
 	/* xywh
 	Main coordinates. */
 
-	int m_x, m_y, m_w, m_h, m_xw, m_yh;
+	int m_x, m_y, m_w, m_h;
 
 	/* label
 	A string of text to display inside, outside or near your widget. */
@@ -42,14 +42,6 @@ protected:
 	Widgets belong to a window, so this pointer points to a parent window. */
 
 	Window* m_window;
-
-	/* callback_t
-	Function pointer called when the entity has to do something. Typedef for ease 
-	of use. */
-
-	typedef void (callback_t)(void*);
-	callback_t* m_callback;
-	void* m_callbackData;
 
 	Widget(int x, int y, int w, int h, const char* l=nullptr);
 
@@ -68,43 +60,34 @@ public:
 
 	virtual void handle(const SDL_Event& e) = 0;
 
+	/* xywh()
+	Returns coordinates. */
+	
+	int getX() const;
+	int getY() const;
+	int getW() const;
+	int getH() const;
+	int getXW() const;
+	int getYH() const;
+
+	/* resizableW/H()
+	Returns whether widget is resizable. */
+
+	bool isResizableW() const;
+	bool isResizableH() const;
+
 	/* resize()
 	Sets new size. */
 
 	virtual void resize(int w, int h);
 
-	/* xywh()
-	Returns coordinates. */
-	
-	int x() const;
-	int y() const;
-	int w() const;
-	int h() const;
-	int xw() const;
-	int yh() const;
-
-	/* resizableW/H()
-	Returns whether widget is resizable. */
-
-	bool resizableW() const;
-	bool resizableH() const;
-	void resizable(bool rw, bool rh);
+	void setResizable(bool rw, bool rh);
 
 	/* addParent
 	Add a pointer to the parent widget. Every window must call this function when 
 	a new widget is added. */
 
 	void addWindow(Window* w);
-
-	/* setCallback()
-	Attaches a m_callback to this widget. */
-
-	void addCallback(callback_t* cb, void* cbData);
-
-	/* doCallback()
-	Runs the m_callback, if set. */
-
-	void doCallback() const;
 };
 } // g::
 

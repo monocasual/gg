@@ -31,7 +31,7 @@ int Group::add(Widget* w)
 void Group::draw()
 {
 	SDL_SetRenderDrawColor(m_window->ren, 255, 255, 255, 255);
-	SDL_Rect rect = {x(), y(), w(), h()};
+	SDL_Rect rect = {getX(), getY(), getW(), getH()};
 	SDL_RenderDrawRect(m_window->ren, &rect);
 	for (Widget* w : m_stack)
 		w->draw();
