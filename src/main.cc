@@ -4,17 +4,6 @@
 #include "gg_button.hh"
 
 
-void callback1(void *p)
-{
-	printf("press me! this is the button callback from button %p\n", p);
-}
-
-void callback2(void *p)
-{
-	printf("click me! this is the button callback from button %p\n", p);
-}
-
-
 int main()
 {
 	gg::init();
@@ -24,6 +13,8 @@ int main()
 
 	gg::Button* btn1 = new gg::Button(20, 20, 600, 440, "button");
 	btn1->setResizable(true, true);
+	btn1->onDown([]() { puts("down!"); });
+	btn1->onUp  ([]() { puts("up!"); });
 	w->add(btn1);
 
 	//ggButton *btn2 = new ggButton(btn1->xw()+20, 20, 50, 40, "button");

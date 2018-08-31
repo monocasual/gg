@@ -10,6 +10,7 @@ namespace gg
 {
 class Widget;
 
+
 class Window : public BaseGroup
 {
 protected:

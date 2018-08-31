@@ -57,18 +57,31 @@ void Button::handle(const SDL_Event& e)
 		if (mx < getXW() && mx > getX() && my < getYH() && my > getY())
 		{
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				//doCallback();
+				if(m_onDown != nullptr) m_onDown();
 				drawDown();
 			}
 			else
 			if (e.type == SDL_MOUSEBUTTONUP)
+			{
+				if(m_onUp != nullptr) m_onUp();
 				draw();
+			}
 		}
 		else // when clicking and dragging outside button
 			if (e.type == SDL_MOUSEBUTTONUP)
+			{
+				if(m_onUp != nullptr) m_onUp();
 				draw();
+			}
 	}
 }
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Button::onDown(std::function<void()> f) { m_onDown = f; }
+void Button::onUp(std::function<void()> f)   { m_onUp   = f; }
 
 
 /* -------------------------------------------------------------------------- */
