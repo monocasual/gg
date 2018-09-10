@@ -13,7 +13,7 @@ Widget::Widget(int x, int y, int w, int h, const char* l)
 		m_label   (l),
 		m_resizeW (false),
 		m_resizeH (false),
-		m_window  (nullptr)
+		m_parent  (nullptr)
 {
 }
 
@@ -64,8 +64,8 @@ void Widget::resize(int w, int h)
 /* -------------------------------------------------------------------------- */
 
 
-void Widget::addWindow(Window* w) 
+void Widget::setParent(BaseGroup* b) 
 { 
-	m_window = w; 
+	m_parent = b; 
 }
 } // g::

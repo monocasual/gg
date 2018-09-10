@@ -14,7 +14,6 @@ public:
 
 	Group(int x, int y, int w, int h);
 
-	int add(Widget* w) override;
 	void draw() override;
 	void handle(const SDL_Event& e) override;
 };

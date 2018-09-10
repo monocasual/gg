@@ -17,6 +17,7 @@ namespace gg
 {
 class Widget;
 
+
 class BaseGroup
 {
 protected:
@@ -29,7 +30,7 @@ public:
 
 	virtual ~BaseGroup();
 
-	virtual int add(Widget* w);
+	virtual void add(Widget* w);
 
 	virtual void drawChildren(int dw, int dh);
 };

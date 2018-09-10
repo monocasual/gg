@@ -22,11 +22,11 @@ BaseGroup::~BaseGroup()
 /* -------------------------------------------------------------------------- */
 
 
-int BaseGroup::add(Widget* w)
+void BaseGroup::add(Widget* w)
 {
 	m_stack.push_back(w);
+	w->setParent(this);
 	printf("[BaseGroup::add] stack expanded, size=%zd\n", m_stack.size());
-	return 1;
 }
 
 

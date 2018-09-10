@@ -15,24 +15,8 @@ Group::Group (int x, int y, int w, int h)
 /* -------------------------------------------------------------------------- */
 
 
-int Group::add(Widget* w)
-{
-	if (BaseGroup::add(w)) {
-		w->addWindow(m_window);
-		return 1;
-	}
-	return 0;
-}
-
-
-/* -------------------------------------------------------------------------- */
-
-
 void Group::draw()
 {
-	SDL_SetRenderDrawColor(m_window->ren, 255, 255, 255, 255);
-	SDL_Rect rect = {getX(), getY(), getW(), getH()};
-	SDL_RenderDrawRect(m_window->ren, &rect);
 	for (Widget* w : m_stack)
 		w->draw();
 }

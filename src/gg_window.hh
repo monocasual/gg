@@ -67,11 +67,6 @@ public:
 
 	void resize(int w, int h);
 
-	/* add()
-	Adds a new widget to this window. */
-
-	int add(Widget* w);
-
 	/* show()
 	Shows the window on screen. */
 

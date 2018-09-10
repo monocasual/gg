@@ -17,6 +17,7 @@
 namespace gg 
 {
 class Window;
+class BaseGroup;
 
 
 class Widget
@@ -39,10 +40,10 @@ protected:
 
 	bool m_resizeW, m_resizeH;
 
-	/* window
-	Widgets belong to a window, so this pointer points to a parent window. */
+	/* parent
+	Widgets belong to a group, be it a Window or a Group. */
 
-	Window* m_window;
+	BaseGroup* m_parent;
 
 	Widget(int x, int y, int w, int h, const char* l=nullptr);
 
@@ -84,11 +85,11 @@ public:
 
 	void setResizable(bool rw, bool rh);
 
-	/* addParent
+	/* setParent
 	Add a pointer to the parent widget. Every window must call this function when 
 	a new widget is added. */
 
-	void addWindow(Window* w);
+	void setParent(BaseGroup* g);
 };
 } // g::
 

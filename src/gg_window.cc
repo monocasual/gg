@@ -71,19 +71,6 @@ void Window::show()
 /* -------------------------------------------------------------------------- */
 
 
-int Window::add(Widget* w)
-{
-	if (BaseGroup::add(w)) {
-		w->addWindow(this);
-		return 1;
-	}
-	return 0;
-}
-
-
-/* -------------------------------------------------------------------------- */
-
-
 void Window::clear()
 {
 	SDL_SetRenderDrawColor(ren, 30, 30, 30, 255);   // set color
