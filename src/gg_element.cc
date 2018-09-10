@@ -1,12 +1,11 @@
-#include "gg_baseGroup.hh"
+#include "gg_element.hh"
 #include "gg_widget.hh"
 
 
 namespace gg 
 {
-BaseGroup::BaseGroup() 
-: ren    (nullptr),
-	damaged(false)
+Element::Element() 
+: ren    (nullptr)
 {
 }
 
@@ -14,39 +13,48 @@ BaseGroup::BaseGroup()
 /* -------------------------------------------------------------------------- */
 
 
-BaseGroup::~BaseGroup()
+Element::~Element()
 {
 	for (Widget* w : m_widgets)
 		delete w;
 	m_widgets.clear();
-	puts("[~BaseGroup] destroyed");
+	puts("[~Element] destroyed");
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 
-void BaseGroup::add(Widget& w)
+void Element::add(Widget& w)
 {
 	add(w);
 }
 
 
-void BaseGroup::add(Widget* w)
+void Element::add(Widget* w)
 {
 	m_widgets.push_back(w);
 	w->setParent(this);
-	printf("[BaseGroup::add] stack expanded, size=%zd\n", m_widgets.size());
+	printf("[Element::add] stack expanded, size=%zd\n", m_widgets.size());
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 
-void BaseGroup::drawChildren()
+void Element::redraw(Widget* w)
+{
+	w->draw(ren);
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Element::drawChildren()
 {
 	for (Widget* w : m_widgets)
-		w->draw();
+		w->draw(ren);
 }
 
 } // gg::

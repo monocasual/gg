@@ -17,7 +17,7 @@
 namespace gg 
 {
 class Window;
-class BaseGroup;
+class Element;
 
 
 class Widget
@@ -32,9 +32,11 @@ protected:
 	/* parent
 	Widgets belong to a group, be it a Window or a Group. */
 
-	BaseGroup* m_parent;
+	Element* m_parent;
 
 	Widget();
+
+	void redraw();
 
 public:
 
@@ -44,7 +46,7 @@ public:
 	Drawing routines. This method draws the initial graphical state of each 
 	widget. */
 
-	virtual void draw() = 0;
+	virtual void draw(SDL_Renderer* ren) = 0;
 
 	/* handle() [pure virtual]
 	Handles events such as click, keypress, show-hide and so on. */
@@ -65,7 +67,7 @@ public:
 	Add a pointer to the parent widget. Every window must call this function when 
 	a new widget is added. */
 
-	void setParent(BaseGroup* g);
+	void setParent(Element* g);
 
 	void setBounds(int x, int y, int w, int h);
 };

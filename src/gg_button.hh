@@ -21,13 +21,14 @@ private:
 
 	const char* m_label;
 
-	void drawDown();
+	void drawDown(SDL_Renderer* ren);
+	void drawUp(SDL_Renderer* ren);
 
 public:
 
 	Button(const char* l=nullptr);
 
-	void draw() override;
+	void draw(SDL_Renderer* ren) override;
 	void handle(const SDL_Event& e) override;
 
 	void onDown(std::function<void()> f);

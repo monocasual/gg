@@ -7,12 +7,12 @@
 namespace gg 
 {
 Window::Window(const char* t, int x, int y, int w, int h)
-	: BaseGroup(),
-		m_x      (x),
-		m_y      (y),
-		m_w      (w),
-		m_h      (h),
-		m_win    (nullptr)
+	: Element(),
+		m_x    (x),
+		m_y    (y),
+		m_w    (w),
+		m_h    (h),
+		m_win  (nullptr)
 {
 	m_win = SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (!m_win)
@@ -57,10 +57,7 @@ void Window::clear()
 
 void Window::render()
 {
-	if (!damaged)
-		return;
 	SDL_RenderPresent(ren);   // update render on screen
-	damaged = false;
 }
 
 

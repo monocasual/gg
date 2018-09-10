@@ -1,6 +1,5 @@
 #include "gg.hh"
 #include "gg_window.hh"
-#include "gg_group.hh"
 #include "gg_button.hh"
 
 
@@ -16,7 +15,7 @@ struct myWindow : public gg::Window
 
 	void resized() override
 	{
-		btn1->setBounds(20, 20, 400, 40);
+		btn1->setBounds(20, (getH() / 2) - 20, getW() - 40, 40);
 	}
 };
 

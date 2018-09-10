@@ -3,7 +3,7 @@
 
 
 #include <SDL2/SDL.h>
-#include "gg_baseGroup.hh"
+#include "gg_element.hh"
 
 
 namespace gg 
@@ -11,7 +11,7 @@ namespace gg
 class Widget;
 
 
-class Window : public BaseGroup
+class Window : public Element
 {
 protected:
 

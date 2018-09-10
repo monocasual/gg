@@ -18,22 +18,9 @@ Button::Button(const char* l)
 /* -------------------------------------------------------------------------- */
 
 
-void Button::draw()
+void Button::draw(SDL_Renderer* ren)
 {
-	m_rect.x = m_x;
-	m_rect.y = m_y;
-	m_rect.w = m_w;
-	m_rect.h = m_h;
-
-	SDL_SetRenderDrawColor(m_parent->ren, 0, 0, 0, 255);
-	SDL_RenderFillRect(m_parent->ren, &m_rect);
-	SDL_SetRenderDrawColor(m_parent->ren, 255, 255, 255, 255);
-	SDL_RenderDrawRect(m_parent->ren, &m_rect);
-
-	if (m_label)
-		gg::drawFont(m_parent->ren, m_rect, m_label);
-
-	m_parent->damaged = true;
+	m_down ? drawDown(ren) : drawUp(ren);
 }
 
 
@@ -53,7 +40,7 @@ void Button::handle(const SDL_Event& e)
 			{
 				m_down = true;
 				if(m_onDown != nullptr) m_onDown();
-				drawDown();
+				redraw();
 			}
 		}
 		else
@@ -61,7 +48,7 @@ void Button::handle(const SDL_Event& e)
 		{
 			m_down = false;
 			if(m_onUp != nullptr) m_onUp();
-			draw();
+			redraw();
 		}
 	}
 }
@@ -77,11 +64,30 @@ void Button::onUp(std::function<void()> f)   { m_onUp   = f; }
 /* -------------------------------------------------------------------------- */
 
 
-void Button::drawDown()
+void Button::drawUp(SDL_Renderer* ren)
 {
-	SDL_SetRenderDrawColor(m_parent->ren, 155, 155, 155, 255);
-	SDL_RenderFillRect(m_parent->ren, &m_rect);
-	m_parent->damaged = true;
+	m_rect.x = m_x;
+	m_rect.y = m_y;
+	m_rect.w = m_w;
+	m_rect.h = m_h;
+
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+	SDL_RenderFillRect(ren, &m_rect);
+	SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
+	SDL_RenderDrawRect(ren, &m_rect);
+
+	if (m_label != nullptr)
+		gg::drawFont(ren, m_rect, m_label);
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Button::drawDown(SDL_Renderer* ren)
+{
+	SDL_SetRenderDrawColor(ren, 155, 155, 155, 255);
+	SDL_RenderFillRect(ren, &m_rect);
 }
 
 } // gg::

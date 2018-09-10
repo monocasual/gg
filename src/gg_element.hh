@@ -1,13 +1,13 @@
 
-/* BaseGroup -----------------------------------------------------------------
+/* Element ----------------------....-------------------------------------------
  *
- * A generic base for every group.
+ * A generic base for everything.
  *
  * -------------------------------------------------------------------------- */
 
 
-#ifndef GG_BASEGROUP_HH
-#define GG_BASEGROUP_HH
+#ifndef GG_ELEMENT_HH
+#define GG_ELEMENT_HH
 
 
 #include <vector>
@@ -19,13 +19,13 @@ namespace gg
 class Widget;
 
 
-class BaseGroup
+class Element
 {
 protected:
 
 	std::vector<Widget*> m_widgets;
 
-	BaseGroup();
+	Element();
 
 public:
 
@@ -37,18 +37,14 @@ public:
 
 	SDL_Renderer* ren;
 
-	/* damaged
-	A damaged group must be redrawn. Each subwidget must set this flag to true 
-	when it needs to update the screen. */
-
-	bool damaged;
-
-	virtual ~BaseGroup();
+	virtual ~Element();
 
 	virtual void add(Widget* w);
 	virtual void add(Widget& w);
 
 	virtual void drawChildren();
+
+	void redraw(Widget* w);
 };
 } // gg::
 

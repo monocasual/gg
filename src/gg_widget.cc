@@ -21,6 +21,15 @@ Widget::~Widget()
 /* -------------------------------------------------------------------------- */
 
 
+void Widget::redraw()
+{
+	m_parent->redraw(this);
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
 int Widget::getX() const  { return m_x; }
 int Widget::getY() const  { return m_y; }
 int Widget::getW() const  { return m_w; }
@@ -32,7 +41,7 @@ int Widget::getYH() const { return m_y + m_h; }
 /* -------------------------------------------------------------------------- */
 
 
-void Widget::setParent(BaseGroup* b) 
+void Widget::setParent(Element* b) 
 { 
 	m_parent = b; 
 }
