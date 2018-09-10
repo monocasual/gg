@@ -1,10 +1,10 @@
 
-/* Widget --------------------------------------------------------------------
- *
- * A generic widget. Normally you don't want to use a Widget directly,
- * but extend it with your own widget.
- *
- * -------------------------------------------------------------------------- */
+/* Widget ----------------------------------------------------------------------
+
+A generic widget. Normally you don't want to use a Widget directly, rather
+extend it with your own widget.
+
+----------------------------------------------------------------------------- */
 
 
 #ifndef GG_WIDGET_HH
