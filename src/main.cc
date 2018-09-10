@@ -9,10 +9,10 @@ int main()
 	gg::init();
 	gg::loadFont("pixelmix.ttf", 10);
 
-	gg::Window* w = new gg::Window("GG test", 0, 0, 640, 480);
+	gg::Window* w = new gg::Window("gg test", 0, 0, 640, 480);
 
-	gg::Button* btn1 = new gg::Button(20, 20, 600, 440, "button");
-	btn1->setResizable(true, true);
+	gg::Button* btn1 = new gg::Button(20, 20, 120, 40, "button");
+	btn1->setResizable(false, true);
 	btn1->onDown([]() { puts("down!"); });
 	btn1->onUp  ([]() { puts("up!"); });
 	w->add(btn1);

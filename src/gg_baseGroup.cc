@@ -4,7 +4,11 @@
 
 namespace gg 
 {
-BaseGroup::BaseGroup() {}
+BaseGroup::BaseGroup() 
+: ren      (nullptr),
+	damaged  (false)
+{
+}
 
 
 /* -------------------------------------------------------------------------- */
@@ -12,9 +16,9 @@ BaseGroup::BaseGroup() {}
 
 BaseGroup::~BaseGroup()
 {
-	for (Widget* w : m_stack)
+	for (Widget* w : m_widgets)
 		delete w;
-	m_stack.clear();
+	m_widgets.clear();
 	puts("[~BaseGroup] destroyed");
 }
 
@@ -24,9 +28,9 @@ BaseGroup::~BaseGroup()
 
 void BaseGroup::add(Widget* w)
 {
-	m_stack.push_back(w);
+	m_widgets.push_back(w);
 	w->setParent(this);
-	printf("[BaseGroup::add] stack expanded, size=%zd\n", m_stack.size());
+	printf("[BaseGroup::add] stack expanded, size=%zd\n", m_widgets.size());
 }
 
 
@@ -35,7 +39,7 @@ void BaseGroup::add(Widget* w)
 
 void BaseGroup::drawChildren(int dw, int dh)
 {
-	for (Widget* w : m_stack)
+	for (Widget* w : m_widgets)
 	{
 		if (w->isResizableW() && w->isResizableH())
 			w->resize(w->getW() + dw, w->getH() + dh);

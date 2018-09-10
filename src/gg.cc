@@ -12,10 +12,10 @@ Whether the app is running or not. */
 
 bool running = false;
 
-/* stack
+/* windows
 Array of pointers to windows. */
 
-std::vector<Window*> stack;
+std::vector<Window*> windows;
 
 /* font
 Pointer to a TTF resource. */
@@ -31,7 +31,7 @@ FontInfo fontInfo;
 int init()
 {
 	running = false;
-	font = nullptr;
+	font    = nullptr;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -123,7 +123,7 @@ int run()
 		}
 		else
 		{
-			for (Window* w : stack)
+			for (Window* w : windows)
 				w->handle(e);
 		}
 	}
@@ -137,9 +137,9 @@ int run()
 
 void add(Window* w)
 {
-	stack.push_back(w);
-	printf("[gg::add] add window %p, id=%d, stack size %zd\n",
-		(void*)w, w->id, stack.size());
+	windows.push_back(w);
+	printf("[gg::add] add window %p, id=%d, windows size %zd\n",
+		(void*)w, w->id, windows.size());
 }
 
 
@@ -148,9 +148,9 @@ void add(Window* w)
 
 void end()
 {
-	for (Window* w : stack)
+	for (Window* w : windows)
 		delete w;
-	stack.clear();
+	windows.clear();
 	SDL_Quit();
 	TTF_Quit();
 }

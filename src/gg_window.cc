@@ -14,9 +14,7 @@ Window::Window(const char* t, int x, int y, int w, int h)
 		m_h      (h),
 		m_win    (nullptr),
 		m_preW   (w),
-		m_preH   (h),
-		ren      (nullptr),
-		damaged  (false)
+		m_preH   (h)
 {
 	m_win = SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (!m_win)
@@ -106,8 +104,6 @@ void Window::drawChildren()
 
 void Window::handle(const SDL_Event& e)
 {
-	/* Handle window events such as shown, a resize, a popup and so on. */
-
 	if (e.type == SDL_WINDOWEVENT)
 	{
 		if (e.window.event == SDL_WINDOWEVENT_SHOWN || e.window.event == SDL_WINDOWEVENT_RESIZED)
@@ -118,14 +114,13 @@ void Window::handle(const SDL_Event& e)
 					resize(e.window.data1, e.window.data2);
 				clear();
 				drawChildren();
-				render();
 			}
 		}
 	}
 
 	/* Then handle events for each child widget. */
 
-	for (Widget* w : m_stack)
+	for (Widget* w : m_widgets)
 		w->handle(e);
 	
 	render();

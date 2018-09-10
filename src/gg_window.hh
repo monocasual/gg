@@ -37,20 +37,6 @@ public:
 
 	unsigned id;
 
-	/* SLD_Renderer
-	Each window contains a public renderer. Any widget must refer to this pointer 
-	in order to draw something. Also they can call other Window's function to 
-	refresh screen and such. Info on SDL renderer:
-	http://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer */
-
-	SDL_Renderer* ren;
-
-	/* damaged
-	A damaged window must be redrawn. Each subwidget must set this flag to true 
-	when it needs to update the screen. */
-
-	bool damaged;
-
 	Window(const char* t, int x, int y, int w, int h);
 	~Window();
 
@@ -87,6 +73,9 @@ public:
 
 	void render();
 
+	/* handle()
+	Handles window events such as shown, a resize, a popup and so on. */
+	
 	void handle(const SDL_Event& e);
 };
 } // gg::

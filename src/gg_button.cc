@@ -21,8 +21,8 @@ Button::Button(int x, int y, int w, int h, const char* l)
 void Button::resize(int w, int h)
 {
 	Widget::resize(w, h);
-	m_rect.w = w;
-	m_rect.h = h;
+	m_rect.w = m_w;
+	m_rect.h = m_h;
 }
 
 
@@ -32,15 +32,15 @@ void Button::resize(int w, int h)
 
 void Button::draw()
 {
-	SDL_SetRenderDrawColor(m_window->ren, 0, 0, 0, 255);
-	SDL_RenderFillRect(m_window->ren, &m_rect);
-	SDL_SetRenderDrawColor(m_window->ren, 255, 255, 255, 255);
-	SDL_RenderDrawRect(m_window->ren, &m_rect);
+	SDL_SetRenderDrawColor(m_parent->ren, 0, 0, 0, 255);
+	SDL_RenderFillRect(m_parent->ren, &m_rect);
+	SDL_SetRenderDrawColor(m_parent->ren, 255, 255, 255, 255);
+	SDL_RenderDrawRect(m_parent->ren, &m_rect);
 
 	if (m_label)
-		gg::drawFont(m_window->ren, m_rect, m_label);
+		gg::drawFont(m_parent->ren, m_rect, m_label);
 
-	m_window->damaged = true;
+	m_parent->damaged = true;
 }
 
 
@@ -89,9 +89,9 @@ void Button::onUp(std::function<void()> f)   { m_onUp   = f; }
 
 void Button::drawDown()
 {
-	SDL_SetRenderDrawColor(m_window->ren, 255, 255, 255, 255);
-	SDL_RenderFillRect(m_window->ren, &m_rect);
-	m_window->damaged = true;
+	SDL_SetRenderDrawColor(m_parent->ren, 255, 255, 255, 255);
+	SDL_RenderFillRect(m_parent->ren, &m_rect);
+	m_parent->damaged = true;
 }
 
 } // gg::

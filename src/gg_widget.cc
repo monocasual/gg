@@ -56,8 +56,8 @@ void Widget::setResizable(bool rw, bool rh)
 
 void Widget::resize(int w, int h)
 {
-	m_w = w;
-	m_h = h;
+	if (m_resizeW) m_w = w;
+	if (m_resizeH) m_h = h;
 }
 
 

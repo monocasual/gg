@@ -17,7 +17,7 @@ Group::Group (int x, int y, int w, int h)
 
 void Group::draw()
 {
-	for (Widget* w : m_stack)
+	for (Widget* w : m_widgets)
 		w->draw();
 }
 
@@ -27,7 +27,7 @@ void Group::draw()
 
 void Group::handle(const SDL_Event& e)
 {
-	for (Widget* w : m_stack)
+	for (Widget* w : m_widgets)
 		w->handle(e);
 }
 
