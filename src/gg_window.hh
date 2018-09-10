@@ -25,11 +25,6 @@ protected:
 
 	SDL_Window* m_win;
 
-	/* preW, preH
-	Previous width and height for calculating increments. */
-
-	int m_preW, m_preH;
-
 public:
 
 	/* id
