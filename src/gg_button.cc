@@ -5,26 +5,14 @@
 
 namespace gg
 {
-Button::Button(int x, int y, int w, int h, const char* l)
-	: Widget(x, y, w, h, l)
+Button::Button(const char* l)
+: Widget  (),
+  m_onDown(nullptr),
+  m_onUp  (nullptr),
+  m_down  (false),
+  m_label (l)
 {
-	m_rect.x = x;
-	m_rect.y = y;
-	m_rect.w = w;
-	m_rect.h = h;
 }
-
-
-/* -------------------------------------------------------------------------- */
-
-
-void Button::resize(int w, int h)
-{
-	Widget::resize(w, h);
-	m_rect.w = m_w;
-	m_rect.h = m_h;
-}
-
 
 
 /* -------------------------------------------------------------------------- */
@@ -32,6 +20,11 @@ void Button::resize(int w, int h)
 
 void Button::draw()
 {
+	m_rect.x = m_x;
+	m_rect.y = m_y;
+	m_rect.w = m_w;
+	m_rect.h = m_h;
+
 	SDL_SetRenderDrawColor(m_parent->ren, 0, 0, 0, 255);
 	SDL_RenderFillRect(m_parent->ren, &m_rect);
 	SDL_SetRenderDrawColor(m_parent->ren, 255, 255, 255, 255);

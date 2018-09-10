@@ -5,8 +5,8 @@
 namespace gg 
 {
 BaseGroup::BaseGroup() 
-: ren      (nullptr),
-	damaged  (false)
+: ren    (nullptr),
+	damaged(false)
 {
 }
 
@@ -26,6 +26,12 @@ BaseGroup::~BaseGroup()
 /* -------------------------------------------------------------------------- */
 
 
+void BaseGroup::add(Widget& w)
+{
+	add(w);
+}
+
+
 void BaseGroup::add(Widget* w)
 {
 	m_widgets.push_back(w);
@@ -37,20 +43,10 @@ void BaseGroup::add(Widget* w)
 /* -------------------------------------------------------------------------- */
 
 
-void BaseGroup::drawChildren(int dw, int dh)
+void BaseGroup::drawChildren()
 {
 	for (Widget* w : m_widgets)
-	{
-		if (w->isResizableW() && w->isResizableH())
-			w->resize(w->getW() + dw, w->getH() + dh);
-		else
-		if (w->isResizableW())
-			w->resize(w->getW() + dw, w->getH());
-		else
-		if (w->isResizableH())
-			w->resize(w->getW(), w->getH() + dh);
-		w->draw();  // Redraw all widgets.
-	}
+		w->draw();
 }
 
 } // gg::

@@ -40,6 +40,8 @@ public:
 	Window(const char* t, int x, int y, int w, int h);
 	~Window();
 
+	virtual void resized() = 0;
+
 	/* xywh()
 	Sets and return coordinates. */
 
@@ -47,26 +49,11 @@ public:
 	int getY() const;
 	int getW() const;
 	int getH() const;
-	
-	void setX(int x);
-	void setY(int y);
-
-	void resize(int w, int h);
-
-	/* show()
-	Shows the window on screen. */
-
-	void show();
 
 	/* clear()
 	Deletes all widget from screen and cover it with the regular background. */
 
 	void clear();
-
-	/* drawChildren()
-	Calls draw() for each child in the group. */
-
-	void drawChildren();
 
 	/* render()
 	Updates the screen after the children have been drawn. */

@@ -12,9 +12,7 @@ Window::Window(const char* t, int x, int y, int w, int h)
 		m_y      (y),
 		m_w      (w),
 		m_h      (h),
-		m_win    (nullptr),
-		m_preW   (w),
-		m_preH   (h)
+		m_win    (nullptr)
 {
 	m_win = SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 	if (!m_win)
@@ -42,28 +40,6 @@ int Window::getX() const { return m_x; }
 int Window::getY() const { return m_y; }
 int Window::getW() const { return m_w; }
 int Window::getH() const { return m_h; }
-void Window::setX(int x) { m_x = x; }
-void Window::setY(int y) { m_y = y; }
-
-
-/* -------------------------------------------------------------------------- */
-
-
-void Window::resize(int w, int h)
-{
-	m_preW = m_w; m_w = w;
-	m_preH = m_h; m_h = h;
-}
-
-
-/* -------------------------------------------------------------------------- */
-
-
-void Window::show()
-{
-	clear();        // clear everything, aka set background color
-	render();       // draw all widgets to screen
-}
 
 
 /* -------------------------------------------------------------------------- */
@@ -91,17 +67,6 @@ void Window::render()
 /* -------------------------------------------------------------------------- */
 
 
-void Window::drawChildren()
-{
-	int dw = m_w - m_preW;
-	int dh = m_h - m_preH;
-	BaseGroup::drawChildren(dw, dh);
-}
-
-
-/* -------------------------------------------------------------------------- */
-
-
 void Window::handle(const SDL_Event& e)
 {
 	if (e.type == SDL_WINDOWEVENT)
@@ -111,18 +76,24 @@ void Window::handle(const SDL_Event& e)
 			if (e.window.windowID == id)
 			{
 				if (e.window.event == SDL_WINDOWEVENT_RESIZED)
-					resize(e.window.data1, e.window.data2);
+				{
+					m_w = e.window.data1;
+					m_h = e.window.data2;
+				}
+				resized();  // Must be called on SDL_WINDOWEVENT_SHOWN as well
 				clear();
 				drawChildren();
 			}
 		}
 	}
 
-	/* Then handle events for each child widget. */
+	/* Handle events for each child widget. */
 
 	for (Widget* w : m_widgets)
 		w->handle(e);
 	
+	/* Then render everything on screen. */
+
 	render();
 }
 } // gg::

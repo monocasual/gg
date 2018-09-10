@@ -46,8 +46,9 @@ public:
 	virtual ~BaseGroup();
 
 	virtual void add(Widget* w);
+	virtual void add(Widget& w);
 
-	virtual void drawChildren(int dw, int dh);
+	virtual void drawChildren();
 };
 } // gg::
 

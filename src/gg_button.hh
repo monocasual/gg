@@ -14,18 +14,19 @@ private:
 
 	SDL_Rect m_rect;
 
-	std::function<void()> m_onDown = nullptr;
-	std::function<void()> m_onUp   = nullptr;
+	std::function<void()> m_onDown;
+	std::function<void()> m_onUp;
 
-	bool m_down = false;
+	bool m_down;
+
+	const char* m_label;
 
 	void drawDown();
 
 public:
 
-	Button(int x, int y, int w, int h, const char* l=nullptr);
+	Button(const char* l=nullptr);
 
-	void resize(int w, int h) override;
 	void draw() override;
 	void handle(const SDL_Event& e) override;
 

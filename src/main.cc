@@ -4,25 +4,28 @@
 #include "gg_button.hh"
 
 
+struct myWindow : public gg::Window
+{
+	gg::Button* btn1;
+
+	myWindow() : gg::Window("gg test", 0, 0, 640, 480),
+	             btn1      (new gg::Button("button"))
+	{
+		add(btn1);
+	}
+
+	void resized() override
+	{
+		btn1->setBounds(20, 20, 400, 40);
+	}
+};
+
+
 int main()
 {
 	gg::init();
 	gg::loadFont("pixelmix.ttf", 10);
-
-	gg::Window* w = new gg::Window("gg test", 0, 0, 640, 480);
-
-	gg::Button* btn1 = new gg::Button(20, 20, 120, 40, "button");
-	btn1->setResizable(false, true);
-	btn1->onDown([]() { puts("down!"); });
-	btn1->onUp  ([]() { puts("up!"); });
-	w->add(btn1);
-
-	gg::Button* btn2 = new gg::Button(btn1->getXW() + 20, 20, 120, 40, "button");
-	w->add(btn2);
-
-	w->show();
-
-	gg::add(w);
+	gg::add(new myWindow());
 	gg::run();
 
 	return 0;

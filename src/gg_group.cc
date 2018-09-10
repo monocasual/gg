@@ -7,7 +7,7 @@ namespace gg
 {
 Group::Group (int x, int y, int w, int h)
 	: BaseGroup(), 
-	  Widget   (x, y, w, h)
+	  Widget   ()
 {
 }
 

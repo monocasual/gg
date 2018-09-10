@@ -29,23 +29,12 @@ protected:
 
 	int m_x, m_y, m_w, m_h;
 
-	/* label
-	A string of text to display inside, outside or near your widget. */
-
-	const char* m_label;
-
-	/* resizeW, resizeH
-	If true, resize the widget horizontally or vertically when the window 
-	changes. */
-
-	bool m_resizeW, m_resizeH;
-
 	/* parent
 	Widgets belong to a group, be it a Window or a Group. */
 
 	BaseGroup* m_parent;
 
-	Widget(int x, int y, int w, int h, const char* l=nullptr);
+	Widget();
 
 public:
 
@@ -72,24 +61,13 @@ public:
 	int getXW() const;
 	int getYH() const;
 
-	/* resizableW/H()
-	Returns whether widget is resizable. */
-
-	bool isResizableW() const;
-	bool isResizableH() const;
-
-	/* resize()
-	Sets new size. */
-
-	virtual void resize(int w, int h);
-
-	void setResizable(bool rw, bool rh);
-
 	/* setParent
 	Add a pointer to the parent widget. Every window must call this function when 
 	a new widget is added. */
 
 	void setParent(BaseGroup* g);
+
+	void setBounds(int x, int y, int w, int h);
 };
 } // g::
 
