@@ -17,8 +17,8 @@ int main()
 	btn1->onUp  ([]() { puts("up!"); });
 	w->add(btn1);
 
-	//ggButton *btn2 = new ggButton(btn1->xw()+20, 20, 50, 40, "button");
-	//w->add(btn2);
+	gg::Button* btn2 = new gg::Button(btn1->getXW() + 20, 20, 120, 40, "button");
+	w->add(btn2);
 
 	w->show();
 

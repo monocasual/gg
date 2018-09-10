@@ -54,25 +54,22 @@ void Button::handle(const SDL_Event& e)
 		int mx, my;
 		SDL_GetMouseState(&mx, &my);
 
-		if (mx < getXW() && mx > getX() && my < getYH() && my > getY())
+		if (e.type == SDL_MOUSEBUTTONDOWN) 
 		{
-			if (e.type == SDL_MOUSEBUTTONDOWN) {
+			if (mx < getXW() && mx > getX() && my < getYH() && my > getY())
+			{
+				m_down = true;
 				if(m_onDown != nullptr) m_onDown();
 				drawDown();
 			}
-			else
-			if (e.type == SDL_MOUSEBUTTONUP)
-			{
-				if(m_onUp != nullptr) m_onUp();
-				draw();
-			}
 		}
-		else // when clicking and dragging outside button
-			if (e.type == SDL_MOUSEBUTTONUP)
-			{
-				if(m_onUp != nullptr) m_onUp();
-				draw();
-			}
+		else
+		if (e.type == SDL_MOUSEBUTTONUP && m_down)
+		{
+			m_down = false;
+			if(m_onUp != nullptr) m_onUp();
+			draw();
+		}
 	}
 }
 
@@ -89,7 +86,7 @@ void Button::onUp(std::function<void()> f)   { m_onUp   = f; }
 
 void Button::drawDown()
 {
-	SDL_SetRenderDrawColor(m_parent->ren, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(m_parent->ren, 155, 155, 155, 255);
 	SDL_RenderFillRect(m_parent->ren, &m_rect);
 	m_parent->damaged = true;
 }

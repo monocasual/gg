@@ -17,6 +17,8 @@ private:
 	std::function<void()> m_onDown = nullptr;
 	std::function<void()> m_onUp   = nullptr;
 
+	bool m_down = false;
+
 	void drawDown();
 
 public:
