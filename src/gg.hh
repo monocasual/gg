@@ -1,3 +1,7 @@
+#ifndef GG_HH
+#define GG_HH
+
+
 #include <SDL2/SDL.h>
 
 
@@ -47,3 +51,6 @@ void drawFont(SDL_Renderer* ren, SDL_Rect rc, const char* t);
 void freeFont();
 
 } // gg::
+
+
+#endif
