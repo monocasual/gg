@@ -1,6 +1,6 @@
-#include "gg.hh"
-#include "gg_window.hh"
-#include "gg_button.hh"
+#include "../src/core/gg.hh"
+#include "../src/core/gg_window.hh"
+#include "../src/widgets/gg_button.hh"
 
 
 struct myWindow : public gg::Window
@@ -24,7 +24,7 @@ struct myWindow : public gg::Window
 int main()
 {
 	gg::init();
-	gg::loadFont("pixelmix.ttf", 12);
+	gg::loadFont("../src/fonts/pixelmix.ttf", 12);
 	gg::add(new myWindow());
 	gg::run();
 

@@ -3,7 +3,7 @@
 
 
 #include <functional>
-#include "gg_element.hh"
+#include "../core/gg_element.hh"
 
 
 namespace gg

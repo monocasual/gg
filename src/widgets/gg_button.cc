@@ -1,5 +1,5 @@
-#include "gg.hh"
-#include "gg_window.hh"
+#include "../core/gg.hh"
+#include "../core/gg_window.hh"
 #include "gg_button.hh"
 
 
