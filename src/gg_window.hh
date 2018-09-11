@@ -35,7 +35,7 @@ public:
 	Window(const char* t, int x, int y, int w, int h);
 	~Window();
 
-	virtual void resized() = 0;
+	void handle(const SDL_Event& e) override;
 
 	/* xywh()
 	Sets and return coordinates. */
@@ -54,11 +54,6 @@ public:
 	Updates the screen after the children have been drawn. */
 
 	void render();
-
-	/* handle()
-	Handles window events such as shown, a resize, a popup and so on. */
-	
-	void handle(const SDL_Event& e);
 };
 } // gg::
 

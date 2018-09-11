@@ -39,6 +39,19 @@ public:
 
 	virtual ~Element();
 
+	/* handle() [virtual]
+	Fired on events such as click, keypress, window show-hide and so on. */
+
+	virtual void handle(const SDL_Event& e) {};
+
+	/* resized() [virtuals]
+	Fired when the element position and size change. */
+
+	virtual void resized() {};
+
+	/* add()
+	Adds a child widget to this element. */
+
 	virtual void add(Widget* w);
 	virtual void add(Widget& w);
 
