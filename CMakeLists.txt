@@ -16,18 +16,19 @@ set(GG_SOURCES
 add_executable(gg ${GG_SOURCES})
 
 # Finds the required libraries. 
-find_library(SDL2_FOUND SDL2)
-find_library(SDL2_TTF_FOUND SDL2_ttf)
+find_library(LIB_SDL2 SDL2)
+find_library(LIB_SDL2_TTF SDL2_ttf)
 
 # Fatal error if a library is missing from the system.
-if (NOT SDL2_FOUND)
+if (NOT LIB_SDL2)
 	message(FATAL_ERROR "SDL2 not found")
 endif()
-if (NOT SDL2_TTF_FOUND)
+if (NOT LIB_SDL2_TTF)
 	message(FATAL_ERROR "SDL2_ttf not found")
 endif()
 
-# Specify libraries or flags to use when linking the target gg.
+# Specify libraries or flags to use when linking the target gg. These will 
+# become linker flags such as -lSDL2 and -lSDL2_ttf.
 target_link_libraries(gg SDL2 SDL2_ttf)
 
 
