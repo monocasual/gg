@@ -1,10 +1,13 @@
+#include <cassert>
 #include "gg_element.hh"
+#include "gg_window.hh"
 
 
 namespace gg 
 {
-Element::Element() 
-: ren    (nullptr)
+Element::Element()
+: m_parent(nullptr), 
+  m_window(nullptr)
 {
 }
 
@@ -28,7 +31,10 @@ void Element::add(Element* e)
 {
 	m_elements.push_back(e);
 	e->m_parent = this;
-	printf("[Element::add] stack expanded, size=%zd\n", m_elements.size());
+	e->m_window = getParentWindow();
+
+	printf("[Element::add] stack expanded, size=%zd, window=%p\n", 
+		m_elements.size(), (void*) m_window);
 }
 
 
@@ -37,7 +43,7 @@ void Element::add(Element* e)
 
 void Element::redraw()
 {
-	draw(ren);
+	draw(m_window->m_ren);
 }
 
 
@@ -53,10 +59,23 @@ void Element::setBounds(int x, int y, int w, int h)
 /* -------------------------------------------------------------------------- */
 
 
+Window* Element::getParentWindow()
+{
+	if (m_parent == nullptr)
+		return static_cast<Window*>(this);
+	return m_parent->getParentWindow();	
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
 void Element::drawChildren()
 {
+	/* If this element has m_parent == null, this is the main window. So there is
+	no m_window to pass to draw(). Let's use the one from the child element. */  
 	for (Element* e : m_elements)
-		e->draw(ren);
+		e->draw(m_parent == nullptr ? e->m_window->m_ren : m_window->m_ren);
 }
 
 } // gg::

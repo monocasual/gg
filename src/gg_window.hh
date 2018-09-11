@@ -8,22 +8,9 @@
 
 namespace gg 
 {
-class Widget;
-
-
 class Window : public Element
 {
-protected:
-
-	/* xywh
-	Main coordinates. */
-
-	int m_x, m_y, m_w, m_h;
-
-	/* win
-	Pointer to a SDL_Window structure. */
-
-	SDL_Window* m_win;
+	friend Element;
 
 public:
 
@@ -54,6 +41,27 @@ public:
 	Updates the screen after the children have been drawn. */
 
 	void render();
+
+protected:
+
+	/* xywh
+	Main coordinates. */
+
+	int m_x, m_y, m_w, m_h;
+
+	/* win
+	Pointer to a SDL_Window structure. */
+
+	SDL_Window* m_win;
+
+
+	/* SLD_Renderer
+	Each window contains a renderer. Any widget must refer to this pointer 
+	in order to draw something. Also they can call other groups function to 
+	refresh screen and such. Info on SDL renderer:
+	http://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer */
+
+	SDL_Renderer* m_ren;
 };
 } // gg::
 

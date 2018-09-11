@@ -16,36 +16,11 @@ A generic base for everything.
 
 namespace gg 
 {
+class Window;
+
 class Element
 {
-protected:
-
-	/* xywh
-	Main coordinates. */
-
-	int m_x, m_y, m_w, m_h;
-
-	/* parent
-	Widgets belong to a parent, that is a Window or another Element (groups). */
-
-	Element* m_parent;
-
-	/* elements
-	Lists of children elements contained into this Element. */
-
-	std::vector<Element*> m_elements;
-
-	Element();
-
 public:
-
-	/* SLD_Renderer
-	Each group contains a public renderer. Any widget must refer to this pointer 
-	in order to draw something. Also they can call other groups function to 
-	refresh screen and such. Info on SDL renderer:
-	http://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer */
-
-	SDL_Renderer* ren;
 
 	virtual ~Element();
 
@@ -70,8 +45,6 @@ public:
 
 	virtual void add(Element* w);
 
-	virtual void drawChildren();
-
 	virtual void setBounds(int x, int y, int w, int h);
 
 	virtual int getX() const  { return m_x; }
@@ -82,6 +55,34 @@ public:
 	virtual int getYH() const { return m_y + m_h; }
 
 	virtual void redraw();
+
+protected:
+
+	/* xywh
+	Main coordinates. */
+
+	int m_x, m_y, m_w, m_h;
+
+	/* parent
+	Widgets belong to a parent, that is a Window or another Element (groups). */
+
+	Element* m_parent;
+
+	Window* m_window;
+
+	/* elements
+	Lists of children elements contained into this Element. */
+
+	std::vector<Element*> m_elements;
+
+	Element();
+
+	virtual void drawChildren();
+
+private:
+
+	Window* getParentWindow();
+
 };
 } // gg::
 

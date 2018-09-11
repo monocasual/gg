@@ -10,6 +10,16 @@ namespace gg
 {
 class Button : public Element
 {
+public:
+
+	Button(const char* l=nullptr);
+
+	void draw(SDL_Renderer* ren) override;
+	void handle(const SDL_Event& e) override;
+
+	void onDown(std::function<void()> f);
+	void onUp(std::function<void()> f);
+
 private:
 
 	SDL_Rect m_rect;
@@ -23,16 +33,6 @@ private:
 
 	void drawDown(SDL_Renderer* ren);
 	void drawUp(SDL_Renderer* ren);
-
-public:
-
-	Button(const char* l=nullptr);
-
-	void draw(SDL_Renderer* ren) override;
-	void handle(const SDL_Event& e) override;
-
-	void onDown(std::function<void()> f);
-	void onUp(std::function<void()> f);
 };
 } // gg::
 

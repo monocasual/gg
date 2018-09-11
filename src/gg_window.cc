@@ -17,7 +17,7 @@ Window::Window(const char* t, int x, int y, int w, int h)
 	if (!m_win)
 		printf("[Window] unable to create window: %s\n", SDL_GetError());
 
-	ren = SDL_CreateRenderer(m_win, -1, SDL_RENDERER_ACCELERATED);
+	m_ren = SDL_CreateRenderer(m_win, -1, SDL_RENDERER_ACCELERATED);
 	id  = SDL_GetWindowID(m_win);
 }
 
@@ -46,8 +46,8 @@ int Window::getH() const { return m_h; }
 
 void Window::clear()
 {
-	SDL_SetRenderDrawColor(ren, 30, 30, 30, 255);   // set color
-	SDL_RenderClear(ren);                           // clear in memory
+	SDL_SetRenderDrawColor(m_ren, 30, 30, 30, 255);   // set color
+	SDL_RenderClear(m_ren);                           // clear in memory
 }
 
 
@@ -56,7 +56,7 @@ void Window::clear()
 
 void Window::render()
 {
-	SDL_RenderPresent(ren);   // update render on screen
+	SDL_RenderPresent(m_ren);   // update render on screen
 }
 
 
