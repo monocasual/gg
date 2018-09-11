@@ -7,7 +7,7 @@ struct myWindow : public gg::Window
 {
 	gg::Button* btn1;
 
-	myWindow() : gg::Window("gg test", 0, 0, 640, 480),
+	myWindow() : gg::Window("gg test", 100, 100, 640, 480),
 	             btn1      (new gg::Button("button"))
 	{
 		add(btn1);

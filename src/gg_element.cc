@@ -5,8 +5,12 @@
 
 namespace gg 
 {
-Element::Element()
-: m_parent(nullptr), 
+Element::Element(int x, int y, int w, int h)
+: m_x     (x),
+  m_y     (y),
+  m_w     (w),
+  m_h     (h),
+  m_parent(nullptr), 
   m_window(nullptr)
 {
 }

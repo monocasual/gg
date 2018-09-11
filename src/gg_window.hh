@@ -19,18 +19,9 @@ public:
 
 	unsigned id;
 
-	Window(const char* t, int x, int y, int w, int h);
 	~Window();
 
 	void handle(const SDL_Event& e) override;
-
-	/* xywh()
-	Sets and return coordinates. */
-
-	int getX() const;
-	int getY() const;
-	int getW() const;
-	int getH() const;
 
 	/* clear()
 	Deletes all widget from screen and cover it with the regular background. */
@@ -44,16 +35,12 @@ public:
 
 protected:
 
-	/* xywh
-	Main coordinates. */
-
-	int m_x, m_y, m_w, m_h;
+	Window(const char* t, int x, int y, int w, int h);
 
 	/* win
 	Pointer to a SDL_Window structure. */
 
 	SDL_Window* m_win;
-
 
 	/* SLD_Renderer
 	Each window contains a renderer. Any widget must refer to this pointer 

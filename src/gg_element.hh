@@ -78,7 +78,7 @@ protected:
 
 	std::vector<Element*> m_elements;
 
-	Element();
+	Element(int x=0, int y=0, int w=0, int h=0);
 
 	virtual void drawChildren();
 

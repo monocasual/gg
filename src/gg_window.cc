@@ -6,11 +6,7 @@
 namespace gg 
 {
 Window::Window(const char* t, int x, int y, int w, int h)
-	: Element(),
-		m_x    (x),
-		m_y    (y),
-		m_w    (w),
-		m_h    (h),
+	: Element(x, y, w, h),
 		m_win  (nullptr)
 {
 	m_win = SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
@@ -18,7 +14,7 @@ Window::Window(const char* t, int x, int y, int w, int h)
 		printf("[Window] unable to create window: %s\n", SDL_GetError());
 
 	m_ren = SDL_CreateRenderer(m_win, -1, SDL_RENDERER_ACCELERATED);
-	id  = SDL_GetWindowID(m_win);
+	id    = SDL_GetWindowID(m_win);
 }
 
 
@@ -30,15 +26,6 @@ Window::~Window()
 	SDL_DestroyWindow(m_win);
 	puts("[~Window] destroyed");
 }
-
-
-/* -------------------------------------------------------------------------- */
-
-
-int Window::getX() const { return m_x; }
-int Window::getY() const { return m_y; }
-int Window::getW() const { return m_w; }
-int Window::getH() const { return m_h; }
 
 
 /* -------------------------------------------------------------------------- */
