@@ -3,12 +3,12 @@
 
 
 #include <functional>
-#include "gg_widget.hh"
+#include "gg_element.hh"
 
 
 namespace gg
 {
-class Button : public Widget
+class Button : public Element
 {
 private:
 

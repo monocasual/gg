@@ -1,5 +1,4 @@
 #include "gg_element.hh"
-#include "gg_widget.hh"
 
 
 namespace gg 
@@ -15,9 +14,9 @@ Element::Element()
 
 Element::~Element()
 {
-	for (Widget* w : m_widgets)
-		delete w;
-	m_widgets.clear();
+	for (Element* e : m_elements)
+		delete e;
+	m_elements.clear();
 	puts("[~Element] destroyed");
 }
 
@@ -25,26 +24,29 @@ Element::~Element()
 /* -------------------------------------------------------------------------- */
 
 
-void Element::add(Widget& w)
+void Element::add(Element* e)
 {
-	add(w);
-}
-
-
-void Element::add(Widget* w)
-{
-	m_widgets.push_back(w);
-	w->setParent(this);
-	printf("[Element::add] stack expanded, size=%zd\n", m_widgets.size());
+	m_elements.push_back(e);
+	e->m_parent = this;
+	printf("[Element::add] stack expanded, size=%zd\n", m_elements.size());
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 
-void Element::redraw(Widget* w)
+void Element::redraw()
 {
-	w->draw(ren);
+	draw(ren);
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Element::setBounds(int x, int y, int w, int h)
+{
+	m_x = x; m_y = y; m_w = w; m_h = h;
 }
 
 
@@ -53,8 +55,8 @@ void Element::redraw(Widget* w)
 
 void Element::drawChildren()
 {
-	for (Widget* w : m_widgets)
-		w->draw(ren);
+	for (Element* e : m_elements)
+		e->draw(ren);
 }
 
 } // gg::

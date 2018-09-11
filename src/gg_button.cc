@@ -6,7 +6,7 @@
 namespace gg
 {
 Button::Button(const char* l)
-: Widget  (),
+: Element (),
   m_onDown(nullptr),
   m_onUp  (nullptr),
   m_down  (false),
@@ -66,6 +66,7 @@ void Button::onUp(std::function<void()> f)   { m_onUp   = f; }
 
 void Button::drawUp(SDL_Renderer* ren)
 {
+	puts("drawUp");
 	m_rect.x = m_x;
 	m_rect.y = m_y;
 	m_rect.w = m_w;
@@ -86,6 +87,7 @@ void Button::drawUp(SDL_Renderer* ren)
 
 void Button::drawDown(SDL_Renderer* ren)
 {
+	puts("drawDown");
 	SDL_SetRenderDrawColor(ren, 155, 155, 155, 255);
 	SDL_RenderFillRect(ren, &m_rect);
 }

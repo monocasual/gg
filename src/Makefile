@@ -1,5 +1,5 @@
-HEADERS  = gg.hh gg_window.hh gg_widget.hh gg_button.hh gg_element.hh
-OBJECTS  = gg.o gg_window.o gg_widget.o gg_button.o gg_element.o
+HEADERS  = gg.hh gg_window.hh gg_button.hh gg_element.hh
+OBJECTS  = gg.o gg_window.o gg_button.o gg_element.o
 MAINBODY = main.cc
 CXXFLAGS = -g -pedantic -Wall -std=c++11 -Wfatal-errors -Werror
 

@@ -1,6 +1,5 @@
 #include <cstdio>
 #include <cstdlib>
-#include "gg_widget.hh"
 #include "gg_window.hh"
 
 
@@ -66,6 +65,7 @@ void Window::render()
 
 void Window::handle(const SDL_Event& e)
 {
+	
 	if (e.type == SDL_WINDOWEVENT)
 	{
 		if (e.window.event == SDL_WINDOWEVENT_SHOWN || e.window.event == SDL_WINDOWEVENT_RESIZED)
@@ -77,8 +77,8 @@ void Window::handle(const SDL_Event& e)
 					m_w = e.window.data1;
 					m_h = e.window.data2;
 				}
-				resized();  // Must be called on SDL_WINDOWEVENT_SHOWN as well
 				clear();
+				resized();  // Must be called on SDL_WINDOWEVENT_SHOWN as well
 				drawChildren();
 			}
 		}
@@ -86,8 +86,8 @@ void Window::handle(const SDL_Event& e)
 
 	/* Handle events for each child widget. */
 
-	for (Widget* w : m_widgets)
-		w->handle(e);
+	for (Element* el : m_elements)
+		el->handle(e);
 	
 	/* Then render everything on screen. */
 
