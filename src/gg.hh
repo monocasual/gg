@@ -26,15 +26,19 @@ void add(Window* w);
 
 int run();
 
-/* end()
- * */
-
-void end();
-
 /* loadFont()
 Loads a font for drawing text. */
 
 int loadFont(const char* f, int size);
+
+/* quit()
+Sends a quit event to the main loop. Call this whenever you want to quit the
+app from outside the main loop (e.g. a button callback). */
+
+void quit();
+
+/* getFontInfo()
+Returns information on the current loaded font. */
 
 FontInfo& getFontInfo();
 

@@ -7,6 +7,8 @@
 
 namespace gg 
 {
+namespace
+{
 /* run
 Whether the app is running or not. */
 
@@ -20,12 +22,28 @@ std::vector<Window*> windows;
 /* font
 Pointer to a TTF resource. */
 
-TTF_Font* font;
+TTF_Font* font;	
 
-FontInfo fontInfo;
+
+/* cleanup()
+Cleans up the Window vector and quits the SDL app. */
+
+void cleanup()
+{
+	for (Window* w : windows)
+		delete w;
+	windows.clear();
+	SDL_Quit();
+	TTF_Quit();
+}
+
+} // {anonymous}
 
 
 /* -------------------------------------------------------------------------- */
+
+
+FontInfo fontInfo;
 
 
 int init()
@@ -127,7 +145,7 @@ int run()
 				w->handle(e);
 		}
 	}
-	end();
+	cleanup();
 	return 1;
 }
 
@@ -146,13 +164,11 @@ void add(Window* w)
 /* -------------------------------------------------------------------------- */
 
 
-void end()
+void quit()
 {
-	for (Window* w : windows)
-		delete w;
-	windows.clear();
-	SDL_Quit();
-	TTF_Quit();
+	SDL_Event e;
+  e.type = SDL_QUIT;
+	SDL_PushEvent(&e);
 }
 
 

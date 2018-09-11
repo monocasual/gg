@@ -8,14 +8,15 @@ struct myWindow : public gg::Window
 	gg::Button* btn1;
 
 	myWindow() : gg::Window("gg test", 100, 100, 640, 480),
-	             btn1      (new gg::Button("button"))
+	             btn1      (new gg::Button("Quit"))
 	{
 		add(btn1);
+		btn1->onUp([]() { gg::quit(); });
 	}
 
 	void resized() override
 	{
-		btn1->setBounds(20, (getH() / 2) - 20, getW() - 40, 40);
+		btn1->setBounds(40, (getH() / 2) - 20, getW() - 80, 40);
 	}
 };
 
@@ -23,7 +24,7 @@ struct myWindow : public gg::Window
 int main()
 {
 	gg::init();
-	gg::loadFont("pixelmix.ttf", 10);
+	gg::loadFont("pixelmix.ttf", 12);
 	gg::add(new myWindow());
 	gg::run();
 
