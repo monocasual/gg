@@ -61,9 +61,9 @@ void Element::setBounds(int x, int y, int w, int h)
 
 Window* Element::getParentWindow()
 {
-	if (m_parent == nullptr)
-		return static_cast<Window*>(this);
-	return m_parent->getParentWindow();	
+	/* Call getParentWindow() recursively until no parent found. Elements with no
+	parents are Windows! */
+	return m_parent == nullptr ? static_cast<Window*>(this) : m_parent->getParentWindow(); 
 }
 
 

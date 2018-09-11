@@ -68,6 +68,9 @@ protected:
 
 	Element* m_parent;
 
+	/* window
+	The top window this widgets belongs to. For windows, this is null. */
+
 	Window* m_window;
 
 	/* elements
