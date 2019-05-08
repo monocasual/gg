@@ -16,7 +16,7 @@ A generic base for everything.
 namespace gg 
 {
 class Window;
-
+class Renderer;
 class Element
 {
 public:
@@ -37,7 +37,7 @@ public:
 	Drawing routines. This method draws the initial graphical state of each 
 	widget. */
 
-	virtual void draw(SDL_Renderer* ren) {};
+	virtual void draw(Renderer& ren) {};
 
 	/* add()
 	Adds a child widget to this element. */

@@ -4,6 +4,7 @@
 
 #include <SDL2/SDL.h>
 #include "gg_element.hh"
+#include "gg_renderer.hh"
 
 
 namespace gg 
@@ -45,10 +46,10 @@ protected:
 	/* SLD_Renderer
 	Each window contains a renderer. Any widget must refer to this pointer 
 	in order to draw something. Also they can call other groups function to 
-	refresh screen and such. Info on SDL renderer:
-	http://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer */
+	refresh screen and such. */
 
-	SDL_Renderer* m_ren;
+	Renderer m_ren;
+
 };
 } // gg::
 

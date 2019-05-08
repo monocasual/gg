@@ -24,7 +24,6 @@ struct myWindow : public gg::Window
 int main()
 {
 	gg::init();
-	gg::loadFont("../src/fonts/pixelmix.ttf", 12);
 	gg::add(new myWindow());
 	gg::run();
 

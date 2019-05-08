@@ -18,7 +18,7 @@ Button::Button(const char* l)
 /* -------------------------------------------------------------------------- */
 
 
-void Button::draw(SDL_Renderer* ren)
+void Button::draw(Renderer& ren)
 {
 	m_down ? drawDown(ren) : drawUp(ren);
 }
@@ -64,30 +64,25 @@ void Button::onUp(std::function<void()> f)   { m_onUp   = f; }
 /* -------------------------------------------------------------------------- */
 
 
-void Button::drawUp(SDL_Renderer* ren)
+void Button::drawUp(Renderer& ren)
 {
-	m_rect.x = m_x;
-	m_rect.y = m_y;
-	m_rect.w = m_w;
-	m_rect.h = m_h;
-
-	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
-	SDL_RenderFillRect(ren, &m_rect);
-	SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
-	SDL_RenderDrawRect(ren, &m_rect);
+	ren.setColor(0, 0, 0);
+	ren.fillRect(m_x, m_y, m_w, m_h);
+	ren.setColor(255, 255, 255);
+	ren.drawRect(m_x, m_y, m_w, m_h);
 
 	if (m_label != nullptr)
-		gg::drawFont(ren, m_rect, m_label);
+		ren.drawText(m_label, m_x, m_y, m_w, m_h);
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 
-void Button::drawDown(SDL_Renderer* ren)
+void Button::drawDown(Renderer& ren)
 {
-	SDL_SetRenderDrawColor(ren, 155, 155, 155, 255);
-	SDL_RenderFillRect(ren, &m_rect);
+	ren.setColor(55, 155, 155);
+	ren.fillRect(m_x, m_y, m_w, m_h);
 }
 
 } // gg::

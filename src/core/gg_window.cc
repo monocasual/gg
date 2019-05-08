@@ -6,15 +6,15 @@
 namespace gg 
 {
 Window::Window(const char* t, int x, int y, int w, int h)
-	: Element(x, y, w, h),
-		m_win  (nullptr)
+: Element(x, y, w, h),
+  m_win  (SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE)),
+  m_ren  (*m_win)
 {
-	m_win = SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
-	if (!m_win)
-		printf("[Window] unable to create window: %s\n", SDL_GetError());
+	//if (!m_win)
+	// TODO throw exception
+	//	printf("[Window] unable to create window: %s\n", SDL_GetError());
 
-	m_ren = SDL_CreateRenderer(m_win, -1, SDL_RENDERER_ACCELERATED);
-	id    = SDL_GetWindowID(m_win);
+	id = SDL_GetWindowID(m_win);
 }
 
 
@@ -33,8 +33,8 @@ Window::~Window()
 
 void Window::clear()
 {
-	SDL_SetRenderDrawColor(m_ren, 30, 30, 30, 255);   // set color
-	SDL_RenderClear(m_ren);                           // clear in memory
+	m_ren.setColor(30, 30, 30, 255);
+	m_ren.clear();
 }
 
 
@@ -43,7 +43,7 @@ void Window::clear()
 
 void Window::render()
 {
-	SDL_RenderPresent(m_ren);   // update render on screen
+	m_ren.render();  // update render on screen
 }
 
 
