@@ -6,11 +6,10 @@
 namespace gg
 {
 Button::Button(const char* l)
-: Element (),
-  onDown  (nullptr),
-  onUp    (nullptr),
-  m_down  (false),
-  m_label (l)
+: Element(),
+  onClick(nullptr),
+  m_down (false),
+  m_label(l)
 {
 }
 
@@ -39,7 +38,6 @@ void Button::handle(const SDL_Event& e)
 			if (mx < getXW() && mx > getX() && my < getYH() && my > getY())
 			{
 				m_down = true;
-				if (onDown != nullptr) onDown();
 				redraw();
 			}
 		}
@@ -47,7 +45,7 @@ void Button::handle(const SDL_Event& e)
 		if (e.type == SDL_MOUSEBUTTONUP && m_down)
 		{
 			m_down = false;
-			if (onUp != nullptr) onUp();
+			if (onClick != nullptr) onClick();
 			redraw();
 		}
 	}

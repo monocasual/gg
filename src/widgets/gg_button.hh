@@ -18,8 +18,7 @@ public:
 	void draw(Renderer& ren) override;
 	void handle(const SDL_Event& e) override;
 
-	std::function<void()> onDown;
-	std::function<void()> onUp;
+	std::function<void()> onClick;
 
 private:
 
