@@ -68,7 +68,7 @@ Window* Element::getParentWindow()
 {
 	/* Call getParentWindow() recursively until no parent found. Elements with no
 	parents are Windows! */
-	return m_parent == nullptr ? static_cast<Window*>(this) : m_parent->getParentWindow(); 
+	return isWindow() ? static_cast<Window*>(this) : m_parent->getParentWindow(); 
 }
 
 
@@ -80,7 +80,17 @@ void Element::drawChildren()
 	/* If this element has m_parent == null, this is the main window. So there is
 	no m_window to pass to draw(). Let's use the one from the child element. */  
 	for (Element* e : m_elements)
-		e->draw(m_parent == nullptr ? e->m_window->m_ren : m_window->m_ren);
+		e->draw(isWindow() ? e->m_window->m_ren : m_window->m_ren);
 }
+
+
+/* -------------------------------------------------------------------------- */
+
+
+bool Element::isWindow() const
+{
+    return m_parent == nullptr;
+}
+
 
 } // gg::

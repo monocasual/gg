@@ -83,6 +83,8 @@ protected:
 
 private:
 
+	bool isWindow() const;
+
 	Window* getParentWindow();
 
 };
