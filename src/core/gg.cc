@@ -12,21 +12,21 @@ namespace
 /* run
 Whether the app is running or not. */
 
-bool running = false;
+bool running_ = false;
 
 /* windows
 Array of pointers to windows. */
 
-std::vector<Window*> windows;
+std::vector<Window*> windows_;
 
 /* cleanup()
 Cleans up the Window vector and quits the SDL app. */
 
-void cleanup()
+void cleanup_()
 {
-	for (Window* w : windows)
+	for (Window* w : windows_)
 		delete w;
-	windows.clear();
+	windows_.clear();
 	SDL_Quit();
 	TTF_Quit();
 }
@@ -38,7 +38,7 @@ void cleanup()
 
 int init()
 {
-	running = false;
+	running_ = false;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -50,7 +50,7 @@ int init()
 		printf("[gg::init] unable to initialize text rendering: %s\n", TTF_GetError());
 		return 0;
 	}
-	running = true;
+	running_ = true;
 	return 1;
 }
 
@@ -61,21 +61,21 @@ int init()
 int run()
 {
 	SDL_Event e;
-	while (running)
+	while (running_)
 	{
 		SDL_WaitEvent(&e);
 		if (e.type == SDL_QUIT)
 		{
 			puts("[gg::run] SDL_QUIT event, stop event loop");
-			running = false;
+			running_ = false;
 		}
 		else
 		{
-			for (Window* w : windows)
+			for (Window* w : windows_)
 				w->handle(e);
 		}
 	}
-	cleanup();
+	cleanup_();
 	return 1;
 }
 
@@ -85,9 +85,9 @@ int run()
 
 void add(Window* w)
 {
-	windows.push_back(w);
+	windows_.push_back(w);
 	printf("[gg::add] add window %p, id=%d, windows size %zd\n",
-		(void*)w, w->id, windows.size());
+		(void*)w, w->id, windows_.size());
 }
 
 

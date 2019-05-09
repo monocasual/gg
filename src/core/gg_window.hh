@@ -30,8 +30,9 @@ public:
 	void clear();
 
 	/* render()
-	Updates the screen after the children have been drawn. */
-
+	Render everything on this window. To be called by sub-elements when they
+	are handling UI-changing events. */
+	
 	void render();
 
 protected:

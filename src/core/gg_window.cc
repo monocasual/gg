@@ -38,12 +38,9 @@ void Window::clear()
 }
 
 
-/* -------------------------------------------------------------------------- */
-
-
 void Window::render()
 {
-	m_ren.render();  // update render on screen
+	m_ren.render();
 }
 
 
@@ -52,7 +49,6 @@ void Window::render()
 
 void Window::handle(const SDL_Event& e)
 {
-	
 	if (e.type == SDL_WINDOWEVENT)
 	{
 		if (e.window.event == SDL_WINDOWEVENT_SHOWN || e.window.event == SDL_WINDOWEVENT_RESIZED)
@@ -67,17 +63,17 @@ void Window::handle(const SDL_Event& e)
 				clear();
 				resized();  // Must be called on SDL_WINDOWEVENT_SHOWN as well
 				drawChildren();
+				render();
 			}
 		}
 	}
+	else
+	{
+		/* Handle remaining events for each child widget. They don't need Window 
+		events. */
 
-	/* Handle events for each child widget. */
-
-	for (Element* el : m_elements)
-		el->handle(e);
-	
-	/* Then render everything on screen. */
-
-	render();
+		for (Element* el : m_elements)
+			el->handle(e);
+	}
 }
 } // gg::

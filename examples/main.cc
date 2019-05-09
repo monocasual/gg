@@ -11,7 +11,7 @@ struct myWindow : public gg::Window
 	             btn1      (new gg::Button("Quit"))
 	{
 		add(btn1);
-		btn1->onUp([]() { gg::quit(); });
+		btn1->onUp = [](){ gg::quit(); };
 	}
 
 	void resized() override

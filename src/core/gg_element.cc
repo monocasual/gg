@@ -48,6 +48,7 @@ void Element::add(Element* e)
 void Element::redraw()
 {
 	draw(m_window->m_ren);
+    m_window->render();
 }
 
 

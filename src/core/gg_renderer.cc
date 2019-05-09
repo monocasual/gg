@@ -42,7 +42,7 @@ void Renderer::setFont(const char* name, int size)
 
 void Renderer::clear()
 {
-	SDL_RenderClear(m_ren); 
+	SDL_RenderClear(m_ren);
 }
 
 

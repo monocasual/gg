@@ -44,16 +44,16 @@ public:
 
 	virtual void add(Element* w);
 
-	virtual void setBounds(int x, int y, int w, int h);
-
-	virtual int getX() const  { return m_x; }
-	virtual int getY() const  { return m_y; }
-	virtual int getW() const  { return m_w; }
-	virtual int getH() const  { return m_h; }
-	virtual int getXW() const { return m_x + m_w; }
-	virtual int getYH() const { return m_y + m_h; }
-
 	virtual void redraw();
+	
+	int getX() const  { return m_x; }
+	int getY() const  { return m_y; }
+	int getW() const  { return m_w; }
+	int getH() const  { return m_h; }
+	int getXW() const { return m_x + m_w; }
+	int getYH() const { return m_y + m_h; }
+
+	void setBounds(int x, int y, int w, int h);
 
 protected:
 
