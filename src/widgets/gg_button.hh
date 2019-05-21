@@ -16,7 +16,7 @@ public:
 	Button(const char* l=nullptr);
 
 	void draw(Renderer& ren) override;
-    void mouseUp(const MouseEvent& e) override;
+	void mouseUp(const MouseEvent& e) override;
 
 	std::function<void()> onClick;
 
