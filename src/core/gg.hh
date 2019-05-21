@@ -7,7 +7,7 @@
 
 namespace gg 
 {
-class Window;
+class Element;
 
 /* init()
  * */
@@ -17,7 +17,7 @@ int init();
 /* add()
  * */
 
-void add(Window* w);
+void add(Element* e);
 
 /* run()
  * */

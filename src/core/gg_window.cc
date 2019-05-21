@@ -62,18 +62,15 @@ void Window::handle(const SDL_Event& e)
 				}
 				clear();
 				resized();  // Must be called on SDL_WINDOWEVENT_SHOWN as well
-				drawChildren();
+				drawChildren(m_ren);
 				render();
 			}
 		}
 	}
 	else
 	{
-		/* Handle remaining events for each child widget. They don't need Window 
-		events. */
-
-		for (Element* el : m_elements)
-			el->handle(e);
+		/* Handle remaining events as default. They don't need Window events. */
+		Element::handle(e);
 	}
 }
 } // gg::

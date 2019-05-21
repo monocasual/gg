@@ -10,8 +10,7 @@ Element::Element(int x, int y, int w, int h)
   m_y     (y),
   m_w     (w),
   m_h     (h),
-  m_parent(nullptr), 
-  m_window(nullptr)
+  m_parent(nullptr)
 {
 }
 
@@ -24,7 +23,16 @@ Element::~Element()
 	for (Element* e : m_elements)
 		delete e;
 	m_elements.clear();
-	puts("[~Element] destroyed");
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Element::handle(const SDL_Event& e)
+{
+    for (Element* el : m_elements)
+        el->handle(e);
 }
 
 
@@ -35,10 +43,6 @@ void Element::add(Element* e)
 {
 	m_elements.push_back(e);
 	e->m_parent = this;
-	e->m_window = getParentWindow();
-
-	printf("[Element::add] stack expanded, size=%zd, window=%p\n", 
-		m_elements.size(), (void*) m_window);
 }
 
 
@@ -47,8 +51,9 @@ void Element::add(Element* e)
 
 void Element::redraw()
 {
-	draw(m_window->m_ren);
-    m_window->render();
+    Window* w = getParentWindow();
+	draw(w->m_ren);
+    w->render();
 }
 
 
@@ -68,29 +73,17 @@ Window* Element::getParentWindow()
 {
 	/* Call getParentWindow() recursively until no parent found. Elements with no
 	parents are Windows! */
-	return isWindow() ? static_cast<Window*>(this) : m_parent->getParentWindow(); 
+	return m_parent == nullptr ? static_cast<Window*>(this) : m_parent->getParentWindow(); 
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 
-void Element::drawChildren()
+void Element::drawChildren(Renderer& ren)
 {
-	/* If this element has m_parent == null, this is the main window. So there is
-	no m_window to pass to draw(). Let's use the one from the child element. */  
 	for (Element* e : m_elements)
-		e->draw(isWindow() ? e->m_window->m_ren : m_window->m_ren);
+		e->draw(ren);
 }
-
-
-/* -------------------------------------------------------------------------- */
-
-
-bool Element::isWindow() const
-{
-    return m_parent == nullptr;
-}
-
 
 } // gg::

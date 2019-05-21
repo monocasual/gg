@@ -26,7 +26,7 @@ public:
 	/* handle() [virtual]
 	Fired on events such as click, keypress, window show-hide and so on. */
 
-	virtual void handle(const SDL_Event& e) {};
+	virtual void handle(const SDL_Event& e);
 
 	/* resized() [virtuals]
 	Fired when the element position and size change. */
@@ -57,6 +57,10 @@ public:
 
 protected:
 
+	Element(int x=0, int y=0, int w=0, int h=0);
+
+	virtual void drawChildren(Renderer& ren);
+
 	/* xywh
 	Main coordinates. */
 
@@ -67,26 +71,14 @@ protected:
 
 	Element* m_parent;
 
-	/* window
-	The top window this widgets belongs to. For windows, this is null. */
-
-	Window* m_window;
-
 	/* elements
 	Lists of children elements contained into this Element. */
 
 	std::vector<Element*> m_elements;
 
-	Element(int x=0, int y=0, int w=0, int h=0);
-
-	virtual void drawChildren();
-
 private:
 
-	bool isWindow() const;
-
 	Window* getParentWindow();
-
 };
 } // gg::
 

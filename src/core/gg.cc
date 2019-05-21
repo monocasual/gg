@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "gg_window.hh"
+#include "gg_element.hh"
 #include "gg.hh"
 
 
@@ -17,16 +18,16 @@ bool running_ = false;
 /* windows
 Array of pointers to windows. */
 
-std::vector<Window*> windows_;
+std::vector<Element*> elements_;
 
 /* cleanup()
 Cleans up the Window vector and quits the SDL app. */
 
 void cleanup_()
 {
-	for (Window* w : windows_)
-		delete w;
-	windows_.clear();
+	for (Element* e : elements_)
+		delete e;
+	elements_.clear();
 	SDL_Quit();
 	TTF_Quit();
 }
@@ -60,19 +61,19 @@ int init()
 
 int run()
 {
-	SDL_Event e;
+	SDL_Event ev;
 	while (running_)
 	{
-		SDL_WaitEvent(&e);
-		if (e.type == SDL_QUIT)
+		SDL_WaitEvent(&ev);
+		if (ev.type == SDL_QUIT)
 		{
 			puts("[gg::run] SDL_QUIT event, stop event loop");
 			running_ = false;
 		}
 		else
 		{
-			for (Window* w : windows_)
-				w->handle(e);
+			for (Element* el : elements_)
+				el->handle(ev);
 		}
 	}
 	cleanup_();
@@ -83,11 +84,9 @@ int run()
 /* -------------------------------------------------------------------------- */
 
 
-void add(Window* w)
+void add(Element* e)
 {
-	windows_.push_back(w);
-	printf("[gg::add] add window %p, id=%d, windows size %zd\n",
-		(void*)w, w->id, windows_.size());
+	elements_.push_back(e);
 }
 
 
