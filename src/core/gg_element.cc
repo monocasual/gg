@@ -1,5 +1,6 @@
 #include <cassert>
 #include "gg_element.hh"
+#include "gg_events.hh"
 #include "gg_window.hh"
 
 
@@ -10,7 +11,8 @@ Element::Element(int x, int y, int w, int h)
   m_y     (y),
   m_w     (w),
   m_h     (h),
-  m_parent(nullptr)
+  m_parent(nullptr),
+  m_mouseDown(false)
 {
 }
 
@@ -31,8 +33,38 @@ Element::~Element()
 
 void Element::handle(const SDL_Event& e)
 {
-    for (Element* el : m_elements)
-        el->handle(e);
+    if (e.type & (SDL_MOUSEBUTTONDOWN | SDL_MOUSEBUTTONUP))
+    {
+        const MouseEvent me = makeMouseEvent();
+
+        if (e.type == SDL_MOUSEBUTTONDOWN) 
+        {
+            for (Element* el : m_elements)
+            {
+                if (me.isOver(*el))
+                {
+                    el->m_mouseDown = true;
+                    el->mouseDown();
+                    el->redraw();
+                    break;
+                }
+            }
+        }
+        else
+        if (e.type == SDL_MOUSEBUTTONUP)
+        {
+            for (Element* el : m_elements)
+            {
+                if (el->m_mouseDown)
+                {
+                    el->m_mouseDown = false;
+                    el->redraw();
+                    el->mouseUp(me);
+                    break;              
+                }
+            }
+        }
+    }
 }
 
 

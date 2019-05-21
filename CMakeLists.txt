@@ -7,6 +7,7 @@ set(CMAKE_COLOR_MAKEFILE ON)
 # Defines the variable GG_SOURCES.
 set(GG_SOURCES
 	src/core/gg.hh src/core/gg.cc
+    src/core/gg_events.hh src/core/gg_events.cc
 	src/core/gg_renderer.hh src/core/gg_renderer.cc
     src/core/gg_element.hh src/core/gg_element.cc
 	src/core/gg_window.hh src/core/gg_window.cc

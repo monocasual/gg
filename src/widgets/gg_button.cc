@@ -1,5 +1,6 @@
 #include "../core/gg.hh"
 #include "../core/gg_window.hh"
+#include "../core/gg_events.hh"
 #include "gg_button.hh"
 
 
@@ -8,7 +9,6 @@ namespace gg
 Button::Button(const char* l)
 : Element(),
   onClick(nullptr),
-  m_down (false),
   m_label(l)
 {
 }
@@ -19,36 +19,16 @@ Button::Button(const char* l)
 
 void Button::draw(Renderer& ren)
 {
-	m_down ? drawDown(ren) : drawUp(ren);
+	m_mouseDown ? drawDown(ren) : drawUp(ren);
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 
-void Button::handle(const SDL_Event& e)
+void Button::mouseUp(const MouseEvent& e)
 {
-	if (e.type & (SDL_MOUSEBUTTONDOWN | SDL_MOUSEBUTTONUP))
-	{
-		int mx, my;
-		SDL_GetMouseState(&mx, &my);
-
-		if (e.type == SDL_MOUSEBUTTONDOWN) 
-		{
-			if (mx < getXW() && mx > getX() && my < getYH() && my > getY())
-			{
-				m_down = true;
-				redraw();
-			}
-		}
-		else
-		if (e.type == SDL_MOUSEBUTTONUP && m_down)
-		{
-			m_down = false;
-			if (onClick != nullptr) onClick();
-			redraw();
-		}
-	}
+	if (e.isOver(*this) && onClick != nullptr) onClick();
 }
 
 

@@ -16,18 +16,16 @@ public:
 	Button(const char* l=nullptr);
 
 	void draw(Renderer& ren) override;
-	void handle(const SDL_Event& e) override;
+    void mouseUp(const MouseEvent& e) override;
 
 	std::function<void()> onClick;
 
 private:
 
-	bool m_down;
-
-	const char* m_label;
-
 	void drawDown(Renderer& ren);
 	void drawUp(Renderer& ren);
+
+	const char* m_label;
 };
 } // gg::
 

@@ -17,6 +17,7 @@ namespace gg
 {
 class Window;
 class Renderer;
+class MouseEvent;
 class Element
 {
 public:
@@ -39,7 +40,10 @@ public:
 
 	virtual void draw(Renderer& ren) {};
 
-	/* add()
+	virtual void mouseDown() {};
+	virtual void mouseUp(const MouseEvent& e) {};
+
+	/* add() [virtual]
 	Adds a child widget to this element. */
 
 	virtual void add(Element* w);
@@ -76,9 +80,12 @@ protected:
 
 	std::vector<Element*> m_elements;
 
+	bool m_mouseDown;
+
 private:
 
 	Window* getParentWindow();
+
 };
 } // gg::
 

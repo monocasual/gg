@@ -18,16 +18,16 @@ bool running_ = false;
 /* windows
 Array of pointers to windows. */
 
-std::vector<Element*> elements_;
+std::vector<Window*> windows_;
 
 /* cleanup()
 Cleans up the Window vector and quits the SDL app. */
 
 void cleanup_()
 {
-	for (Element* e : elements_)
-		delete e;
-	elements_.clear();
+	for (Window* w : windows_)
+		delete w;
+	windows_.clear();
 	SDL_Quit();
 	TTF_Quit();
 }
@@ -72,8 +72,8 @@ int run()
 		}
 		else
 		{
-			for (Element* el : elements_)
-				el->handle(ev);
+			for (Window* w : windows_)
+				w->handle(ev);
 		}
 	}
 	cleanup_();
@@ -84,9 +84,9 @@ int run()
 /* -------------------------------------------------------------------------- */
 
 
-void add(Element* e)
+void add(Window* w)
 {
-	elements_.push_back(e);
+	windows_.push_back(w);
 }
 
 
