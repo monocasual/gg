@@ -15,6 +15,7 @@ set(GG_SOURCES
     src/core/gg_element.hh src/core/gg_element.cc
 	src/core/gg_window.hh src/core/gg_window.cc
 	src/widgets/gg_button.hh src/widgets/gg_button.cc
+    src/widgets/gg_box.hh src/widgets/gg_box.cc
 	examples/main.cc)
 
 # Adds a new (executable) target called gg.
