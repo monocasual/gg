@@ -20,17 +20,6 @@ Element::Element(int x, int y, int w, int h)
 /* -------------------------------------------------------------------------- */
 
 
-Element::~Element()
-{
-	for (Element* e : m_elements)
-		delete e;
-	m_elements.clear();
-}
-
-
-/* -------------------------------------------------------------------------- */
-
-
 void Element::handle(const SDL_Event& e)
 {
     if (e.type & (SDL_MOUSEBUTTONDOWN | SDL_MOUSEBUTTONUP))
@@ -71,10 +60,16 @@ void Element::handle(const SDL_Event& e)
 /* -------------------------------------------------------------------------- */
 
 
+void Element::add(Element& e)
+{
+    add(&e);
+}
+
+
 void Element::add(Element* e)
 {
-	m_elements.push_back(e);
-	e->m_parent = this;
+    m_elements.push_back(e);
+    e->m_parent = this;
 }
 
 

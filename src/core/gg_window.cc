@@ -10,9 +10,8 @@ Window::Window(const char* t, int x, int y, int w, int h)
   m_win  (SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE)),
   m_ren  (*m_win)
 {
-	//if (!m_win)
-	// TODO throw exception
-	//	printf("[Window] unable to create window: %s\n", SDL_GetError());
+	if (m_win == nullptr)
+		throw std::bad_alloc();
 
 	id = SDL_GetWindowID(m_win);
 }

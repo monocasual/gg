@@ -1,3 +1,4 @@
+#include <new>
 #include <cassert>
 #include "gg_renderer.hh"
 
@@ -6,16 +7,36 @@ namespace gg
 {
 Renderer::Renderer(SDL_Window& win)
 {
+	if (TTF_Init() == -1)
+	{
+		printf("TTF_Init: %s\n", TTF_GetError());
+		throw std::bad_alloc();
+	}
+
 	m_ren = SDL_CreateRenderer(&win, -1, SDL_RENDERER_ACCELERATED);
-	// TODO throw on failure
+	if (m_ren == nullptr)
+	{
+		printf("SDL_CreateRenderer: %s\n", SDL_GetError());
+		throw std::bad_alloc();
+	}
 
 	m_font = TTF_OpenFontIndex("../src/fonts/pixelmix.ttf", 12, 0);
-	/*
 	if (m_font == nullptr)
 	{
-		// TODO throw on failure
-		printf("[ggWidget::setFont] unable to load font: %s\n", TTF_GetError());
-	}*/
+		printf("TTF_OpenFontIndex: %s\n", TTF_GetError());
+		throw std::bad_alloc();
+	}
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+Renderer::~Renderer()
+{
+	SDL_DestroyRenderer(m_ren);
+	TTF_CloseFont(m_font);
+	TTF_Quit();
 }
 
 
@@ -93,15 +114,4 @@ void Renderer::drawText(const char* txt, int x, int y, int w, int h)
 
 	SDL_RenderCopy(m_ren, texture, nullptr, &rect);    
 }
-
-
-/* -------------------------------------------------------------------------- */
-
-
-Renderer::~Renderer()
-{
-	SDL_DestroyRenderer(m_ren);
-	TTF_CloseFont(m_font);
-}
-
 } // gg::

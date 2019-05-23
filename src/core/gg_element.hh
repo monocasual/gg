@@ -22,7 +22,7 @@ class Element
 {
 public:
 
-	virtual ~Element();
+	virtual ~Element() {};
 
 	/* handle() [virtual]
 	Fired on events such as click, keypress, window show-hide and so on. */
@@ -47,6 +47,7 @@ public:
 	Adds a child widget to this element. */
 
 	virtual void add(Element* w);
+	virtual void add(Element& w);
 
 	virtual void redraw();
 	

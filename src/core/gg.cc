@@ -25,11 +25,7 @@ Cleans up the Window vector and quits the SDL app. */
 
 void cleanup_()
 {
-	for (Window* w : windows_)
-		delete w;
-	windows_.clear();
 	SDL_Quit();
-	TTF_Quit();
 }
 } // {anonymous}
 
@@ -44,11 +40,6 @@ int init()
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("[gg::init] unable to initialize: %s\n", SDL_GetError());
-		return 0;
-	}
-	if (TTF_Init() == -1)
-	{
-		printf("[gg::init] unable to initialize text rendering: %s\n", TTF_GetError());
 		return 0;
 	}
 	running_ = true;
@@ -77,7 +68,7 @@ int run()
 		}
 	}
 	cleanup_();
-	return 1;
+	return 0;
 }
 
 

@@ -4,6 +4,9 @@ project(gg VERSION 0.0.0 LANGUAGES CXX)
 
 set(CMAKE_COLOR_MAKEFILE ON)
 
+# Debug mode for now
+set(CMAKE_BUILD_TYPE Debug)
+
 # Defines the variable GG_SOURCES.
 set(GG_SOURCES
 	src/core/gg.hh src/core/gg.cc
