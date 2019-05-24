@@ -28,7 +28,7 @@ struct Group : public gg::Element
 
 	void resized() override
 	{
-		box.setBounds(getX() + 10, getY() + 10, getW() - 20, 40);
+		box.setBounds(getX() + 10, getY() + 10, 100/*getW() - 20*/, 40);
 	}
 };
 

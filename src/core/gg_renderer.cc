@@ -61,6 +61,22 @@ void Renderer::setFont(const std::string& name, int size)
 /* -------------------------------------------------------------------------- */
 
 
+void Renderer::setClip(int x, int y, int w, int h)
+{
+	SDL_Rect r { x, y, w, h };
+	SDL_RenderSetClipRect(m_ren, &r);
+}
+
+
+void Renderer::unsetClip()
+{
+	SDL_RenderSetClipRect(m_ren, nullptr);
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
 void Renderer::clear()
 {
 	SDL_RenderClear(m_ren);

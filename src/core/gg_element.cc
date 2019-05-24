@@ -111,7 +111,9 @@ void Element::redraw()
 
 void Element::draw(Renderer& ren)
 {
+    ren.setClip(getX(), getY(), getW(), getH());
     drawChildren(ren);
+    ren.unsetClip();
 };
 
 

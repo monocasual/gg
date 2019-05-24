@@ -18,10 +18,21 @@ public:
 
     void setColor(int r, int g, int b, int a=255);
     void setFont(const std::string& name, int size);
-    void clear();
+    void setClip(int x, int y, int w, int h);
+    void unsetClip();
+
     void drawRect(int x, int y, int w, int h);
     void drawText(const std::string& txt, int x, int y, int w, int h);
     void fillRect(int x, int y, int w, int h);
+
+    /* clear
+    Clears the entire screen to currently selected color. */
+
+    void clear();
+
+    /* render
+    Updates the screen with any rendering performed since the previous call.
+    Call this to actually display things on screen. */
 
     void render();
 
