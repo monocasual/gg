@@ -71,6 +71,8 @@ void Element::handle(const SDL_Event& e)
                 el->redraw();       
             }
     }
+
+    redraw();
 }
 
 
@@ -99,6 +101,7 @@ void Element::redraw()
 	draw(w->m_ren);
     w->clear();
     w->drawChildren(w->m_ren);
+    //drawChildren(w->m_ren);
     w->render();
 }
 
@@ -109,6 +112,7 @@ void Element::redraw()
 void Element::setBounds(int x, int y, int w, int h)
 {
 	m_x = x; m_y = y; m_w = w; m_h = h;
+    resized();
 }
 
 
