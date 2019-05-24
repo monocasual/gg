@@ -45,15 +45,17 @@ public:
 	virtual void mouseMove(const MouseEvent& e) {};
 	virtual void mouseDrag(const MouseEvent& e) {};
 
-
-	/* add() [virtual]
-	Adds a child widget to this element. */
-
-	virtual void add(Element* w);
-	virtual void add(Element& w);
+	/* redraw() [virtual]
+	Forces the redraw for this element and all its children. */
 
 	virtual void redraw();
-	
+
+	/* add()
+	Adds a child widget to this element. */
+
+	void add(Element* w);
+	void add(Element& w);
+
 	int getX() const  { return m_x; }
 	int getY() const  { return m_y; }
 	int getW() const  { return m_w; }
@@ -66,6 +68,9 @@ public:
 protected:
 
 	Element(int x=0, int y=0, int w=0, int h=0);
+
+	/* drawChildren [virtual]
+	Draws all children of this element. */
 
 	virtual void drawChildren(Renderer& ren);
 
@@ -84,6 +89,9 @@ protected:
 
 	std::vector<Element*> m_elements;
 
+	/* m_mouseDown
+	Tells whether the mouse has been held down on this element. */
+	
 	bool m_mouseDown;
 
 private:
