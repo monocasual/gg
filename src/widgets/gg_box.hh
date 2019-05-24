@@ -2,6 +2,7 @@
 #define GG_BOX_HH
 
 
+#include <string>
 #include "../core/gg_element.hh"
 
 
@@ -12,13 +13,15 @@ class Box : public Element
 {
 public:
 
-	Box(const char* l=nullptr);
+	Box(std::string t="");
 
 	void draw(Renderer& ren) override;
 
+    void setText(std::string t);
+
 private:
 
-	const char* m_label;
+	std::string m_text;
 };
 } // gg::
 

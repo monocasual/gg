@@ -13,7 +13,7 @@ class Button : public Element
 {
 public:
 
-	Button(const char* l=nullptr);
+	Button(std::string l="");
 
 	void draw(Renderer& ren) override;
 	void mouseUp(const MouseEvent& e) override;
@@ -25,7 +25,7 @@ private:
 	void drawDown(Renderer& ren);
 	void drawUp(Renderer& ren);
 
-	const char* m_label;
+	std::string m_label;
 };
 } // gg::
 

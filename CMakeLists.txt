@@ -14,12 +14,17 @@ set(GG_SOURCES
 	src/core/gg_renderer.hh src/core/gg_renderer.cc
     src/core/gg_element.hh src/core/gg_element.cc
 	src/core/gg_window.hh src/core/gg_window.cc
+    src/core/gg_utils.hh
 	src/widgets/gg_button.hh src/widgets/gg_button.cc
     src/widgets/gg_box.hh src/widgets/gg_box.cc
+    src/widgets/gg_slider.hh src/widgets/gg_slider.cc
 	examples/main.cc)
 
 # Adds a new (executable) target called gg.
 add_executable(gg ${GG_SOURCES})
+
+# Set compiler flags
+target_compile_options(gg PRIVATE -Wall -Werror)
 
 # Finds the required libraries. 
 find_library(LIB_SDL2 SDL2)
@@ -36,5 +41,3 @@ endif()
 # Specify libraries or flags to use when linking the target gg. These will 
 # become linker flags such as -lSDL2 and -lSDL2_ttf.
 target_link_libraries(gg SDL2 SDL2_ttf)
-
-

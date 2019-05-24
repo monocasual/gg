@@ -40,7 +40,7 @@ public:
 
 	virtual void draw(Renderer& ren) {};
 
-	virtual void mouseDown() {};
+	virtual void mouseDown(const MouseEvent& e) {};
 	virtual void mouseUp(const MouseEvent& e) {};
 	virtual void mouseMove(const MouseEvent& e) {};
 	virtual void mouseDrag(const MouseEvent& e) {};

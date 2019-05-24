@@ -2,6 +2,7 @@
 #define GG_RENDERER_HH
 
 
+#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
@@ -16,10 +17,10 @@ public:
     ~Renderer();
 
     void setColor(int r, int g, int b, int a=255);
-    void setFont(const char* name, int size);
+    void setFont(const std::string& name, int size);
     void clear();
     void drawRect(int x, int y, int w, int h);
-    void drawText(const char* txt, int x, int y, int w, int h);
+    void drawText(const std::string& txt, int x, int y, int w, int h);
     void fillRect(int x, int y, int w, int h);
 
     void render();

@@ -52,7 +52,7 @@ void Renderer::setColor(int r, int g, int b, int a)
 /* -------------------------------------------------------------------------- */
 
 
-void Renderer::setFont(const char* name, int size)
+void Renderer::setFont(const std::string& name, int size)
 {
 	// TODO
 }
@@ -93,16 +93,16 @@ void Renderer::fillRect(int x, int y, int w, int h)
 /* -------------------------------------------------------------------------- */
 
 
-void Renderer::drawText(const char* txt, int x, int y, int w, int h)
+void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 {
 	SDL_Rect  rect       = { x, y, w, h };
 	SDL_Color color      = { 255, 255, 255 };
-	SDL_Surface* surf    = TTF_RenderText_Solid(m_font, txt, color);
+	SDL_Surface* surf    = TTF_RenderText_Solid(m_font, txt.c_str(), color);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_ren, surf);
 	SDL_FreeSurface(surf);
 
 	int tw, th;
-	TTF_SizeText(m_font, txt, &tw, &th);
+	TTF_SizeText(m_font, txt.c_str(), &tw, &th);
 
 	if (tw > rect.w)
 		printf("[drawFont] warning: string overflow (%d px)\n", tw - rect.w);

@@ -5,7 +5,7 @@
 
 namespace gg
 {
-Button::Button(const char* l)
+Button::Button(std::string l)
 : Element(),
   onClick(nullptr),
   m_label(l)
@@ -41,7 +41,7 @@ void Button::drawUp(Renderer& ren)
 	ren.setColor(255, 255, 255);
 	ren.drawRect(m_x, m_y, m_w, m_h);
 
-	if (m_label != nullptr)
+	if (m_label != "")
 		ren.drawText(m_label, m_x, m_y, m_w, m_h);
 }
 

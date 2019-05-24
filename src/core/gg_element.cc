@@ -33,7 +33,7 @@ void Element::handle(const SDL_Event& e)
                 if (me.isOver(*el))
                 {
                     el->m_mouseDown = true;
-                    el->mouseDown();
+                    el->mouseDown(me);
                     el->redraw();
                     break;
                 }
@@ -59,8 +59,17 @@ void Element::handle(const SDL_Event& e)
     {
         const MouseEvent me = makeMouseEvent();
         for (Element* el : m_elements)
+            if (el->m_mouseDown)
+            {
+                el->mouseDrag(me);
+                el->redraw();
+            }
+            else
             if (me.isOver(*el))
-                el->m_mouseDown ? el->mouseDrag(me) : el->mouseMove(me);          
+            {
+                el->mouseMove(me);
+                el->redraw();       
+            }
     }
 }
 
@@ -88,6 +97,8 @@ void Element::redraw()
 {
     Window* w = getParentWindow();
 	draw(w->m_ren);
+    w->clear();
+    w->drawChildren(w->m_ren);
     w->render();
 }
 
@@ -117,6 +128,7 @@ Window* Element::getParentWindow()
 
 void Element::drawChildren(Renderer& ren)
 {
+    /* TODO - damage flag: redraw only if damaged */
 	for (Element* e : m_elements)
 		e->draw(ren);
 }

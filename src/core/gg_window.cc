@@ -59,8 +59,8 @@ void Window::handle(const SDL_Event& e)
 					m_w = e.window.data1;
 					m_h = e.window.data2;
 				}
-				clear();
 				resized();  // Must be called on SDL_WINDOWEVENT_SHOWN as well
+				clear();
 				drawChildren(m_ren);
 				render();
 			}
