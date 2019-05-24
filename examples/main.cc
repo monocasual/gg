@@ -9,10 +9,16 @@
 struct Group : public gg::Element
 {
 	gg::Box box;
+	gg::Button btn;
 
-	Group() : box("Inside.")
+	Group()
+	: box("Inside."),
+	  btn("Quit")
 	{
 		add(box);
+		add(btn);
+
+		btn.onClick = [](){ gg::quit(); };
 	}
 
 	void draw(gg::Renderer& ren) override
@@ -29,6 +35,7 @@ struct Group : public gg::Element
 	void resized() override
 	{
 		box.setBounds(getX() + 10, getY() + 10, 100/*getW() - 20*/, 40);
+		btn.setBounds(getX() + 10, getH() - 10, getW() - 20, 40);
 	}
 };
 

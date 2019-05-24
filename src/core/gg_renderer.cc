@@ -20,7 +20,7 @@ Renderer::Renderer(SDL_Window& win)
 		throw std::bad_alloc();
 	}
 
-	m_font = TTF_OpenFont("../src/fonts/alterebro.ttf", 20);
+	m_font = TTF_OpenFont("../src/fonts/alterebro.ttf", 32);
 	if (m_font == nullptr)
 	{
 		printf("TTF_OpenFont: %s\n", TTF_GetError());
@@ -111,8 +111,8 @@ void Renderer::fillRect(int x, int y, int w, int h)
 
 void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 {
-	SDL_Rect     rect    = { x, y, w, h };
-	SDL_Color    fgcolor = { 255, 255, 255 };
+	SDL_Color fgcolor = { 255, 255, 255 };
+
 	SDL_Surface* surf    = TTF_RenderUTF8_Solid(m_font, txt.c_str(), fgcolor);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_ren, surf);
 	SDL_FreeSurface(surf);
@@ -120,15 +120,17 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 	int tw, th;
 	TTF_SizeText(m_font, txt.c_str(), &tw, &th);
 
-	if (tw > rect.w)
-		printf("[Renderer] warning: string overflow (%d px)\n", tw - rect.w);
+	if (tw > w)
+		printf("[Renderer] warning: string overflow (%d px)\n", tw - w);
 
+	SDL_Rect rect = { x, y, w, h };
 	rect.x = rect.x + (rect.w / 2) - (tw / 2);
 	rect.y = rect.y + (rect.h / 2) - (th / 2);
 	rect.w = tw;
 	rect.h = th;
 
-	SDL_RenderCopy(m_ren, texture, nullptr, &rect);    
+	SDL_RenderCopy(m_ren, texture, nullptr, &rect);
+	SDL_DestroyTexture(texture);
 }
 
 } // gg::
