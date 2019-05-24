@@ -6,7 +6,6 @@ namespace gg
 {
 Box::Box(std::string t) : m_text(t)
 {
-    printf("BOX p=%p\n", (void*)this);
 }
 
 
@@ -15,7 +14,6 @@ Box::Box(std::string t) : m_text(t)
 
 void Box::draw(Renderer& ren)
 {
-    printf("DRAW BOX p=%p\n", (void*)this);
     ren.setColor(30, 30, 30);
     ren.fillRect(m_x, m_y, m_w, m_h);
     

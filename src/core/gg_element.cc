@@ -71,8 +71,6 @@ void Element::handle(const SDL_Event& e)
                 el->redraw();       
             }
     }
-
-    redraw();
 }
 
 
@@ -98,12 +96,20 @@ void Element::add(Element* e)
 void Element::redraw()
 {
     Window* w = getParentWindow();
-	draw(w->m_ren);
     w->clear();
+	draw(w->m_ren);
     w->drawChildren(w->m_ren);
-    //drawChildren(w->m_ren);
     w->render();
 }
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Element::draw(Renderer& ren)
+{
+    drawChildren(ren);
+};
 
 
 /* -------------------------------------------------------------------------- */

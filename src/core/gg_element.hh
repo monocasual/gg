@@ -38,7 +38,7 @@ public:
 	Drawing routines. This method draws the initial graphical state of each 
 	widget. */
 
-	virtual void draw(Renderer& ren) {};
+	virtual void draw(Renderer& ren);
 
 	virtual void mouseDown(const MouseEvent& e) {};
 	virtual void mouseUp(const MouseEvent& e) {};

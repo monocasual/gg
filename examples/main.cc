@@ -5,9 +5,8 @@
 #include "../src/widgets/gg_box.hh"
 #include "../src/widgets/gg_slider.hh"
 
-#include "../src/core/gg_renderer.hh"
 
-struct Group : public gg::Box
+struct Group : public gg::Element
 {
 	gg::Box box;
 
@@ -17,15 +16,18 @@ struct Group : public gg::Box
 	}
 
 	void draw(gg::Renderer& ren) override
-	{
-		gg::Box::draw(ren);
-		for (Element* e : m_elements)
-			e->draw(ren);
+	{ 		
+   		ren.setColor(15, 15, 15);
+    	ren.fillRect(m_x, m_y, m_w, m_h);
+
+		ren.setColor(255, 255, 255);
+		ren.drawRect(m_x, m_y, m_w, m_h);
+		
+		gg::Element::draw(ren);
 	}
 
 	void resized() override
 	{
-		puts("RESIZED");
 		box.setBounds(getX() + 10, getY() + 10, 80, 40);
 	}
 };
