@@ -95,9 +95,12 @@ void Element::add(Element* e)
 
 void Element::redraw()
 {
+    /* On redraw() all elements inside the window are redrawn. A future 
+    optimization will paint only those elements with a damaged state: see
+    drawChildren() below. */
+
     Window* w = getParentWindow();
     w->clear();
-	draw(w->m_ren);
     w->drawChildren(w->m_ren);
     w->render();
 }

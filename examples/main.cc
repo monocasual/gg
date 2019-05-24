@@ -28,24 +28,57 @@ struct Group : public gg::Element
 
 	void resized() override
 	{
-		box.setBounds(getX() + 10, getY() + 10, 80, 40);
+		box.setBounds(getX() + 10, getY() + 10, getW() - 20, 40);
 	}
 };
 
 
 struct myWindow : public gg::Window
 {
-	Group group;
+	gg::Button btn1;
+	gg::Button btn2;
+	gg::Button btn3;
+	gg::Box    box;
+	gg::Box    output;
+	gg::Slider vslider;
+	gg::Slider hslider;
+	Group      group;
 
 	myWindow()
-	: gg::Window("gg test", 100, 100, 640, 480)
+	: gg::Window("gg test", 100, 100, 640, 480),
+	  btn1      ("Quit"),
+	  btn2      ("button x"),
+	  btn3      ("button y"),
+	  box       ("Example box with some text."),
+	  hslider   (gg::Slider::Type::HORIZONTAL)
 	{
+		add(btn1);
+		add(btn2);
+		add(btn3);
+		add(box);
+		add(output);
+		add(vslider);
+		add(hslider);
 		add(group);
+
+		btn1.onClick    = [](){ gg::quit(); };
+		vslider.onChange = [this](){ output.setText(std::to_string(vslider.getValue())); };
+		hslider.onChange = [this](){ output.setText(std::to_string(hslider.getValue())); };
+
+		vslider.setValue(0.5);
 	}
 
 	void resized() override
 	{
-		group.setBounds(40, 40, getW() - 80, 140);
+		btn1.setBounds(40, 40, 100, 40);
+		btn2.setBounds(40, btn1.getYH() + 10, 100, 40);
+		btn3.setBounds(40, btn2.getYH() + 10, 100, 40);
+		vslider.setBounds(btn2.getXW() + 10, btn1.getYH() + 10, 40, 90);
+		output.setBounds(vslider.getXW() + 10, btn1.getYH() + 10, 90, 40);
+		hslider.setBounds(vslider.getXW() + 10, output.getYH() + 10, 90, 40);
+		box.setBounds(40, btn3.getYH() + 10, getW() - 80, 40);
+
+		group.setBounds(output.getXW() + 10, 40, getW() - output.getXW() - 50, 140);
 	}
 };
 
