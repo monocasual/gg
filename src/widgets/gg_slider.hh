@@ -15,7 +15,7 @@ public:
 
     enum class Type { VERTICAL, HORIZONTAL };
 
-	Slider();
+	Slider(Type t=Type::VERTICAL);
 
 	void draw(Renderer& ren) override;
     void mouseDrag(const MouseEvent& e) override;
@@ -29,10 +29,10 @@ public:
 
 private:
 
+    void compute(int x, int y);
+
     float m_value;
     Type  m_type;
-
-    void compute(int x, int y);
 };
 } // gg::
 

@@ -7,11 +7,11 @@
 
 namespace gg
 {
-Slider::Slider()
+Slider::Slider(Type t)
 : Element (),
   onChange(nullptr),
   m_value (0.0f),
-  m_type  (Type::VERTICAL)
+  m_type  (t)
 {
 }
 
@@ -33,7 +33,10 @@ void Slider::draw(Renderer& ren)
 		ren.fillRect(m_x, m_y + y, m_w, m_h - y);
 	}
 	else
-		assert(false); // TODO
+	{
+		int x = utils::map<float, int>(m_value, 0.0f, 1.0f, 0, m_w);
+		ren.fillRect(m_x, m_y, x, m_h);
+	}
 }
 
 
@@ -61,13 +64,10 @@ void Slider::mouseDrag(const MouseEvent& e)
 void Slider::compute(int x, int y)
 {
 	if (m_type == Type::VERTICAL)
-	{
 		m_value = utils::map<int, float>(utils::clamp(y - m_y, 0, m_h), 0, m_h, 1.0f, 0.0f);
-	}
 	else
-	{
-		assert(false); // TODO
-	}
+		m_value = utils::map<int, float>(utils::clamp(x - m_x, 0, m_w), 0, m_w, 0.0f, 1.0f);
+
 	if (onChange != nullptr) onChange();
 }
 
