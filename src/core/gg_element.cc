@@ -22,7 +22,7 @@ Element::Element(int x, int y, int w, int h)
 
 void Element::handle(const SDL_Event& e)
 {
-    if (e.type & (SDL_MOUSEBUTTONDOWN | SDL_MOUSEBUTTONUP))
+    if (e.type == SDL_MOUSEBUTTONDOWN ||  e.type == SDL_MOUSEBUTTONUP)
     {
         const MouseEvent me = makeMouseEvent();
 
@@ -53,6 +53,14 @@ void Element::handle(const SDL_Event& e)
                 }
             }
         }
+    }
+    else
+    if (e.type == SDL_MOUSEMOTION)
+    {
+        const MouseEvent me = makeMouseEvent();
+        for (Element* el : m_elements)
+            if (me.isOver(*el))
+                el->m_mouseDown ? el->mouseDrag(me) : el->mouseMove(me);          
     }
 }
 
