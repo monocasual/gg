@@ -21,10 +21,10 @@ Slider::Slider(Type t)
 
 void Slider::draw(Renderer& ren)
 {
-	ren.setColor(0, 0, 0);
+	ren.setColor(Color{ 0, 0, 0 });
 	ren.fillRect(m_x, m_y, m_w, m_h);
 
-	ren.setColor(255, 255, 255);
+	ren.setColor(Color{ 255, 255, 255 });
 	ren.drawRect(m_x, m_y, m_w, m_h);
 
 	if (m_type == Type::VERTICAL)

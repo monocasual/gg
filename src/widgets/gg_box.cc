@@ -14,10 +14,10 @@ Box::Box(std::string t) : m_text(t)
 
 void Box::draw(Renderer& ren)
 {
-    ren.setColor(30, 30, 30);
+    ren.setColor(Color{ 30, 30, 30 });
     ren.fillRect(m_x, m_y, m_w, m_h);
     
-	ren.setColor(255, 255, 255);
+	ren.setColor(Color{ 255, 255, 255 });
 	ren.drawRect(m_x, m_y, m_w, m_h);
 
 	if (m_text != "")

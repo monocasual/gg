@@ -36,9 +36,9 @@ void Button::mouseUp(const MouseEvent& e)
 
 void Button::drawUp(Renderer& ren)
 {
-	ren.setColor(0, 0, 0);
+	ren.setColor(Color{ 0, 0, 0 });
 	ren.fillRect(m_x, m_y, m_w, m_h);
-	ren.setColor(255, 255, 255);
+	ren.setColor(Color{ 255, 255, 255 });
 	ren.drawRect(m_x, m_y, m_w, m_h);
 
 	if (m_label != "")
@@ -51,7 +51,7 @@ void Button::drawUp(Renderer& ren)
 
 void Button::drawDown(Renderer& ren)
 {
-	ren.setColor(55, 155, 155);
+	ren.setColor(Color{ 55, 155, 155 });
 	ren.fillRect(m_x, m_y, m_w, m_h);
 }
 

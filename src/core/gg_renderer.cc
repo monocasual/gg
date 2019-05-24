@@ -20,10 +20,10 @@ Renderer::Renderer(SDL_Window& win)
 		throw std::bad_alloc();
 	}
 
-	m_font = TTF_OpenFontIndex("../src/fonts/pixelmix.ttf", 12, 0);
+	m_font = TTF_OpenFont("../src/fonts/alterebro.ttf", 20);
 	if (m_font == nullptr)
 	{
-		printf("TTF_OpenFontIndex: %s\n", TTF_GetError());
+		printf("TTF_OpenFont: %s\n", TTF_GetError());
 		throw std::bad_alloc();
 	}
 }
@@ -43,9 +43,9 @@ Renderer::~Renderer()
 /* -------------------------------------------------------------------------- */
 
 
-void Renderer::setColor(int r, int g, int b, int a)
+void Renderer::setColor(Color c)
 {
-	SDL_SetRenderDrawColor(m_ren, r, g, b, a); 
+	SDL_SetRenderDrawColor(m_ren, c.r, c.g, c.b, c.a); 
 }
 
 
@@ -111,9 +111,9 @@ void Renderer::fillRect(int x, int y, int w, int h)
 
 void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 {
-	SDL_Rect  rect       = { x, y, w, h };
-	SDL_Color color      = { 255, 255, 255 };
-	SDL_Surface* surf    = TTF_RenderText_Solid(m_font, txt.c_str(), color);
+	SDL_Rect     rect    = { x, y, w, h };
+	SDL_Color    fgcolor = { 255, 255, 255 };
+	SDL_Surface* surf    = TTF_RenderUTF8_Solid(m_font, txt.c_str(), fgcolor);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_ren, surf);
 	SDL_FreeSurface(surf);
 
@@ -130,4 +130,5 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 
 	SDL_RenderCopy(m_ren, texture, nullptr, &rect);    
 }
+
 } // gg::

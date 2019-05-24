@@ -17,10 +17,10 @@ struct Group : public gg::Element
 
 	void draw(gg::Renderer& ren) override
 	{ 		
-   		ren.setColor(15, 15, 15);
+   		ren.setColor(gg::Color{ 15, 15, 15 });
     	ren.fillRect(m_x, m_y, m_w, m_h);
 
-		ren.setColor(255, 255, 255);
+		ren.setColor(gg::Color{ 255, 255, 255 });
 		ren.drawRect(m_x, m_y, m_w, m_h);
 		
 		gg::Element::draw(ren);
@@ -49,7 +49,7 @@ struct myWindow : public gg::Window
 	  btn1      ("Quit"),
 	  btn2      ("button x"),
 	  btn3      ("button y"),
-	  box       ("Example box with some text."),
+	  box       ("Example box with some cràzy text."),
 	  hslider   (gg::Slider::Type::HORIZONTAL)
 	{
 		add(btn1);

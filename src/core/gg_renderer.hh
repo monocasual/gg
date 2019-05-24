@@ -9,6 +9,18 @@
 
 namespace gg 
 {
+struct Color
+{
+    int r = 0;
+    int g = 0; 
+    int b = 0;
+    int a = 255;
+};
+
+
+/* -------------------------------------------------------------------------- */
+
+
 class Renderer
 {
 public:
@@ -16,7 +28,7 @@ public:
     Renderer(SDL_Window& win);
     ~Renderer();
 
-    void setColor(int r, int g, int b, int a=255);
+    void setColor(Color c);
     void setFont(const std::string& name, int size);
     void setClip(int x, int y, int w, int h);
     void unsetClip();
@@ -37,6 +49,8 @@ public:
     void render();
 
 private:
+
+    Color getCurrentColor() const;
 
     /* Info on SDL renderer:
     http://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer */
