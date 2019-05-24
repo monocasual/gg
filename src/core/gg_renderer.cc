@@ -105,7 +105,7 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 	TTF_SizeText(m_font, txt.c_str(), &tw, &th);
 
 	if (tw > rect.w)
-		printf("[drawFont] warning: string overflow (%d px)\n", tw - rect.w);
+		printf("[Renderer] warning: string overflow (%d px)\n", tw - rect.w);
 
 	rect.x = rect.x + (rect.w / 2) - (tw / 2);
 	rect.y = rect.y + (rect.h / 2) - (th / 2);

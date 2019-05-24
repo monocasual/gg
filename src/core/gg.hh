@@ -29,9 +29,6 @@ Sends a quit event to the main loop. Call this whenever you want to quit the
 app from outside the main loop (e.g. a button callback). */
 
 void quit();
-
-void freeFont();
-
 } // gg::
 
 
