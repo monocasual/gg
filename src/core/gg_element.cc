@@ -22,55 +22,45 @@ Element::Element(int x, int y, int w, int h)
 
 void Element::handle(const SDL_Event& e)
 {
-    if (e.type == SDL_MOUSEBUTTONDOWN ||  e.type == SDL_MOUSEBUTTONUP)
+    if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
     {
         const MouseEvent me = makeMouseEvent();
 
-        if (e.type == SDL_MOUSEBUTTONDOWN) 
+        if (e.type == SDL_MOUSEBUTTONDOWN && me.isOver(*this)) 
         {
-            for (Element* el : m_elements)
-            {
-                if (me.isOver(*el))
-                {
-                    el->m_mouseDown = true;
-                    el->mouseDown(me);
-                    el->redraw();
-                    break;
-                }
-            }
+            m_mouseDown = true;
+            mouseDown(me);
+            redraw();
         }
         else
-        if (e.type == SDL_MOUSEBUTTONUP)
+        if (e.type == SDL_MOUSEBUTTONUP && m_mouseDown)
         {
-            for (Element* el : m_elements)
-            {
-                if (el->m_mouseDown)
-                {
-                    el->m_mouseDown = false;
-                    el->redraw();
-                    el->mouseUp(me);
-                    break;              
-                }
-            }
-        }
+            m_mouseDown = false;
+            redraw();
+            mouseUp(me);
+        }       
     }
     else
     if (e.type == SDL_MOUSEMOTION)
     {
         const MouseEvent me = makeMouseEvent();
-        for (Element* el : m_elements)
-            if (el->m_mouseDown)
-            {
-                el->mouseDrag(me);
-                el->redraw();
-            }
-            else
-            if (me.isOver(*el))
-            {
-                el->mouseMove(me);
-                el->redraw();       
-            }
+        if (m_mouseDown)
+        {
+            mouseDrag(me);
+            redraw();
+        }
+        else
+        if (me.isOver(*this))
+        {
+            mouseMove(me);
+            redraw();       
+        }
     }
+
+    /* Pass the event to the underlying children. */
+
+    for (Element* el : m_elements)
+        el->handle(e);
 }
 
 
