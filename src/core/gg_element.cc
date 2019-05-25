@@ -6,12 +6,9 @@
 
 namespace gg 
 {
-Element::Element(int x, int y, int w, int h)
-: m_x     (x),
-  m_y     (y),
-  m_w     (w),
-  m_h     (h),
-  m_parent(nullptr),
+Element::Element(Rect r)
+: m_bounds   (r),
+  m_parent   (nullptr),
   m_mouseDown(false)
 {
 }
@@ -26,7 +23,7 @@ void Element::handle(const SDL_Event& e)
     {
         const MouseEvent me = makeMouseEvent();
 
-        if (e.type == SDL_MOUSEBUTTONDOWN && me.isOver(*this)) 
+        if (e.type == SDL_MOUSEBUTTONDOWN && me.isOver(m_bounds)) 
         {
             m_mouseDown = true;
             mouseDown(me);
@@ -50,7 +47,7 @@ void Element::handle(const SDL_Event& e)
             redraw();
         }
         else
-        if (me.isOver(*this))
+        if (me.isOver(m_bounds))
         {
             mouseMove(me);
             redraw();       
@@ -101,7 +98,7 @@ void Element::redraw()
 
 void Element::draw(Renderer& ren)
 {
-    ren.setClip(getX(), getY(), getW(), getH());
+    ren.setClip(m_bounds);
     drawChildren(ren);
     ren.unsetClip();
 };
@@ -112,7 +109,7 @@ void Element::draw(Renderer& ren)
 
 void Element::setBounds(int x, int y, int w, int h)
 {
-	m_x = x; m_y = y; m_w = w; m_h = h;
+    m_bounds = Rect(x, y, w, h);
     resized();
 }
 

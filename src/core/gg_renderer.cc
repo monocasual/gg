@@ -68,6 +68,12 @@ void Renderer::setClip(int x, int y, int w, int h)
 }
 
 
+void Renderer::setClip(Rect r)
+{
+	setClip(r.x, r.y, r.w, r.h);
+}
+
+
 void Renderer::unsetClip()
 {
 	SDL_RenderSetClipRect(m_ren, nullptr);
@@ -99,10 +105,22 @@ void Renderer::drawRect(int x, int y, int w, int h)
 }
 
 
+void Renderer::drawRect(Rect r)
+{
+	drawRect(r.x, r.y, r.w, r.h);
+}
+
+
 void Renderer::fillRect(int x, int y, int w, int h)
 {
 	SDL_Rect r { x, y, w, h };
 	SDL_RenderFillRect(m_ren, &r);
+}
+
+
+void Renderer::fillRect(Rect r)
+{
+	fillRect(r.x, r.y, r.w, r.h);
 }
 
 
@@ -131,6 +149,12 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 
 	SDL_RenderCopy(m_ren, texture, nullptr, &rect);
 	SDL_DestroyTexture(texture);
+}
+
+
+void Renderer::drawText(const std::string& txt, Rect r)
+{
+	drawText(txt, r.x, r.y, r.w, r.h);
 }
 
 } // gg::

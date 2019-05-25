@@ -5,6 +5,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "gg.hh"
 
 
 namespace gg 
@@ -31,11 +32,15 @@ public:
     void setColor(Color c);
     void setFont(const std::string& name, int size);
     void setClip(int x, int y, int w, int h);
+    void setClip(Rect r);
     void unsetClip();
 
     void drawRect(int x, int y, int w, int h);
+    void drawRect(Rect r);
     void drawText(const std::string& txt, int x, int y, int w, int h);
+    void drawText(const std::string& txt, Rect r);
     void fillRect(int x, int y, int w, int h);
+    void fillRect(Rect r);
 
     /* clear
     Clears the entire screen to currently selected color. */

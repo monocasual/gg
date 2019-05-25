@@ -11,7 +11,10 @@ class Window;
 
 struct Rect
 {
-    int x, y, w, h;
+    Rect();
+    Rect(int x, int y, int w, int h);
+
+    int x, y, w, h, xw, yh;
 };
 
 /* init()

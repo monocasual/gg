@@ -6,7 +6,7 @@
 namespace gg 
 {
 Window::Window(const char* t, int x, int y, int w, int h)
-: Element(x, y, w, h),
+: Element(Rect(x, y, w, h)),
   m_win  (SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE)),
   m_ren  (*m_win)
 {
@@ -56,8 +56,8 @@ void Window::handle(const SDL_Event& e)
 			{
 				if (e.window.event == SDL_WINDOWEVENT_RESIZED)
 				{
-					m_w = e.window.data1;
-					m_h = e.window.data2;
+					m_bounds.w = e.window.data1;
+					m_bounds.h = e.window.data2;
 				}
 				resized();  // Must be called on SDL_WINDOWEVENT_SHOWN as well
 				clear();

@@ -22,20 +22,20 @@ Slider::Slider(Type t)
 void Slider::draw(Renderer& ren)
 {
 	ren.setColor(Color{ 0, 0, 0 });
-	ren.fillRect(m_x, m_y, m_w, m_h);
+	ren.fillRect(m_bounds);
 
 	ren.setColor(Color{ 255, 255, 255 });
-	ren.drawRect(m_x, m_y, m_w, m_h);
+	ren.drawRect(m_bounds);
 
 	if (m_type == Type::VERTICAL)
 	{
-		int y = utils::map<float, int>(m_value, 0.0f, 1.0f, m_h, 0);
-		ren.fillRect(m_x, m_y + y, m_w, m_h - y);
+		int y = utils::map<float, int>(m_value, 0.0f, 1.0f, getH(), 0);
+		ren.fillRect(getX(), getY() + y, getW(), getH() - y);
 	}
 	else
 	{
-		int x = utils::map<float, int>(m_value, 0.0f, 1.0f, 0, m_w);
-		ren.fillRect(m_x, m_y, x, m_h);
+		int x = utils::map<float, int>(m_value, 0.0f, 1.0f, 0, getW());
+		ren.fillRect(getX(), getY(), x, getH());
 	}
 }
 
@@ -64,9 +64,9 @@ void Slider::mouseDrag(const MouseEvent& e)
 void Slider::compute(int x, int y)
 {
 	if (m_type == Type::VERTICAL)
-		m_value = utils::map<int, float>(utils::clamp(y - m_y, 0, m_h), 0, m_h, 1.0f, 0.0f);
+		m_value = utils::map<int, float>(utils::clamp(y - getY(), 0, getH()), 0, getH(), 1.0f, 0.0f);
 	else
-		m_value = utils::map<int, float>(utils::clamp(x - m_x, 0, m_w), 0, m_w, 0.0f, 1.0f);
+		m_value = utils::map<int, float>(utils::clamp(x - getX(), 0, getW()), 0, getW(), 0.0f, 1.0f);
 
 	if (onChange != nullptr) onChange();
 }

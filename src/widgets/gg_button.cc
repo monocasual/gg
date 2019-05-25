@@ -27,7 +27,7 @@ void Button::draw(Renderer& ren)
 
 void Button::mouseUp(const MouseEvent& e)
 {
-	if (e.isOver(*this) && onClick != nullptr) onClick();
+	if (e.isOver(m_bounds) && onClick != nullptr) onClick();
 }
 
 
@@ -37,12 +37,12 @@ void Button::mouseUp(const MouseEvent& e)
 void Button::drawUp(Renderer& ren)
 {
 	ren.setColor(Color{ 0, 0, 0 });
-	ren.fillRect(m_x, m_y, m_w, m_h);
+	ren.fillRect(m_bounds);
 	ren.setColor(Color{ 255, 255, 255 });
-	ren.drawRect(m_x, m_y, m_w, m_h);
+	ren.drawRect(m_bounds);
 
 	if (m_label != "")
-		ren.drawText(m_label, m_x, m_y, m_w, m_h);
+		ren.drawText(m_label, m_bounds);
 }
 
 
@@ -52,7 +52,7 @@ void Button::drawUp(Renderer& ren)
 void Button::drawDown(Renderer& ren)
 {
 	ren.setColor(Color{ 55, 155, 155 });
-	ren.fillRect(m_x, m_y, m_w, m_h);
+	ren.fillRect(m_bounds);
 }
 
 } // gg::

@@ -24,10 +24,10 @@ struct Group : public gg::Element
 	void draw(gg::Renderer& ren) override
 	{ 		
    		ren.setColor(gg::Color{ 15, 15, 15 });
-    	ren.fillRect(m_x, m_y, m_w, m_h);
+    	ren.fillRect(m_bounds);
 
 		ren.setColor(gg::Color{ 255, 255, 255 });
-		ren.drawRect(m_x, m_y, m_w, m_h);
+		ren.drawRect(m_bounds);
 		
 		gg::Element::draw(ren);
 	}

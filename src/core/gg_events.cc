@@ -5,9 +5,9 @@
 
 namespace gg 
 {
-bool MouseEvent::isOver(const Element& e) const
+bool MouseEvent::isOver(Rect r) const
 {
-    return x < e.getXW() && x > e.getX() && y < e.getYH() && y > e.getY();
+    return x < r.xw && x > r.x && y < r.yh && y > r.y;
 }
 
 

@@ -2,6 +2,9 @@
 #define GG_EVENTS_HH
 
 
+#include "gg.hh"
+
+
 namespace gg 
 {
 class Element;
@@ -10,7 +13,7 @@ struct MouseEvent
     int x;
     int y;
 
-    bool isOver(const Element& e) const;
+    bool isOver(Rect r) const;
 };
 
 MouseEvent makeMouseEvent();

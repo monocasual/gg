@@ -11,6 +11,7 @@ A generic base for everything.
 
 #include <vector>
 #include <SDL2/SDL.h>
+#include "gg.hh"
 
 
 namespace gg 
@@ -56,28 +57,29 @@ public:
 	void add(Element* w);
 	void add(Element& w);
 
-	int getX() const  { return m_x; }
-	int getY() const  { return m_y; }
-	int getW() const  { return m_w; }
-	int getH() const  { return m_h; }
-	int getXW() const { return m_x + m_w; }
-	int getYH() const { return m_y + m_h; }
+	int getX() const  { return m_bounds.x; }
+	int getY() const  { return m_bounds.y; }
+	int getW() const  { return m_bounds.w; }
+	int getH() const  { return m_bounds.h; }
+	int getXW() const { return m_bounds.xw; }
+	int getYH() const { return m_bounds.yh; }
+	Rect getBounds() const { return m_bounds; }
 
 	void setBounds(int x, int y, int w, int h);
 
 protected:
 
-	Element(int x=0, int y=0, int w=0, int h=0);
+	Element(Rect r=Rect());
 
 	/* drawChildren [virtual]
 	Draws all children of this element. */
 
 	virtual void drawChildren(Renderer& ren);
 
-	/* xywh
+	/* m_bounds
 	Main coordinates. */
 
-	int m_x, m_y, m_w, m_h;
+	Rect m_bounds;
 
 	/* parent
 	Widgets belong to a parent, that is a Window or another Element (groups). */
