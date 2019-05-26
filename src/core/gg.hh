@@ -22,15 +22,15 @@ struct Rect
 
 int init();
 
-/* add()
+/* addWindow()
  * */
 
-void add(Window* w);
+void addWindow(Window* w);
 
 /* run()
  * */
 
-int run();
+void run();
 
 /* quit()
 Sends a quit event to the main loop. Call this whenever you want to quit the

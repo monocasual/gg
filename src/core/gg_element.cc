@@ -19,6 +19,9 @@ Element::Element(Rect r)
 
 void Element::handle(const SDL_Event& e)
 {
+    if (e.window.windowID != getParentWindow()->id)
+        return;
+
     if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
     {
         const MouseEvent me = makeMouseEvent();
@@ -53,7 +56,21 @@ void Element::handle(const SDL_Event& e)
             redraw();       
         }
     }
-
+    /*
+    else
+    if (e.type == SDL_KEYDOWN || e.type == SDL_TEXTINPUT)
+    {
+        if (e.type == SDL_KEYDOWN)
+        {
+            printf("%d, %s\n", e.key.keysym.sym, SDL_GetKeyName(e.key.keysym.sym));
+        }
+        else
+        {
+            const KeyEvent ke = makeKeyEvent(e);
+            printf("%s %s\n", e.text.text, ke.ch);            
+        }
+    }
+*/
     /* Pass the event to the underlying children. */
 
     for (Element* el : m_elements)
@@ -111,6 +128,12 @@ void Element::setBounds(int x, int y, int w, int h)
 {
     m_bounds = Rect(x, y, w, h);
     resized();
+}
+
+
+void Element::setBounds(Rect b)
+{
+    setBounds(b.x, b.y, b.w, b.h);
 }
 
 

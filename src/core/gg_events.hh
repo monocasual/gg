@@ -8,6 +8,7 @@
 namespace gg 
 {
 class Element;
+
 struct MouseEvent
 {
     int x;
@@ -16,7 +17,13 @@ struct MouseEvent
     bool isOver(Rect r) const;
 };
 
+struct KeyEvent
+{
+    const char* ch;
+};
+
 MouseEvent makeMouseEvent();
+KeyEvent makeKeyEvent(const SDL_Event& e);
 }; // gg::
 
 

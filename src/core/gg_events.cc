@@ -14,12 +14,21 @@ bool MouseEvent::isOver(Rect r) const
 /* -------------------------------------------------------------------------- */
 
 
-
 MouseEvent makeMouseEvent()
 {
     int mx, my;
     SDL_GetMouseState(&mx, &my);
     return { mx, my };
 }
+
+
+/* -------------------------------------------------------------------------- */
+
+
+KeyEvent makeKeyEvent(const SDL_Event& e)
+{
+    return { e.text.text };
+}
+
 }; // gg::
 

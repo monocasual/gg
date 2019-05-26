@@ -35,9 +35,20 @@ public:
 	
 	void render();
 
+	/* setModal
+	Creates a modal window. Call this before adding the window to the gg main
+	loop. */
+
+	void setModal(const Window* parent);
+
+	void show();
+	void hide();
+
+	void setResizable(bool v);
+
 protected:
 
-	Window(const char* t, int x, int y, int w, int h);
+	Window(const std::string& title, int x, int y, int w, int h);
 
 	/* win
 	Pointer to a SDL_Window structure. */

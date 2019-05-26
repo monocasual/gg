@@ -4,21 +4,29 @@
 #include "../src/widgets/gg_button.hh"
 #include "../src/widgets/gg_box.hh"
 #include "../src/widgets/gg_slider.hh"
+#include "../src/widgets/gg_alert.hh"
 
 
 struct Group : public gg::Element
 {
 	gg::Box box;
 	gg::Button btn;
+	gg::Alert alert;
 
 	Group()
 	: box("Inside."),
-	  btn("Quit")
+	  btn("Quit"),
+	  alert("Warning", "Quit: are you really sure?")
 	{
 		add(box);
 		add(btn);
 
-		btn.onClick = [](){ gg::quit(); };
+		btn.onClick = [this](){ showAlert(); };
+	}
+
+	void showAlert()
+	{
+		gg::addWindow(&alert);
 	}
 
 	void draw(gg::Renderer& ren) override
@@ -95,7 +103,7 @@ int main()
 	gg::init();
 
 	std::unique_ptr<myWindow> w = std::make_unique<myWindow>();
-	gg::add(w.get());
-	return gg::run();
+	gg::addWindow(w.get());
+	gg::run();
 }
 

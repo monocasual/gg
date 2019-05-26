@@ -66,6 +66,7 @@ public:
 	Rect getBounds() const { return m_bounds; }
 
 	void setBounds(int x, int y, int w, int h);
+	void setBounds(Rect b);
 
 protected:
 
@@ -75,6 +76,8 @@ protected:
 	Draws all children of this element. */
 
 	virtual void drawChildren(Renderer& ren);
+
+	Window* getParentWindow();
 
 	/* m_bounds
 	Main coordinates. */
@@ -95,11 +98,6 @@ protected:
 	Tells whether the mouse has been held down on this element. */
 	
 	bool m_mouseDown;
-
-private:
-
-	Window* getParentWindow();
-
 };
 } // gg::
 

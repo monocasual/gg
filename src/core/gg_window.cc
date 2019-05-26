@@ -5,9 +5,9 @@
 
 namespace gg 
 {
-Window::Window(const char* t, int x, int y, int w, int h)
+Window::Window(const std::string& t, int x, int y, int w, int h)
 : Element(Rect(x, y, w, h)),
-  m_win  (SDL_CreateWindow(t, x, y, w, h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE)),
+  m_win  (SDL_CreateWindow(t.c_str(), x, y, w, h, SDL_WINDOW_HIDDEN | SDL_WINDOW_RESIZABLE)),
   m_ren  (*m_win)
 {
 	if (m_win == nullptr)
@@ -40,6 +40,39 @@ void Window::clear()
 void Window::render()
 {
 	m_ren.render();
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Window::show()
+{
+	SDL_ShowWindow(m_win);
+}
+
+
+void Window::hide()
+{
+	SDL_HideWindow(m_win);
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Window::setResizable(bool v)
+{
+	SDL_SetWindowResizable(m_win, static_cast<SDL_bool>(v));
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Window::setModal(const Window* parent)
+{
+	SDL_SetWindowModalFor(m_win, parent->m_win);
 }
 
 
