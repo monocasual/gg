@@ -2,6 +2,10 @@
 #define GG_UTILS_HH
 
 
+#include <vector>
+#include <algorithm>
+
+
 namespace gg {
 namespace utils
 {
@@ -25,6 +29,15 @@ T clamp(T x, T min, T max)
     if (x < min) return min;
     if (x > max) return max;
     return x;
+}
+
+/* eraseIf (template)
+Erases things from a vector given a lambda F. */
+
+template <typename T, typename F>
+void eraseIf(std::vector<T>& v, F&& f)
+{
+    v.erase(std::remove_if(v.begin(), v.end(), f), v.end());
 }
 }} // gg::utils::
 

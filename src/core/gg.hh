@@ -27,6 +27,9 @@ int init();
 
 void addWindow(Window* w);
 
+
+void removeWindow(Window* w);
+
 /* run()
  * */
 

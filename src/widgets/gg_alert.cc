@@ -21,4 +21,12 @@ void Alert::resized()
     m_box.setBounds(getBounds());
 }
 
+
+/* -------------------------------------------------------------------------- */
+
+
+void Alert::closed()
+{
+    gg::removeWindow(this);
+}
 } // gg::

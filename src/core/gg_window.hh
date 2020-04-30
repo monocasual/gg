@@ -22,6 +22,11 @@ public:
 
 	~Window();
 
+	/* close [virtual]
+	Invoked when the 'x' button is pressed. */
+
+	virtual void closed() {};
+
 	void handle(const SDL_Event& e) override;
 
 	/* clear()

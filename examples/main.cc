@@ -95,6 +95,11 @@ struct myWindow : public gg::Window
 
 		group.setBounds(output.getXW() + 10, 40, getW() - output.getXW() - 50, 140);
 	}
+
+	void closed() override
+	{
+		gg::quit();
+	}
 };
 
 

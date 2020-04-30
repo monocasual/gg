@@ -16,6 +16,7 @@ public:
 	Alert(const std::string& title, const std::string& text);
 
     void resized() override;
+    void closed() override;
 
 private:
 

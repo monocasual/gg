@@ -99,6 +99,12 @@ void Window::handle(const SDL_Event& e)
 				render();
 			}
 		}
+		else
+		if (e.window.event == SDL_WINDOWEVENT_CLOSE)
+		{
+			if (e.window.windowID == id)
+				closed();
+		}
 	}
 	else
 	{

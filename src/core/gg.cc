@@ -4,6 +4,7 @@
 #include "gg_const.hh"
 #include "gg_window.hh"
 #include "gg_element.hh"
+#include "gg_utils.hh"
 #include "gg.hh"
 
 
@@ -111,12 +112,20 @@ void addWindow(Window* w)
 /* -------------------------------------------------------------------------- */
 
 
+void removeWindow(Window* w)
+{
+	w->hide();
+	utils::eraseIf(windows_, [w] (const Window* o) { return o->id == w->id; });
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
 void quit()
 {
 	SDL_Event e;
 	e.type = SDL_QUIT;
 	SDL_PushEvent(&e);
 }
-
-
 } // gg::
