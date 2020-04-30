@@ -4,6 +4,9 @@ project(gg VERSION 0.0.0 LANGUAGES CXX)
 
 set(CMAKE_COLOR_MAKEFILE ON)
 
+# Enable C++17.
+set(CMAKE_CXX_STANDARD 17)
+
 # Debug mode for now
 set(CMAKE_BUILD_TYPE Debug)
 

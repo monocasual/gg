@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cassert>
 #include "../core/gg_renderer.hh"
 #include "../core/gg_events.hh"
@@ -64,9 +65,9 @@ void Slider::mouseDrag(const MouseEvent& e)
 void Slider::compute(int x, int y)
 {
 	if (m_type == Type::VERTICAL)
-		m_value = utils::map<int, float>(utils::clamp(y - getY(), 0, getH()), 0, getH(), 1.0f, 0.0f);
+		m_value = utils::map<int, float>(std::clamp(y - getY(), 0, getH()), 0, getH(), 1.0f, 0.0f);
 	else
-		m_value = utils::map<int, float>(utils::clamp(x - getX(), 0, getW()), 0, getW(), 0.0f, 1.0f);
+		m_value = utils::map<int, float>(std::clamp(x - getX(), 0, getW()), 0, getW(), 0.0f, 1.0f);
 
 	if (onChange != nullptr) onChange();
 }
@@ -82,7 +83,7 @@ float Slider::getValue() const { return m_value; }
 
 void Slider::setValue(float v)
 { 
-	m_value = utils::clamp(v, 0.0f, 1.0f);
+	m_value = std::clamp(v, 0.0f, 1.0f);
 	if (onChange != nullptr) onChange();
 }
 

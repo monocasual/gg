@@ -20,16 +20,7 @@ TO map(TI x, TI a, TI b, TO w, TO z)
 }
 
 
-/* clamp (template)
-Bounds 'x' between min and max values. */
-
-template <typename T>
-T clamp(T x, T min, T max)
-{
-    if (x < min) return min;
-    if (x > max) return max;
-    return x;
-}
+/* -------------------------------------------------------------------------- */
 
 /* eraseIf (template)
 Erases things from a vector given a lambda F. */
