@@ -9,6 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # Defines the variable GG_SOURCES.
 set(GG_SOURCES
+	src/core/gg_const.hh
 	src/core/gg.hh src/core/gg.cc
     src/core/gg_events.hh src/core/gg_events.cc
 	src/core/gg_renderer.hh src/core/gg_renderer.cc

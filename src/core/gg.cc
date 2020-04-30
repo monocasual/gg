@@ -1,6 +1,7 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "gg_const.hh"
 #include "gg_window.hh"
 #include "gg_element.hh"
 #include "gg.hh"
@@ -61,7 +62,7 @@ int init()
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		printf("[init] unable to initialize: %s\n", SDL_GetError());
+		GG_DEBUG("Unable to initialize: " << SDL_GetError());
 		return 0;
 	}
 
@@ -84,7 +85,7 @@ void run()
 		SDL_WaitEvent(&ev);
 		if (ev.type == SDL_QUIT)
 		{
-			puts("[run] SDL_QUIT event, stop event loop");
+			GG_DEBUG("SDL_QUIT event, stop event loop");
 			running_ = false;
 		}
 		else

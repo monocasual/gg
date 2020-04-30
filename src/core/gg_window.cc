@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include "gg_const.hh"
 #include "gg_window.hh"
 
 
@@ -23,7 +24,7 @@ Window::Window(const std::string& t, int x, int y, int w, int h)
 Window::~Window()
 {
 	SDL_DestroyWindow(m_win);
-	puts("[~Window] destroyed");
+	GG_DEBUG("Window destroyed");
 }
 
 

@@ -1,5 +1,6 @@
 #include <new>
 #include <cassert>
+#include "gg_const.hh"
 #include "gg_renderer.hh"
 
 
@@ -9,21 +10,21 @@ Renderer::Renderer(SDL_Window& win)
 {
 	if (TTF_Init() == -1)
 	{
-		printf("TTF_Init: %s\n", TTF_GetError());
+		GG_DEBUG("TTF_Init: " << TTF_GetError());
 		throw std::bad_alloc();
 	}
 
 	m_ren = SDL_CreateRenderer(&win, -1, SDL_RENDERER_ACCELERATED);
 	if (m_ren == nullptr)
 	{
-		printf("SDL_CreateRenderer: %s\n", SDL_GetError());
+		GG_DEBUG("SDL_CreateRenderer: " << SDL_GetError());
 		throw std::bad_alloc();
 	}
 
 	m_font = TTF_OpenFont("../src/fonts/alterebro.ttf", 32);
 	if (m_font == nullptr)
 	{
-		printf("TTF_OpenFont: %s\n", TTF_GetError());
+		GG_DEBUG("TTF_OpenFont: " << TTF_GetError());
 		throw std::bad_alloc();
 	}
 }
@@ -139,7 +140,7 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 	TTF_SizeText(m_font, txt.c_str(), &tw, &th);
 
 	if (tw > w)
-		printf("[Renderer] warning: string overflow (%d px)\n", tw - w);
+		GG_DEBUG("String overflow (" << tw - w << " px)");
 
 	SDL_Rect rect = { x, y, w, h };
 	rect.x = rect.x + (rect.w / 2) - (tw / 2);
