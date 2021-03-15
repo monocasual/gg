@@ -7,9 +7,10 @@
 namespace gg 
 {
 Element::Element(Rect r)
-: m_bounds   (r),
-  m_parent   (nullptr),
-  m_mouseDown(false)
+: m_bounds   (r)
+, m_parent   (nullptr)
+, m_mouseDown(false)
+, m_focus    (false)
 {
 }
 
@@ -29,6 +30,7 @@ void Element::handle(const SDL_Event& e)
         if (e.type == SDL_MOUSEBUTTONDOWN && me.isOver(m_bounds)) 
         {
             m_mouseDown = true;
+            setFocus();
             mouseDown(me);
             redraw();
         }
@@ -67,8 +69,11 @@ void Element::handle(const SDL_Event& e)
         }
         else
         {
-            const KeyEvent ke = makeKeyEvent(e);
-            keyPress(ke);
+            if (m_focus)
+            {
+                keyPress(makeKeyEvent(e));
+                redraw();
+            }
         }
     }
 
@@ -135,6 +140,17 @@ void Element::setBounds(int x, int y, int w, int h)
 void Element::setBounds(Rect b)
 {
     setBounds(b.x, b.y, b.w, b.h);
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+void Element::setFocus()
+{
+    for (Element* el : m_elements)
+        el->m_focus = false;
+    m_focus = true;
 }
 
 

@@ -5,6 +5,7 @@
 #include "widgets/gg_box.hh"
 #include "widgets/gg_slider.hh"
 #include "widgets/gg_alert.hh"
+#include "widgets/gg_input.hh"
 
 
 struct Group : public gg::Element
@@ -58,6 +59,8 @@ struct myWindow : public gg::Window
 	gg::Slider vslider;
 	gg::Slider hslider;
 	Group      group;
+	gg::Input  input1;
+	gg::Input  input2;
 
 	myWindow()
 	: gg::Window("gg test", 100, 100, 640, 480),
@@ -75,6 +78,8 @@ struct myWindow : public gg::Window
 		add(vslider);
 		add(hslider);
 		add(group);
+		add(input1);
+		add(input2);
 
 		btn1.onClick    = [](){ gg::quit(); };
 		vslider.onChange = [this](){ output.setText(std::to_string(vslider.getValue())); };
@@ -92,8 +97,9 @@ struct myWindow : public gg::Window
 		output.setBounds(vslider.getXW() + 10, btn1.getYH() + 10, 90, 40);
 		hslider.setBounds(vslider.getXW() + 10, output.getYH() + 10, 90, 40);
 		box.setBounds(40, btn3.getYH() + 10, getW() - 80, 40);
-
 		group.setBounds(output.getXW() + 10, 40, getW() - output.getXW() - 50, 140);
+		input1.setBounds(40, box.getYH() + 10, getW() - 80, 40);
+		input2.setBounds(40, input1.getYH() + 10, getW() - 80, 40);
 	}
 
 	void closed() override

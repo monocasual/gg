@@ -27,17 +27,16 @@ list(APPEND GG_TARGET_PROPERTIES)
 # ------------------------------------------------------------------------------
 
 list(APPEND GG_SOURCES
-	src/core/gg_const.hh
-	src/core/gg.hh src/core/gg.cc
-	src/core/gg_events.hh src/core/gg_events.cc
-	src/core/gg_renderer.hh src/core/gg_renderer.cc
-	src/core/gg_element.hh src/core/gg_element.cc
-	src/core/gg_window.hh src/core/gg_window.cc
-	src/core/gg_utils.hh
-	src/widgets/gg_button.hh src/widgets/gg_button.cc
-	src/widgets/gg_box.hh src/widgets/gg_box.cc
-	src/widgets/gg_slider.hh src/widgets/gg_slider.cc
-	src/widgets/gg_alert.hh src/widgets/gg_alert.cc
+	src/core/gg.cc
+	src/core/gg_events.cc
+	src/core/gg_renderer.cc
+	src/core/gg_element.cc
+	src/core/gg_window.cc
+	src/widgets/gg_button.cc
+	src/widgets/gg_box.cc
+	src/widgets/gg_slider.cc
+	src/widgets/gg_alert.cc
+	src/widgets/gg_input.cc
 	examples/main.cc)
 
 # ------------------------------------------------------------------------------

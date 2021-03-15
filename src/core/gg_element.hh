@@ -16,9 +16,10 @@ A generic base for everything.
 
 namespace gg 
 {
-class Window;
-class Renderer;
-class MouseEvent;
+class  Window;
+class  Renderer;
+struct MouseEvent;
+struct KeyEvent;
 class Element
 {
 public:
@@ -70,6 +71,11 @@ public:
 	void setBounds(int x, int y, int w, int h);
 	void setBounds(Rect b);
 
+	/* setFocus()
+	Set focus to this element. Other elements lose their focus. */
+
+	void setFocus();
+
 protected:
 
 	Element(Rect r=Rect());
@@ -100,6 +106,8 @@ protected:
 	Tells whether the mouse has been held down on this element. */
 	
 	bool m_mouseDown;
+
+	bool m_focus;
 };
 } // gg::
 
