@@ -29,6 +29,5 @@ KeyEvent makeKeyEvent(const SDL_Event& e)
 {
     return { e.text.text };
 }
-
-}; // gg::
+} // gg::
 

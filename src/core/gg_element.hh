@@ -41,10 +41,10 @@ public:
 
 	virtual void draw(Renderer& ren);
 
-	virtual void mouseDown(const MouseEvent& e) {};
-	virtual void mouseUp(const MouseEvent& e) {};
-	virtual void mouseMove(const MouseEvent& e) {};
-	virtual void mouseDrag(const MouseEvent& e) {};
+	virtual void mouseDown(const MouseEvent&) {};
+	virtual void mouseUp(const MouseEvent&) {};
+	virtual void mouseMove(const MouseEvent&) {};
+	virtual void mouseDrag(const MouseEvent&) {};
 
 	/* redraw() [virtual]
 	Forces the redraw for this element and all its children. */

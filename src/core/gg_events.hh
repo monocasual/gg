@@ -24,7 +24,7 @@ struct KeyEvent
 
 MouseEvent makeMouseEvent();
 KeyEvent makeKeyEvent(const SDL_Event& e);
-}; // gg::
+} // gg::
 
 
 #endif
