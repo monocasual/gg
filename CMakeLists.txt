@@ -2,40 +2,59 @@ cmake_minimum_required(VERSION 3.2)
 
 project(gg VERSION 0.0.0 LANGUAGES CXX)
 
-set(CMAKE_COLOR_MAKEFILE ON)
+# ------------------------------------------------------------------------------
+# Lists definition
+#
+# GG_SOURCES - contains the source files
+# GG_PREPROCESSOR_DEFS - preprocessor definitions
+# GG_INCLUDE_DIRS - include directories (e.g. -I)
+# GG_COMPILER_OPTIONS - additional flags for the compiler
+# GG_LIBRARIES - external dependencies to link
+# GG_COMPILER_FEATURES - e.g. C++17
+# GG_TARGET_PROPERTIES - additional properties for the main target.
+# ------------------------------------------------------------------------------
 
-# Enable C++17.
-set(CMAKE_CXX_STANDARD 17)
+list(APPEND GG_SOURCES)
+list(APPEND GG_PREPROCESSOR_DEFS)
+list(APPEND GG_INCLUDE_DIRS
+	${CMAKE_SOURCE_DIR}
+	${CMAKE_SOURCE_DIR}/src)
+list(APPEND GG_COMPILER_OPTIONS)
+list(APPEND GG_LIBRARIES)
+list(APPEND GG_COMPILER_FEATURES cxx_std_17)
+list(APPEND GG_TARGET_PROPERTIES)
 
-# Debug mode for now
-set(CMAKE_BUILD_TYPE Debug)
+# ------------------------------------------------------------------------------
 
-# Defines the variable GG_SOURCES.
-set(GG_SOURCES
+list(APPEND GG_SOURCES
 	src/core/gg_const.hh
 	src/core/gg.hh src/core/gg.cc
-    src/core/gg_events.hh src/core/gg_events.cc
+	src/core/gg_events.hh src/core/gg_events.cc
 	src/core/gg_renderer.hh src/core/gg_renderer.cc
-    src/core/gg_element.hh src/core/gg_element.cc
+	src/core/gg_element.hh src/core/gg_element.cc
 	src/core/gg_window.hh src/core/gg_window.cc
-    src/core/gg_utils.hh
+	src/core/gg_utils.hh
 	src/widgets/gg_button.hh src/widgets/gg_button.cc
-    src/widgets/gg_box.hh src/widgets/gg_box.cc
-    src/widgets/gg_slider.hh src/widgets/gg_slider.cc
-    src/widgets/gg_alert.hh src/widgets/gg_alert.cc
+	src/widgets/gg_box.hh src/widgets/gg_box.cc
+	src/widgets/gg_slider.hh src/widgets/gg_slider.cc
+	src/widgets/gg_alert.hh src/widgets/gg_alert.cc
 	examples/main.cc)
 
-# Adds a new (executable) target called gg.
-add_executable(gg ${GG_SOURCES})
+# ------------------------------------------------------------------------------
 
-# Set compiler flags
-target_compile_options(gg PRIVATE -Wall -Werror)
+if(MSVC)
+	list(APPEND GG_COMPILER_OPTIONS /W4)
+else()
+	list(APPEND GG_COMPILER_OPTIONS -Wall -Wextra -Wpedantic)
+endif()
 
-# Finds the required libraries. 
+# ------------------------------------------------------------------------------
+
+# Dependencies
+
 find_library(LIB_SDL2 SDL2)
 find_library(LIB_SDL2_TTF SDL2_ttf)
 
-# Fatal error if a library is missing from the system.
 if (NOT LIB_SDL2)
 	message(FATAL_ERROR "SDL2 not found")
 endif()
@@ -43,6 +62,15 @@ if (NOT LIB_SDL2_TTF)
 	message(FATAL_ERROR "SDL2_ttf not found")
 endif()
 
-# Specify libraries or flags to use when linking the target gg. These will 
-# become linker flags such as -lSDL2 and -lSDL2_ttf.
-target_link_libraries(gg SDL2 SDL2_ttf)
+find_package(SDL2 REQUIRED)
+list(APPEND GG_LIBRARIES SDL2 SDL2_ttf)
+
+# ------------------------------------------------------------------------------
+
+add_executable(gg)
+target_compile_features(gg PRIVATE ${GG_COMPILER_FEATURES})
+target_sources(gg PRIVATE ${GG_SOURCES})
+target_compile_definitions(gg PRIVATE ${GG_PREPROCESSOR_DEFS})
+target_include_directories(gg PRIVATE ${GG_INCLUDE_DIRS})
+target_link_libraries(gg PRIVATE ${GG_LIBRARIES})
+target_compile_options(gg PRIVATE ${GG_COMPILER_OPTIONS})
