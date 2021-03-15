@@ -3,7 +3,7 @@
 
 
 #include <functional>
-#include "../core/gg_window.hh"
+#include "core/gg_window.hh"
 #include "gg_box.hh"
 
 

@@ -46,6 +46,8 @@ public:
 	virtual void mouseMove(const MouseEvent&) {};
 	virtual void mouseDrag(const MouseEvent&) {};
 
+	virtual void keyPress(const KeyEvent&) {};
+
 	/* redraw() [virtual]
 	Forces the redraw for this element and all its children. */
 

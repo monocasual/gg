@@ -21,7 +21,7 @@ Renderer::Renderer(SDL_Window& win)
 		throw std::bad_alloc();
 	}
 
-	m_font = TTF_OpenFont("../src/fonts/alterebro.ttf", 32);
+	m_font = TTF_OpenFont("src/fonts/alterebro.ttf", 32);
 	if (m_font == nullptr)
 	{
 		GG_DEBUG("TTF_OpenFont: " << TTF_GetError());

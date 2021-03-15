@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <cassert>
-#include "../core/gg_renderer.hh"
-#include "../core/gg_events.hh"
-#include "../core/gg_utils.hh"
+#include "core/gg_renderer.hh"
+#include "core/gg_events.hh"
+#include "core/gg_utils.hh"
 #include "gg_slider.hh"
 
 

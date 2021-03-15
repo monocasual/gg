@@ -1,10 +1,10 @@
 #include <memory>
-#include "../src/core/gg.hh"
-#include "../src/core/gg_window.hh"
-#include "../src/widgets/gg_button.hh"
-#include "../src/widgets/gg_box.hh"
-#include "../src/widgets/gg_slider.hh"
-#include "../src/widgets/gg_alert.hh"
+#include "core/gg.hh"
+#include "core/gg_window.hh"
+#include "widgets/gg_button.hh"
+#include "widgets/gg_box.hh"
+#include "widgets/gg_slider.hh"
+#include "widgets/gg_alert.hh"
 
 
 struct Group : public gg::Element

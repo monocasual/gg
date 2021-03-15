@@ -1,5 +1,5 @@
-#include "../core/gg_renderer.hh"
-#include "../core/gg_events.hh"
+#include "core/gg_renderer.hh"
+#include "core/gg_events.hh"
 #include "gg_button.hh"
 
 

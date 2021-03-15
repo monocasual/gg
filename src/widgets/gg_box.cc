@@ -1,4 +1,4 @@
-#include "../core/gg_renderer.hh"
+#include "core/gg_renderer.hh"
 #include "gg_box.hh"
 
 

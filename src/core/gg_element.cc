@@ -56,21 +56,22 @@ void Element::handle(const SDL_Event& e)
             redraw();       
         }
     }
-    /*
     else
     if (e.type == SDL_KEYDOWN || e.type == SDL_TEXTINPUT)
     {
         if (e.type == SDL_KEYDOWN)
         {
-            printf("%d, %s\n", e.key.keysym.sym, SDL_GetKeyName(e.key.keysym.sym));
+            // generic press. Includes also special keys (backspace, tab, ...)
+            // https://lazyfoo.net/tutorials/SDL/32_text_input_and_clipboard_handling/index.php
+            //printf("%d, %s\n", e.key.keysym.sym, SDL_GetKeyName(e.key.keysym.sym));
         }
         else
         {
             const KeyEvent ke = makeKeyEvent(e);
-            printf("%s %s\n", e.text.text, ke.ch);            
+            keyPress(ke);
         }
     }
-*/
+
     /* Pass the event to the underlying children. */
 
     for (Element* el : m_elements)
@@ -118,7 +119,7 @@ void Element::draw(Renderer& ren)
     ren.setClip(m_bounds);
     drawChildren(ren);
     ren.unsetClip();
-};
+}
 
 
 /* -------------------------------------------------------------------------- */
@@ -157,5 +158,4 @@ void Element::drawChildren(Renderer& ren)
 	for (Element* e : m_elements)
 		e->draw(ren);
 }
-
 } // gg::
