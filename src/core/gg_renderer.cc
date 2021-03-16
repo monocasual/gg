@@ -128,7 +128,8 @@ void Renderer::fillRect(Rect r)
 /* -------------------------------------------------------------------------- */
 
 
-void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
+void Renderer::drawText(const std::string& txt, int x, int y, int w, int h, 
+	TextAlign align)
 {
 	SDL_Color fgcolor = { 255, 255, 255 };
 
@@ -143,19 +144,24 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h)
 		GG_DEBUG("String overflow (" << tw - w << " px)");
 
 	SDL_Rect rect = { x, y, w, h };
-	rect.x = rect.x + (rect.w / 2) - (tw / 2);
-	rect.y = rect.y + (rect.h / 2) - (th / 2);
+	rect.y = rect.y + (rect.h / 2) - (th / 2); // h-centered
 	rect.w = tw;
 	rect.h = th;
+
+	if (align == TextAlign::CENTER)
+		rect.x = rect.x + (w / 2) - (tw / 2);
+	else
+	if (align == TextAlign::RIGHT)
+		rect.x = rect.x + (w - tw);
 
 	SDL_RenderCopy(m_ren, texture, nullptr, &rect);
 	SDL_DestroyTexture(texture);
 }
 
 
-void Renderer::drawText(const std::string& txt, Rect r)
+void Renderer::drawText(const std::string& txt, Rect r, TextAlign t)
 {
-	drawText(txt, r.x, r.y, r.w, r.h);
+	drawText(txt, r.x, r.y, r.w, r.h, t);
 }
 
 } // gg::

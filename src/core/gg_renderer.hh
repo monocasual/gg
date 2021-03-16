@@ -26,6 +26,8 @@ class Renderer
 {
 public:
 
+    enum class TextAlign { LEFT, CENTER, RIGHT };
+
     Renderer(SDL_Window& win);
     ~Renderer();
 
@@ -37,8 +39,8 @@ public:
 
     void drawRect(int x, int y, int w, int h);
     void drawRect(Rect r);
-    void drawText(const std::string& txt, int x, int y, int w, int h);
-    void drawText(const std::string& txt, Rect r);
+    void drawText(const std::string& txt, int x, int y, int w, int h, TextAlign t=TextAlign::CENTER);
+    void drawText(const std::string& txt, Rect r, TextAlign t=TextAlign::CENTER);
     void fillRect(int x, int y, int w, int h);
     void fillRect(Rect r);
 

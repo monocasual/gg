@@ -21,7 +21,7 @@ void Input::draw(Renderer& ren)
 	if (m_text != "")
 	{
 		ren.setColor(Color{ 255, 255, 255 });
-		ren.drawText(m_text, m_bounds);
+		ren.drawText(m_text, m_bounds, Renderer::TextAlign::LEFT);
 	}
 
 	if (m_focus)
