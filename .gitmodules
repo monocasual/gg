@@ -1,0 +1,3 @@
+[submodule "src/deps/tiny-utf8"]
+	path = src/deps/tiny-utf8
+	url = git@github.com:DuffsDevice/tiny-utf8.git
