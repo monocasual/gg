@@ -30,11 +30,7 @@ void Input::draw(Renderer& ren)
 	{
 		ren.setColor(Color{ 150, 150, 150 });
 		ren.drawRect(m_bounds);
-
-		int caret_x  = m_bounds.x + getCaretPx(ren);
-		int caret_y1 = m_bounds.y;
-		int caret_y2 = m_bounds.yh;
-		ren.drawLine(caret_x, caret_y1, caret_x, caret_y2);
+		ren.drawLine(m_bounds.getHeightAsLine().withShiftedX(getCaretPx(ren)));
 	}
 }
 
@@ -64,6 +60,6 @@ void Input::keyPress(const KeyEvent& e)
 
 int Input::getCaretPx(const Renderer& ren) const
 {
-	return ren.getTextBounds(m_text.substr(0, m_caret)).xw;
+	return ren.getTextBounds(m_text.substr(0, m_caret)).xw + m_bounds.x;
 }
 }

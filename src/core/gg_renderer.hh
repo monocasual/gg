@@ -49,6 +49,7 @@ public:
     void fillRect(Rect r);
 
     void drawLine(int x1, int y1, int x2, int y2) const;
+    void drawLine(Line l) const;
 
     /* clear
     Clears the entire screen to currently selected color. */

@@ -182,4 +182,10 @@ void Renderer::drawLine(int x1, int y1, int x2, int y2) const
 {
 	SDL_RenderDrawLine(m_ren, x1, y1, x2, y2);
 }
+
+
+void Renderer::drawLine(Line l) const
+{
+	drawLine(l.x1, l.y1, l.x2, l.y2);
+}
 } // gg::
