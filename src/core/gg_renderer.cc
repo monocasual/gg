@@ -47,7 +47,7 @@ Renderer::~Renderer()
 Rect Renderer::getTextBounds(const std::string& txt) const
 {
 	int tw, th;
-	TTF_SizeText(m_font, txt.c_str(), &tw, &th);
+	TTF_SizeUTF8(m_font, txt.c_str(), &tw, &th);
 	return {0, 0, tw, th};	
 }
 
