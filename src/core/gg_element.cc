@@ -61,20 +61,22 @@ void Element::handle(const SDL_Event& e)
     else
     if (e.type == SDL_KEYDOWN || e.type == SDL_TEXTINPUT)
     {
+        /* Generic press: includes also special keys (backspace, tab, ...).
+        More information: 
+        https://lazyfoo.net/tutorials/SDL/32_text_input_and_clipboard_handling/index.php */
+
         if (e.type == SDL_KEYDOWN)
         {
-            // generic press. Includes also special keys (backspace, tab, ...)
-            // https://lazyfoo.net/tutorials/SDL/32_text_input_and_clipboard_handling/index.php
-            //printf("%d, %s\n", e.key.keysym.sym, SDL_GetKeyName(e.key.keysym.sym));
+            if (m_focus && e.key.keysym.sym == SDLK_BACKSPACE)
+                keyPress(makeFuncKeyEvent(KeyEvent::Type::BACKSPACE));
         }
-        else
+        else // SDL_TEXTINPUT
         {
             if (m_focus)
-            {
-                keyPress(makeKeyEvent(e));
-                redraw();
-            }
+                keyPress(makeTextKeyEvent(e));
         }
+
+        redraw();
     }
 
     /* Pass the event to the underlying children. */

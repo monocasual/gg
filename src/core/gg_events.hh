@@ -19,11 +19,18 @@ struct MouseEvent
 
 struct KeyEvent
 {
+    enum class Type 
+    {
+        TEXT, BACKSPACE 
+    };
+
+    Type        type;
     const char* ch;
 };
 
 MouseEvent makeMouseEvent();
-KeyEvent makeKeyEvent(const SDL_Event& e);
+KeyEvent makeTextKeyEvent(const SDL_Event& e);
+KeyEvent makeFuncKeyEvent(KeyEvent::Type t);
 } // gg::
 
 

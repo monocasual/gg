@@ -28,6 +28,7 @@ void Input::draw(Renderer& ren)
 	{
 		ren.setColor(Color{ 150, 150, 150 });
 		ren.drawRect(m_bounds);
+		// TODO - draw caret
 	}
 }
 
@@ -37,7 +38,10 @@ void Input::draw(Renderer& ren)
 
 void Input::keyPress(const KeyEvent& e)
 {
-	m_text += e.ch;
-    printf("%s\n", e.ch);
+	if (e.type == KeyEvent::Type::TEXT)
+		m_text += e.ch;
+	else
+	if (e.type == KeyEvent::Type::BACKSPACE && m_text.size() > 0)
+		m_text.pop_back();
 }
 }

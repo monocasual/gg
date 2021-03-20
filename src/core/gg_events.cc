@@ -25,9 +25,15 @@ MouseEvent makeMouseEvent()
 /* -------------------------------------------------------------------------- */
 
 
-KeyEvent makeKeyEvent(const SDL_Event& e)
+KeyEvent makeTextKeyEvent(const SDL_Event& e)
 {
-    return { e.text.text };
+    return { KeyEvent::Type::TEXT, e.text.text };
+}
+
+
+KeyEvent makeFuncKeyEvent(KeyEvent::Type t)
+{
+    return { t, nullptr };
 }
 } // gg::
 

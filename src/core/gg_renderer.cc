@@ -44,6 +44,17 @@ Renderer::~Renderer()
 /* -------------------------------------------------------------------------- */
 
 
+Rect Renderer::getTextBounds(const std::string& txt) const
+{
+	int tw, th;
+	TTF_SizeText(m_font, txt.c_str(), &tw, &th);
+	return {0, 0, tw, th};	
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
 void Renderer::setColor(Color c)
 {
 	SDL_SetRenderDrawColor(m_ren, c.r, c.g, c.b, c.a); 
@@ -137,22 +148,21 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h,
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_ren, surf);
 	SDL_FreeSurface(surf);
 
-	int tw, th;
-	TTF_SizeText(m_font, txt.c_str(), &tw, &th);
+	Rect txtBounds = getTextBounds(txt);
 
-	if (tw > w)
-		GG_DEBUG("String overflow (" << tw - w << " px)");
+	if (txtBounds.w > w)
+		GG_DEBUG("String overflow (" << txtBounds.w - w << " px)");
 
 	SDL_Rect rect = { x, y, w, h };
-	rect.y = rect.y + (rect.h / 2) - (th / 2); // h-centered
-	rect.w = tw;
-	rect.h = th;
+	rect.y = rect.y + (rect.h / 2) - (txtBounds.h / 2); // h-centered
+	rect.w = txtBounds.w;
+	rect.h = txtBounds.h;
 
 	if (align == TextAlign::CENTER)
-		rect.x = rect.x + (w / 2) - (tw / 2);
+		rect.x = rect.x + (w / 2) - (txtBounds.w / 2);
 	else
 	if (align == TextAlign::RIGHT)
-		rect.x = rect.x + (w - tw);
+		rect.x = rect.x + (w - txtBounds.w);
 
 	SDL_RenderCopy(m_ren, texture, nullptr, &rect);
 	SDL_DestroyTexture(texture);
@@ -164,4 +174,12 @@ void Renderer::drawText(const std::string& txt, Rect r, TextAlign t)
 	drawText(txt, r.x, r.y, r.w, r.h, t);
 }
 
+
+/* -------------------------------------------------------------------------- */
+
+
+void Renderer::drawLine(int x1, int y1, int x2, int y2) const
+{
+	SDL_RenderDrawLine(m_ren, x1, y1, x2, y2);
+}
 } // gg::

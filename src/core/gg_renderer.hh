@@ -31,6 +31,8 @@ public:
     Renderer(SDL_Window& win);
     ~Renderer();
 
+    Rect getTextBounds(const std::string& txt) const;
+
     void setColor(Color c);
     void setFont(const std::string& name, int size);
     void setClip(int x, int y, int w, int h);
@@ -43,6 +45,8 @@ public:
     void drawText(const std::string& txt, Rect r, TextAlign t=TextAlign::CENTER);
     void fillRect(int x, int y, int w, int h);
     void fillRect(Rect r);
+
+    void drawLine(int x1, int y1, int x2, int y2) const;
 
     /* clear
     Clears the entire screen to currently selected color. */
