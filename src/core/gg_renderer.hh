@@ -7,6 +7,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
 #include "gg.hh"
+#include "gg_rect.hh"
 
 
 namespace gg 

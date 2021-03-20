@@ -20,7 +20,10 @@ public:
 
 private:
 
+	int getCaretPx(const Renderer& ren) const;
+
 	tiny_utf8::string m_text;
+	int               m_caret;
 };
 } // gg::
 

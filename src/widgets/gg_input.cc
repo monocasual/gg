@@ -5,7 +5,9 @@
 
 namespace gg
 {
-Input::Input() : Element()
+Input::Input() 
+: Element()
+, m_caret(0)
 {
 }
 
@@ -18,7 +20,7 @@ void Input::draw(Renderer& ren)
 	ren.setColor(Color{ 0, 0, 0 });
 	ren.fillRect(m_bounds);
 
-	if (m_text != "")
+	if (!m_text.empty())
 	{
 		ren.setColor(Color{ 255, 255, 255 });
 		ren.drawText(m_text, m_bounds, Renderer::TextAlign::LEFT);
@@ -28,7 +30,11 @@ void Input::draw(Renderer& ren)
 	{
 		ren.setColor(Color{ 150, 150, 150 });
 		ren.drawRect(m_bounds);
-		// TODO - draw caret
+
+		int caret_x  = m_bounds.x + getCaretPx(ren);
+		int caret_y1 = m_bounds.y;
+		int caret_y2 = m_bounds.yh;
+		ren.drawLine(caret_x, caret_y1, caret_x, caret_y2);
 	}
 }
 
@@ -38,10 +44,26 @@ void Input::draw(Renderer& ren)
 
 void Input::keyPress(const KeyEvent& e)
 {
-	if (e.type == KeyEvent::Type::TEXT)
+	switch (e.type)
+	{
+	case KeyEvent::Type::TEXT:
 		m_text += e.ch;
-	else
-	if (e.type == KeyEvent::Type::BACKSPACE && m_text.size() > 0)
-		m_text.pop_back();
+		m_caret = m_text.length();
+		break;
+	
+	case KeyEvent::Type::BACKSPACE:
+		if (!m_text.empty())
+			m_text.pop_back();
+		break;
+	}
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+
+int Input::getCaretPx(const Renderer& ren) const
+{
+	return ren.getTextBounds(m_text.substr(0, m_caret)).xw;
 }
 }

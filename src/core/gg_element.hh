@@ -12,6 +12,7 @@ A generic base for everything.
 #include <vector>
 #include <SDL2/SDL.h>
 #include "gg.hh"
+#include "gg_rect.hh"
 
 
 namespace gg 

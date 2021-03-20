@@ -9,14 +9,6 @@ namespace gg
 {
 class Window;
 
-struct Rect
-{
-    Rect();
-    Rect(int x, int y, int w, int h);
-
-    int x, y, w, h, xw, yh;
-};
-
 /* init()
  * */
 
