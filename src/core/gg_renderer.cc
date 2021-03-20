@@ -44,7 +44,7 @@ Renderer::~Renderer()
 /* -------------------------------------------------------------------------- */
 
 
-Rect Renderer::getTextBounds(const std::string& txt) const
+Rect Renderer::getTextBounds(const tiny_utf8::string& txt) const
 {
 	int tw, th;
 	TTF_SizeUTF8(m_font, txt.c_str(), &tw, &th);
@@ -139,7 +139,7 @@ void Renderer::fillRect(Rect r)
 /* -------------------------------------------------------------------------- */
 
 
-void Renderer::drawText(const std::string& txt, int x, int y, int w, int h, 
+void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h, 
 	TextAlign align)
 {
 	SDL_Color fgcolor = { 255, 255, 255 };
@@ -169,7 +169,7 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h,
 }
 
 
-void Renderer::drawText(const std::string& txt, Rect r, TextAlign t)
+void Renderer::drawText(const tiny_utf8::string& txt, Rect r, TextAlign t)
 {
 	drawText(txt, r.x, r.y, r.w, r.h, t);
 }

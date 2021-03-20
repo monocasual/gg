@@ -5,6 +5,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
 #include "gg.hh"
 
 
@@ -31,7 +32,7 @@ public:
     Renderer(SDL_Window& win);
     ~Renderer();
 
-    Rect getTextBounds(const std::string& txt) const;
+    Rect getTextBounds(const tiny_utf8::string& txt) const;
 
     void setColor(Color c);
     void setFont(const std::string& name, int size);
@@ -41,8 +42,8 @@ public:
 
     void drawRect(int x, int y, int w, int h);
     void drawRect(Rect r);
-    void drawText(const std::string& txt, int x, int y, int w, int h, TextAlign t=TextAlign::CENTER);
-    void drawText(const std::string& txt, Rect r, TextAlign t=TextAlign::CENTER);
+    void drawText(const tiny_utf8::string& txt, int x, int y, int w, int h, TextAlign t=TextAlign::CENTER);
+    void drawText(const tiny_utf8::string& txt, Rect r, TextAlign t=TextAlign::CENTER);
     void fillRect(int x, int y, int w, int h);
     void fillRect(Rect r);
 

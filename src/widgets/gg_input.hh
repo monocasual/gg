@@ -2,6 +2,7 @@
 #define GG_INPUT_HH
 
 
+#include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
 #include "core/gg_element.hh"
 
 
@@ -19,7 +20,7 @@ public:
 
 private:
 
-	std::string m_text;
+	tiny_utf8::string m_text;
 };
 } // gg::
 
