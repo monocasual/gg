@@ -6,7 +6,7 @@
 
 namespace gg 
 {
-Element::Element(Rect r)
+Element::Element(geompp::Rect<int> r)
 : m_bounds   (r)
 , m_parent   (nullptr)
 , m_mouseDown(false)
@@ -134,12 +134,12 @@ void Element::draw(Renderer& ren)
 
 void Element::setBounds(int x, int y, int w, int h)
 {
-    m_bounds = Rect(x, y, w, h);
+    m_bounds = geompp::Rect<int>(x, y, w, h);
     resized();
 }
 
 
-void Element::setBounds(Rect b)
+void Element::setBounds(geompp::Rect<int> b)
 {
     setBounds(b.x, b.y, b.w, b.h);
 }

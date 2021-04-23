@@ -14,7 +14,7 @@ struct MouseEvent
     int x;
     int y;
 
-    bool isOver(Rect r) const;
+    bool isOver(geompp::Rect<int> r) const;
 };
 
 struct KeyEvent

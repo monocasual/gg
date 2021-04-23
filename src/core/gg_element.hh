@@ -12,7 +12,7 @@ A generic base for everything.
 #include <vector>
 #include <SDL2/SDL.h>
 #include "gg.hh"
-#include "gg_rect.hh"
+#include "deps/geompp/src/rect.hpp"
 
 
 namespace gg 
@@ -67,10 +67,10 @@ public:
 	int getH() const  { return m_bounds.h; }
 	int getXW() const { return m_bounds.xw; }
 	int getYH() const { return m_bounds.yh; }
-	Rect getBounds() const { return m_bounds; }
+	geompp::Rect<int> getBounds() const { return m_bounds; }
 
 	void setBounds(int x, int y, int w, int h);
-	void setBounds(Rect b);
+	void setBounds(geompp::Rect<int> b);
 
 	/* setFocus()
 	Set focus to this element. Other elements lose their focus. */
@@ -79,7 +79,7 @@ public:
 
 protected:
 
-	Element(Rect r=Rect());
+	Element(geompp::Rect<int> r={});
 
 	/* drawChildren [virtual]
 	Draws all children of this element. */
@@ -91,7 +91,7 @@ protected:
 	/* m_bounds
 	Main coordinates. */
 
-	Rect m_bounds;
+	geompp::Rect<int> m_bounds;
 
 	/* parent
 	Widgets belong to a parent, that is a Window or another Element (groups). */

@@ -28,8 +28,6 @@ list(APPEND GG_TARGET_PROPERTIES)
 
 list(APPEND GG_SOURCES
 	src/core/gg.cc
-	src/core/gg_rect.cc
-	src/core/gg_line.cc
 	src/core/gg_events.cc
 	src/core/gg_renderer.cc
 	src/core/gg_element.cc

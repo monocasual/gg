@@ -7,7 +7,7 @@
 namespace gg 
 {
 Window::Window(const std::string& t, int x, int y, int w, int h)
-: Element(Rect(x, y, w, h)),
+: Element(geompp::Rect<int>(x, y, w, h)),
   m_win  (SDL_CreateWindow(t.c_str(), x, y, w, h, SDL_WINDOW_HIDDEN | SDL_WINDOW_RESIZABLE)),
   m_ren  (*m_win)
 {

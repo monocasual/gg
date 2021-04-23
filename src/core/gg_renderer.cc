@@ -44,7 +44,7 @@ Renderer::~Renderer()
 /* -------------------------------------------------------------------------- */
 
 
-Rect Renderer::getTextBounds(const tiny_utf8::string& txt) const
+geompp::Rect<int> Renderer::getTextBounds(const tiny_utf8::string& txt) const
 {
 	int tw, th;
 	TTF_SizeUTF8(m_font, txt.c_str(), &tw, &th);
@@ -80,7 +80,7 @@ void Renderer::setClip(int x, int y, int w, int h)
 }
 
 
-void Renderer::setClip(Rect r)
+void Renderer::setClip(geompp::Rect<int> r)
 {
 	setClip(r.x, r.y, r.w, r.h);
 }
@@ -117,7 +117,7 @@ void Renderer::drawRect(int x, int y, int w, int h)
 }
 
 
-void Renderer::drawRect(Rect r)
+void Renderer::drawRect(geompp::Rect<int> r)
 {
 	drawRect(r.x, r.y, r.w, r.h);
 }
@@ -130,7 +130,7 @@ void Renderer::fillRect(int x, int y, int w, int h)
 }
 
 
-void Renderer::fillRect(Rect r)
+void Renderer::fillRect(geompp::Rect<int> r)
 {
 	fillRect(r.x, r.y, r.w, r.h);
 }
@@ -148,7 +148,7 @@ void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_ren, surf);
 	SDL_FreeSurface(surf);
 
-	Rect txtBounds = getTextBounds(txt);
+	geompp::Rect<int> txtBounds = getTextBounds(txt);
 
 	if (txtBounds.w > w)
 		GG_DEBUG("String overflow (" << txtBounds.w - w << " px)");
@@ -169,7 +169,7 @@ void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h
 }
 
 
-void Renderer::drawText(const tiny_utf8::string& txt, Rect r, TextAlign t)
+void Renderer::drawText(const tiny_utf8::string& txt, geompp::Rect<int> r, TextAlign t)
 {
 	drawText(txt, r.x, r.y, r.w, r.h, t);
 }
@@ -184,7 +184,7 @@ void Renderer::drawLine(int x1, int y1, int x2, int y2) const
 }
 
 
-void Renderer::drawLine(Line l) const
+void Renderer::drawLine(geompp::Line<int> l) const
 {
 	drawLine(l.x1, l.y1, l.x2, l.y2);
 }

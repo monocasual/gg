@@ -6,8 +6,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
+#include "deps/geompp/src/rect.hpp" 
 #include "gg.hh"
-#include "gg_rect.hh"
 
 
 namespace gg 
@@ -33,23 +33,23 @@ public:
     Renderer(SDL_Window& win);
     ~Renderer();
 
-    Rect getTextBounds(const tiny_utf8::string& txt) const;
+    geompp::Rect<int> getTextBounds(const tiny_utf8::string& txt) const;
 
     void setColor(Color c);
     void setFont(const std::string& name, int size);
     void setClip(int x, int y, int w, int h);
-    void setClip(Rect r);
+    void setClip(geompp::Rect<int> r);
     void unsetClip();
 
     void drawRect(int x, int y, int w, int h);
-    void drawRect(Rect r);
+    void drawRect(geompp::Rect<int> r);
     void drawText(const tiny_utf8::string& txt, int x, int y, int w, int h, TextAlign t=TextAlign::CENTER);
-    void drawText(const tiny_utf8::string& txt, Rect r, TextAlign t=TextAlign::CENTER);
+    void drawText(const tiny_utf8::string& txt, geompp::Rect<int> r, TextAlign t=TextAlign::CENTER);
     void fillRect(int x, int y, int w, int h);
-    void fillRect(Rect r);
+    void fillRect(geompp::Rect<int> r);
 
     void drawLine(int x1, int y1, int x2, int y2) const;
-    void drawLine(Line l) const;
+    void drawLine(geompp::Line<int> l) const;
 
     /* clear
     Clears the entire screen to currently selected color. */
