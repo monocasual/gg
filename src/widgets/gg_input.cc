@@ -53,6 +53,6 @@ void Input::keyPress(const KeyEvent& e)
 
 int Input::getCaretPx(const Renderer& ren) const
 {
-	return ren.getTextBounds(m_text.substr(0, m_caret)).xw + m_bounds.x;
+	return ren.getTextBounds(m_text.substr(0, m_caret)).xw;
 }
 } // namespace gg
