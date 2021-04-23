@@ -1,14 +1,13 @@
-#include <vector>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include "gg.hh"
 #include "gg_const.hh"
-#include "gg_window.hh"
 #include "gg_element.hh"
 #include "gg_utils.hh"
-#include "gg.hh"
+#include "gg_window.hh"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <vector>
 
-
-namespace gg 
+namespace gg
 {
 namespace
 {
@@ -30,13 +29,11 @@ void cleanup_()
 	SDL_StopTextInput();
 	SDL_Quit();
 }
-} // {anonymous}
-
+} // namespace
 
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
-
 
 int init()
 {
@@ -55,9 +52,7 @@ int init()
 	return 1;
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void run()
 {
@@ -79,9 +74,7 @@ void run()
 	cleanup_();
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void addWindow(Window* w)
 {
@@ -89,19 +82,15 @@ void addWindow(Window* w)
 	windows_.push_back(w);
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void removeWindow(Window* w)
 {
 	w->hide();
-	utils::eraseIf(windows_, [w] (const Window* o) { return o->id == w->id; });
+	utils::eraseIf(windows_, [w](const Window* o) { return o->id == w->id; });
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void quit()
 {
@@ -109,4 +98,4 @@ void quit()
 	e.type = SDL_QUIT;
 	SDL_PushEvent(&e);
 }
-} // gg::
+} // namespace gg

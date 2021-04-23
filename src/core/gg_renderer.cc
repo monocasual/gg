@@ -1,10 +1,9 @@
-#include <new>
-#include <cassert>
-#include "gg_const.hh"
 #include "gg_renderer.hh"
+#include "gg_const.hh"
+#include <cassert>
+#include <new>
 
-
-namespace gg 
+namespace gg
 {
 Renderer::Renderer(SDL_Window& win)
 {
@@ -29,9 +28,7 @@ Renderer::Renderer(SDL_Window& win)
 	}
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 Renderer::~Renderer()
 {
@@ -40,109 +37,89 @@ Renderer::~Renderer()
 	TTF_Quit();
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 geompp::Rect<int> Renderer::getTextBounds(const tiny_utf8::string& txt) const
 {
 	int tw, th;
 	TTF_SizeUTF8(m_font, txt.c_str(), &tw, &th);
-	return {0, 0, tw, th};	
+	return {0, 0, tw, th};
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Renderer::setColor(Color c)
 {
-	SDL_SetRenderDrawColor(m_ren, c.r, c.g, c.b, c.a); 
+	SDL_SetRenderDrawColor(m_ren, c.r, c.g, c.b, c.a);
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Renderer::setFont(const std::string& name, int size)
 {
 	// TODO
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Renderer::setClip(int x, int y, int w, int h)
 {
-	SDL_Rect r { x, y, w, h };
+	SDL_Rect r{x, y, w, h};
 	SDL_RenderSetClipRect(m_ren, &r);
 }
-
 
 void Renderer::setClip(geompp::Rect<int> r)
 {
 	setClip(r.x, r.y, r.w, r.h);
 }
 
-
 void Renderer::unsetClip()
 {
 	SDL_RenderSetClipRect(m_ren, nullptr);
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Renderer::clear()
 {
 	SDL_RenderClear(m_ren);
 }
 
-
 void Renderer::render()
 {
 	SDL_RenderPresent(m_ren);
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Renderer::drawRect(int x, int y, int w, int h)
 {
-	SDL_Rect r { x, y, w, h };
+	SDL_Rect r{x, y, w, h};
 	SDL_RenderDrawRect(m_ren, &r);
 }
-
 
 void Renderer::drawRect(geompp::Rect<int> r)
 {
 	drawRect(r.x, r.y, r.w, r.h);
 }
 
-
 void Renderer::fillRect(int x, int y, int w, int h)
 {
-	SDL_Rect r { x, y, w, h };
+	SDL_Rect r{x, y, w, h};
 	SDL_RenderFillRect(m_ren, &r);
 }
-
 
 void Renderer::fillRect(geompp::Rect<int> r)
 {
 	fillRect(r.x, r.y, r.w, r.h);
 }
 
-
 /* -------------------------------------------------------------------------- */
 
-
-void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h, 
-	TextAlign align)
+void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h,
+    TextAlign align)
 {
-	SDL_Color fgcolor = { 255, 255, 255 };
+	SDL_Color fgcolor = {255, 255, 255};
 
 	SDL_Surface* surf    = TTF_RenderUTF8_Solid(m_font, txt.c_str(), fgcolor);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_ren, surf);
@@ -153,39 +130,34 @@ void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h
 	if (txtBounds.w > w)
 		GG_DEBUG("String overflow (" << txtBounds.w - w << " px)");
 
-	SDL_Rect rect = { x, y, w, h };
-	rect.y = rect.y + (rect.h / 2) - (txtBounds.h / 2); // h-centered
-	rect.w = txtBounds.w;
-	rect.h = txtBounds.h;
+	SDL_Rect rect = {x, y, w, h};
+	rect.y        = rect.y + (rect.h / 2) - (txtBounds.h / 2); // h-centered
+	rect.w        = txtBounds.w;
+	rect.h        = txtBounds.h;
 
 	if (align == TextAlign::CENTER)
 		rect.x = rect.x + (w / 2) - (txtBounds.w / 2);
-	else
-	if (align == TextAlign::RIGHT)
+	else if (align == TextAlign::RIGHT)
 		rect.x = rect.x + (w - txtBounds.w);
 
 	SDL_RenderCopy(m_ren, texture, nullptr, &rect);
 	SDL_DestroyTexture(texture);
 }
 
-
 void Renderer::drawText(const tiny_utf8::string& txt, geompp::Rect<int> r, TextAlign t)
 {
 	drawText(txt, r.x, r.y, r.w, r.h, t);
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Renderer::drawLine(int x1, int y1, int x2, int y2) const
 {
 	SDL_RenderDrawLine(m_ren, x1, y1, x2, y2);
 }
 
-
 void Renderer::drawLine(geompp::Line<int> l) const
 {
 	drawLine(l.x1, l.y1, l.x2, l.y2);
 }
-} // gg::
+} // namespace gg

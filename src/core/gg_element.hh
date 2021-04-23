@@ -4,28 +4,24 @@ A generic base for everything.
 
 ----------------------------------------------------------------------------- */
 
-
 #ifndef GG_ELEMENT_HH
 #define GG_ELEMENT_HH
 
-
-#include <vector>
-#include <SDL2/SDL.h>
-#include "gg.hh"
 #include "deps/geompp/src/rect.hpp"
+#include "gg.hh"
+#include <SDL2/SDL.h>
+#include <vector>
 
-
-namespace gg 
+namespace gg
 {
-class  Window;
-class  Renderer;
+class Window;
+class Renderer;
 struct MouseEvent;
 struct KeyEvent;
 class Element
 {
 public:
-
-	virtual ~Element() {};
+	virtual ~Element(){};
 
 	/* handle() [virtual]
 	Fired on events such as click, keypress, window show-hide and so on. */
@@ -35,7 +31,7 @@ public:
 	/* resized() [virtuals]
 	Fired when the element position and size change. */
 
-	virtual void resized() {};
+	virtual void resized(){};
 
 	/* draw() [virtual]
 	Drawing routines. This method draws the initial graphical state of each 
@@ -43,12 +39,12 @@ public:
 
 	virtual void draw(Renderer& ren);
 
-	virtual void mouseDown(const MouseEvent&) {};
-	virtual void mouseUp(const MouseEvent&) {};
-	virtual void mouseMove(const MouseEvent&) {};
-	virtual void mouseDrag(const MouseEvent&) {};
+	virtual void mouseDown(const MouseEvent&){};
+	virtual void mouseUp(const MouseEvent&){};
+	virtual void mouseMove(const MouseEvent&){};
+	virtual void mouseDrag(const MouseEvent&){};
 
-	virtual void keyPress(const KeyEvent&) {};
+	virtual void keyPress(const KeyEvent&){};
 
 	/* redraw() [virtual]
 	Forces the redraw for this element and all its children. */
@@ -61,12 +57,12 @@ public:
 	void add(Element* w);
 	void add(Element& w);
 
-	int getX() const  { return m_bounds.x; }
-	int getY() const  { return m_bounds.y; }
-	int getW() const  { return m_bounds.w; }
-	int getH() const  { return m_bounds.h; }
-	int getXW() const { return m_bounds.xw; }
-	int getYH() const { return m_bounds.yh; }
+	int               getX() const { return m_bounds.x; }
+	int               getY() const { return m_bounds.y; }
+	int               getW() const { return m_bounds.w; }
+	int               getH() const { return m_bounds.h; }
+	int               getXW() const { return m_bounds.xw; }
+	int               getYH() const { return m_bounds.yh; }
 	geompp::Rect<int> getBounds() const { return m_bounds; }
 
 	void setBounds(int x, int y, int w, int h);
@@ -78,8 +74,7 @@ public:
 	void setFocus();
 
 protected:
-
-	Element(geompp::Rect<int> r={});
+	Element(geompp::Rect<int> r = {});
 
 	/* drawChildren [virtual]
 	Draws all children of this element. */
@@ -105,12 +100,11 @@ protected:
 
 	/* m_mouseDown
 	Tells whether the mouse has been held down on this element. */
-	
+
 	bool m_mouseDown;
 
 	bool m_focus;
 };
-} // gg::
-
+} // namespace gg
 
 #endif

@@ -1,31 +1,28 @@
+#include "gg_slider.hh"
+#include "core/gg_events.hh"
+#include "core/gg_renderer.hh"
+#include "core/gg_utils.hh"
 #include <algorithm>
 #include <cassert>
-#include "core/gg_renderer.hh"
-#include "core/gg_events.hh"
-#include "core/gg_utils.hh"
-#include "gg_slider.hh"
-
 
 namespace gg
 {
 Slider::Slider(Type t)
-: Element (),
-  onChange(nullptr),
-  m_value (0.0f),
-  m_type  (t)
+: Element()
+, onChange(nullptr)
+, m_value(0.0f)
+, m_type(t)
 {
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Slider::draw(Renderer& ren)
 {
-	ren.setColor(Color{ 0, 0, 0 });
+	ren.setColor(Color{0, 0, 0});
 	ren.fillRect(m_bounds);
 
-	ren.setColor(Color{ 255, 255, 255 });
+	ren.setColor(Color{255, 255, 255});
 	ren.drawRect(m_bounds);
 
 	if (m_type == Type::VERTICAL)
@@ -40,27 +37,21 @@ void Slider::draw(Renderer& ren)
 	}
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Slider::mouseDown(const MouseEvent& e)
 {
 	compute(e.x, e.y);
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Slider::mouseDrag(const MouseEvent& e)
 {
 	compute(e.x, e.y);
 }
 
-
 /* -------------------------------------------------------------------------- */
-
 
 void Slider::compute(int x, int y)
 {
@@ -69,22 +60,21 @@ void Slider::compute(int x, int y)
 	else
 		m_value = utils::map<int, float>(std::clamp(x - getX(), 0, getW()), 0, getW(), 0.0f, 1.0f);
 
-	if (onChange != nullptr) onChange();
+	if (onChange != nullptr)
+		onChange();
 }
 
 /* -------------------------------------------------------------------------- */
-
 
 float Slider::getValue() const { return m_value; }
 
-
 /* -------------------------------------------------------------------------- */
 
-
 void Slider::setValue(float v)
-{ 
+{
 	m_value = std::clamp(v, 0.0f, 1.0f);
-	if (onChange != nullptr) onChange();
+	if (onChange != nullptr)
+		onChange();
 }
 
-} // gg::
+} // namespace gg

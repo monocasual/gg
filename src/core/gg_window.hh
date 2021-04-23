@@ -1,20 +1,17 @@
 #ifndef GG_WINDOW_HH
 #define GG_WINDOW_HH
 
-
-#include <SDL2/SDL.h>
 #include "gg_element.hh"
 #include "gg_renderer.hh"
+#include <SDL2/SDL.h>
 
-
-namespace gg 
+namespace gg
 {
 class Window : public Element
 {
 	friend Element;
 
 public:
-
 	/* id
 	Unique id of this window. */
 
@@ -25,7 +22,7 @@ public:
 	/* close [virtual]
 	Invoked when the 'x' button is pressed. */
 
-	virtual void closed() {};
+	virtual void closed(){};
 
 	void handle(const SDL_Event& e) override;
 
@@ -37,7 +34,7 @@ public:
 	/* render()
 	Render everything on this window. To be called by sub-elements when they
 	are handling UI-changing events. */
-	
+
 	void render();
 
 	/* setModal
@@ -52,7 +49,6 @@ public:
 	void setResizable(bool v);
 
 protected:
-
 	Window(const std::string& title, int x, int y, int w, int h);
 
 	/* win
@@ -66,9 +62,7 @@ protected:
 	refresh screen and such. */
 
 	Renderer m_ren;
-
 };
-} // gg::
-
+} // namespace gg
 
 #endif

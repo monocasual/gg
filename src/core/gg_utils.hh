@@ -1,12 +1,11 @@
 #ifndef GG_UTILS_HH
 #define GG_UTILS_HH
 
-
-#include <vector>
 #include <algorithm>
+#include <vector>
 
-
-namespace gg {
+namespace gg
+{
 namespace utils
 {
 /* map (template)
@@ -16,9 +15,8 @@ Maps 'x' in range [a, b] to a new range [w, z]. Source:
 template <typename TI, typename TO>
 TO map(TI x, TI a, TI b, TO w, TO z)
 {
-    return (((x - a) / (double) (b - a)) * (z - w)) + w;
+	return (((x - a) / (double)(b - a)) * (z - w)) + w;
 }
-
 
 /* -------------------------------------------------------------------------- */
 
@@ -28,9 +26,9 @@ Erases things from a vector given a lambda F. */
 template <typename T, typename F>
 void eraseIf(std::vector<T>& v, F&& f)
 {
-    v.erase(std::remove_if(v.begin(), v.end(), f), v.end());
+	v.erase(std::remove_if(v.begin(), v.end(), f), v.end());
 }
-}} // gg::utils::
-
+} // namespace utils
+} // namespace gg
 
 #endif
