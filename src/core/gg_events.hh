@@ -1,6 +1,7 @@
 #ifndef GG_EVENTS_HH
 #define GG_EVENTS_HH
 
+#include "deps/geompp/src/rect.hpp"
 #include "gg.hh"
 
 namespace gg
