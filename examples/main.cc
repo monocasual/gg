@@ -1,28 +1,27 @@
-#include <memory>
 #include "core/gg.hh"
 #include "core/gg_window.hh"
-#include "widgets/gg_button.hh"
-#include "widgets/gg_box.hh"
-#include "widgets/gg_slider.hh"
 #include "widgets/gg_alert.hh"
+#include "widgets/gg_box.hh"
+#include "widgets/gg_button.hh"
 #include "widgets/gg_input.hh"
-
+#include "widgets/gg_slider.hh"
+#include <memory>
 
 struct Group : public gg::Element
 {
-	gg::Box box;
+	gg::Box    box;
 	gg::Button btn;
-	gg::Alert alert;
+	gg::Alert  alert;
 
 	Group()
-	: box("Inside."),
-	  btn("Quit"),
-	  alert("Warning", "Quit: are you really sure?")
+	: box("Inside.")
+	, btn("Quit")
+	, alert("Warning", "Quit: are you really sure?")
 	{
 		add(box);
 		add(btn);
 
-		btn.onClick = [this](){ showAlert(); };
+		btn.onClick = [this]() { showAlert(); };
 	}
 
 	void showAlert()
@@ -31,23 +30,22 @@ struct Group : public gg::Element
 	}
 
 	void draw(gg::Renderer& ren) override
-	{ 		
-   		ren.setColor(gg::Color{ 15, 15, 15 });
-    	ren.fillRect(m_bounds);
+	{
+		ren.setColor(gg::Color{15, 15, 15});
+		ren.fillRect(m_bounds);
 
-		ren.setColor(gg::Color{ 255, 255, 255 });
+		ren.setColor(gg::Color{255, 255, 255});
 		ren.drawRect(m_bounds);
-		
+
 		gg::Element::draw(ren);
 	}
 
 	void resized() override
 	{
-		box.setBounds(getX() + 10, getY() + 10, 100/*getW() - 20*/, 40);
+		box.setBounds(getX() + 10, getY() + 10, 100 /*getW() - 20*/, 40);
 		btn.setBounds(getX() + 10, getH() - 10, getW() - 20, 40);
 	}
 };
-
 
 struct myWindow : public gg::Window
 {
@@ -63,12 +61,12 @@ struct myWindow : public gg::Window
 	gg::Input  input2;
 
 	myWindow()
-	: gg::Window("gg test", 100, 100, 640, 480),
-	  btn1      ("Quit"),
-	  btn2      ("button x"),
-	  btn3      ("button y"),
-	  box       ("Example box with some cràzy text."),
-	  hslider   (gg::Slider::Type::HORIZONTAL)
+	: gg::Window("gg test", 100, 100, 640, 480)
+	, btn1("Quit")
+	, btn2("button x")
+	, btn3("button y")
+	, box("Example box with some cràzy text.")
+	, hslider(gg::Slider::Type::HORIZONTAL)
 	{
 		add(btn1);
 		add(btn2);
@@ -81,9 +79,9 @@ struct myWindow : public gg::Window
 		add(input1);
 		add(input2);
 
-		btn1.onClick    = [](){ gg::quit(); };
-		vslider.onChange = [this](){ output.setText(std::to_string(vslider.getValue())); };
-		hslider.onChange = [this](){ output.setText(std::to_string(hslider.getValue())); };
+		btn1.onClick     = []() { gg::quit(); };
+		vslider.onChange = [this]() { output.setText(std::to_string(vslider.getValue())); };
+		hslider.onChange = [this]() { output.setText(std::to_string(hslider.getValue())); };
 
 		vslider.setValue(0.5);
 	}
@@ -108,7 +106,6 @@ struct myWindow : public gg::Window
 	}
 };
 
-
 int main()
 {
 	gg::init();
@@ -117,4 +114,3 @@ int main()
 	gg::addWindow(w.get());
 	gg::run();
 }
-
