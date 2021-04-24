@@ -41,14 +41,14 @@ void Slider::draw(Renderer& ren)
 
 void Slider::mouseDown(const MouseEvent& e)
 {
-	compute(e.x, e.y);
+	compute(e.position.x, e.position.y);
 }
 
 /* -------------------------------------------------------------------------- */
 
 void Slider::mouseDrag(const MouseEvent& e)
 {
-	compute(e.x, e.y);
+	compute(e.position.x, e.position.y);
 }
 
 /* -------------------------------------------------------------------------- */

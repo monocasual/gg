@@ -4,9 +4,16 @@
 
 namespace gg
 {
+MouseEvent::MouseEvent(int x, int y)
+: position(x, y)
+{
+}
+
+/* -------------------------------------------------------------------------- */
+
 bool MouseEvent::isOver(geompp::Rect<int> r) const
 {
-	return x < r.xw && x > r.x && y < r.yh && y > r.y;
+	return r.contains(position);
 }
 
 /* -------------------------------------------------------------------------- */

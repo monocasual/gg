@@ -1,6 +1,7 @@
 #ifndef GG_EVENTS_HH
 #define GG_EVENTS_HH
 
+#include "deps/geompp/src/point.hpp"
 #include "deps/geompp/src/rect.hpp"
 #include "gg.hh"
 
@@ -10,10 +11,11 @@ class Element;
 
 struct MouseEvent
 {
-	int x;
-	int y;
+	MouseEvent(int x, int y);
 
 	bool isOver(geompp::Rect<int> r) const;
+
+	geompp::Point<int> position;
 };
 
 struct KeyEvent

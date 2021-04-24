@@ -69,9 +69,14 @@ public:
 	void setBounds(geompp::Rect<int> b);
 
 	/* setFocus()
-	Set focus to this element. Other elements lose their focus. */
+	Set focus to this element. Other children lose their focus. */
 
 	void setFocus();
+
+	/* clearFocus()
+	Clear focus for this elements and all children. */
+
+	void clearFocus();
 
 protected:
 	Element(geompp::Rect<int> r = {});

@@ -131,9 +131,17 @@ void Element::setBounds(geompp::Rect<int> b)
 
 void Element::setFocus()
 {
+	clearFocus();
+	m_focus = true;
+}
+
+/* -------------------------------------------------------------------------- */
+
+void Element::clearFocus()
+{
 	for (Element* el : m_elements)
 		el->m_focus = false;
-	m_focus = true;
+	m_focus = false;
 }
 
 /* -------------------------------------------------------------------------- */

@@ -6,7 +6,7 @@
 namespace gg
 {
 Window::Window(const std::string& t, int x, int y, int w, int h)
-: Element(geompp::Rect<int>(x, y, w, h))
+: Element(geompp::Rect<int>(0, 0, w, h)) // Element has x=y=0 (i.e. local coords)
 , m_win(SDL_CreateWindow(t.c_str(), x, y, w, h, SDL_WINDOW_HIDDEN | SDL_WINDOW_RESIZABLE))
 , m_ren(*m_win)
 {
@@ -75,8 +75,8 @@ void Window::handle(const SDL_Event& e)
 			{
 				if (e.window.event == SDL_WINDOWEVENT_RESIZED)
 				{
-					m_bounds.w = e.window.data1;
-					m_bounds.h = e.window.data2;
+					m_bounds.setW(e.window.data1);
+					m_bounds.setH(e.window.data2);
 				}
 				resized(); // Must be called on SDL_WINDOWEVENT_SHOWN as well
 				clear();

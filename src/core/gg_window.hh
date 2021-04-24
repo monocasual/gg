@@ -12,11 +12,6 @@ class Window : public Element
 	friend Element;
 
 public:
-	/* id
-	Unique id of this window. */
-
-	unsigned id;
-
 	~Window();
 
 	/* close [virtual]
@@ -47,6 +42,11 @@ public:
 	void hide();
 
 	void setResizable(bool v);
+
+	/* id
+	Unique id of this window. */
+
+	unsigned id;
 
 protected:
 	Window(const std::string& title, int x, int y, int w, int h);
