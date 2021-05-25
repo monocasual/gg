@@ -47,7 +47,6 @@ void Input::keyPress(const KeyEvent& e)
 		break;
 
 	case KeyEvent::Type::DELETE:
-		//if (m_caret > 0)
 		m_text.erase(m_caret);
 		break;
 
@@ -64,18 +63,6 @@ void Input::keyPress(const KeyEvent& e)
 	default:
 		break;
 	}
-}
-
-/* -------------------------------------------------------------------------- */
-
-void Input::mouseDown(const MouseEvent& e)
-{ /*
-	switch (e.type)
-	{
-
-	default:
-		break;
-	}*/
 }
 
 /* -------------------------------------------------------------------------- */

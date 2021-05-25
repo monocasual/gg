@@ -14,7 +14,6 @@ public:
 
 	void draw(Renderer& ren) override;
 	void keyPress(const KeyEvent& e) override;
-	void mouseDown(const MouseEvent&) override;
 
 private:
 	int getCaretPx(const Renderer& ren) const;
