@@ -52,7 +52,7 @@ void Element::handle(const SDL_Event& e)
 			redraw();
 		}
 	}
-	else if (e.type == SDL_KEYDOWN || e.type == SDL_TEXTINPUT)
+	else if (m_focus && (e.type == SDL_KEYDOWN || e.type == SDL_TEXTINPUT))
 	{
 		/* Generic press: includes also special keys (backspace, tab, ...).
         More information: 
@@ -60,23 +60,22 @@ void Element::handle(const SDL_Event& e)
 
 		if (e.type == SDL_KEYDOWN)
 		{
-			if (m_focus && e.key.keysym.sym == SDLK_BACKSPACE)
+			if (e.key.keysym.sym == SDLK_BACKSPACE)
 				keyPress(makeFuncKeyEvent(KeyEvent::Type::BACKSPACE));
-			else if (m_focus && e.key.keysym.sym == SDLK_DELETE)
+			else if (e.key.keysym.sym == SDLK_DELETE)
 				keyPress(makeFuncKeyEvent(KeyEvent::Type::DELETE));
-			else if (m_focus && e.key.keysym.sym == SDLK_UP)
+			else if (e.key.keysym.sym == SDLK_UP)
 				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_UP));
-			else if (m_focus && e.key.keysym.sym == SDLK_DOWN)
+			else if (e.key.keysym.sym == SDLK_DOWN)
 				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_DOWN));
-			else if (m_focus && e.key.keysym.sym == SDLK_LEFT)
+			else if (e.key.keysym.sym == SDLK_LEFT)
 				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_LEFT));
-			else if (m_focus && e.key.keysym.sym == SDLK_RIGHT)
+			else if (e.key.keysym.sym == SDLK_RIGHT)
 				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_RIGHT));
 		}
 		else // SDL_TEXTINPUT
 		{
-			if (m_focus)
-				keyPress(makeTextKeyEvent(e));
+			keyPress(makeTextKeyEvent(e));
 		}
 
 		redraw();
