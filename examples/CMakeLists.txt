@@ -7,3 +7,4 @@ endfunction()
 
 gg_make_example(global global.cc)
 gg_make_example(box box.cc)
+gg_make_example(input input.cc)
