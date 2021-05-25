@@ -27,17 +27,16 @@ list(APPEND GG_TARGET_PROPERTIES)
 # ------------------------------------------------------------------------------
 
 list(APPEND GG_SOURCES
-	src/core/gg.cc
-	src/core/gg_events.cc
-	src/core/gg_renderer.cc
-	src/core/gg_element.cc
-	src/core/gg_window.cc
-	src/widgets/gg_button.cc
-	src/widgets/gg_box.cc
-	src/widgets/gg_slider.cc
-	src/widgets/gg_alert.cc
-	src/widgets/gg_input.cc
-	examples/main.cc)
+	${CMAKE_SOURCE_DIR}/src/core/gg.cc
+	${CMAKE_SOURCE_DIR}/src/core/gg_events.cc
+	${CMAKE_SOURCE_DIR}/src/core/gg_renderer.cc
+	${CMAKE_SOURCE_DIR}/src/core/gg_element.cc
+	${CMAKE_SOURCE_DIR}/src/core/gg_window.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/gg_button.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/gg_box.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/gg_slider.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/gg_alert.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/gg_input.cc)
 
 # ------------------------------------------------------------------------------
 
@@ -45,6 +44,16 @@ if(MSVC)
 	list(APPEND GG_COMPILER_OPTIONS /W4)
 else()
 	list(APPEND GG_COMPILER_OPTIONS -Wall -Wextra -Wpedantic)
+endif()
+
+# ------------------------------------------------------------------------------
+
+# Options
+
+option(GG_BUILD_EXAMPLES "Build examples." ON)
+
+if(GG_BUILD_EXAMPLES)
+  add_subdirectory (examples)
 endif()
 
 # ------------------------------------------------------------------------------
@@ -66,10 +75,12 @@ list(APPEND GG_LIBRARIES SDL2 SDL2_ttf)
 
 # ------------------------------------------------------------------------------
 
-add_executable(gg)
+add_library(gg)
 target_compile_features(gg PRIVATE ${GG_COMPILER_FEATURES})
 target_sources(gg PRIVATE ${GG_SOURCES})
 target_compile_definitions(gg PRIVATE ${GG_PREPROCESSOR_DEFS})
 target_include_directories(gg PRIVATE ${GG_INCLUDE_DIRS})
 target_link_libraries(gg PRIVATE ${GG_LIBRARIES})
 target_compile_options(gg PRIVATE ${GG_COMPILER_OPTIONS})
+
+set_target_properties(gg PROPERTIES VERSION ${PROJECT_VERSION})

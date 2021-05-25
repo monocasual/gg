@@ -1,0 +1,9 @@
+function(gg_make_example name sources)
+    add_executable(${name} ${sources})
+    target_compile_features(${name} PRIVATE cxx_std_17)
+    target_include_directories(${name} PRIVATE ${GG_INCLUDE_DIRS})
+    target_link_libraries(${name} PRIVATE gg)
+endfunction()
+
+gg_make_example(global global.cc)
+gg_make_example(box box.cc)
