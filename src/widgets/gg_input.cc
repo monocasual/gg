@@ -38,15 +38,44 @@ void Input::keyPress(const KeyEvent& e)
 	switch (e.type)
 	{
 	case KeyEvent::Type::TEXT:
-		m_text += e.ch;
-		m_caret = m_text.length();
+		m_text.insert(m_caret++, e.ch);
 		break;
 
 	case KeyEvent::Type::BACKSPACE:
-		if (!m_text.empty())
-			m_text.pop_back();
+		if (m_caret > 0)
+			m_text.erase(--m_caret);
+		break;
+
+	case KeyEvent::Type::DELETE:
+		//if (m_caret > 0)
+		m_text.erase(m_caret);
+		break;
+
+	case KeyEvent::Type::ARROW_LEFT:
+		if (m_caret > 0)
+			m_caret--;
+		break;
+
+	case KeyEvent::Type::ARROW_RIGHT:
+		if (m_caret < m_text.length())
+			m_caret++;
+		break;
+
+	default:
 		break;
 	}
+}
+
+/* -------------------------------------------------------------------------- */
+
+void Input::mouseDown(const MouseEvent& e)
+{ /*
+	switch (e.type)
+	{
+
+	default:
+		break;
+	}*/
 }
 
 /* -------------------------------------------------------------------------- */

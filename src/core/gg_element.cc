@@ -62,6 +62,16 @@ void Element::handle(const SDL_Event& e)
 		{
 			if (m_focus && e.key.keysym.sym == SDLK_BACKSPACE)
 				keyPress(makeFuncKeyEvent(KeyEvent::Type::BACKSPACE));
+			else if (m_focus && e.key.keysym.sym == SDLK_DELETE)
+				keyPress(makeFuncKeyEvent(KeyEvent::Type::DELETE));
+			else if (m_focus && e.key.keysym.sym == SDLK_UP)
+				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_UP));
+			else if (m_focus && e.key.keysym.sym == SDLK_DOWN)
+				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_DOWN));
+			else if (m_focus && e.key.keysym.sym == SDLK_LEFT)
+				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_LEFT));
+			else if (m_focus && e.key.keysym.sym == SDLK_RIGHT)
+				keyPress(makeFuncKeyEvent(KeyEvent::Type::ARROW_RIGHT));
 		}
 		else // SDL_TEXTINPUT
 		{

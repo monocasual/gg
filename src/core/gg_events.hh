@@ -23,7 +23,12 @@ struct KeyEvent
 	enum class Type
 	{
 		TEXT,
-		BACKSPACE
+		BACKSPACE,
+		DELETE,
+		ARROW_LEFT,
+		ARROW_RIGHT,
+		ARROW_UP,
+		ARROW_DOWN,
 	};
 
 	Type        type;

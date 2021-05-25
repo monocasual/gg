@@ -14,12 +14,13 @@ public:
 
 	void draw(Renderer& ren) override;
 	void keyPress(const KeyEvent& e) override;
+	void mouseDown(const MouseEvent&) override;
 
 private:
 	int getCaretPx(const Renderer& ren) const;
 
-	tiny_utf8::string m_text;
-	int               m_caret;
+	tiny_utf8::string            m_text;
+	tiny_utf8::string::size_type m_caret;
 };
 } // namespace gg
 
