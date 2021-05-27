@@ -29,7 +29,7 @@ Window::~Window()
 
 void Window::clear()
 {
-	m_ren.setColor(Color{30, 30, 30});
+	m_ren.setColor(gg::getStyle().windowBackgroundColor);
 	m_ren.clear();
 }
 

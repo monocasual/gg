@@ -21,10 +21,10 @@ Slider::Slider(Type t)
 
 void Slider::draw(Renderer& ren)
 {
-	ren.setColor(Color{0, 0, 0});
+	ren.setColor(gg::getStyle().sliderBackgroundColor);
 	ren.fillRect(m_bounds);
 
-	ren.setColor(Color{255, 255, 255});
+	ren.setColor(gg::getStyle().sliderBodyColor);
 	ren.drawRect(m_bounds);
 
 	if (m_type == Type::VERTICAL)
@@ -78,5 +78,4 @@ void Slider::setValue(float v)
 	if (onChange != nullptr)
 		onChange();
 }
-
 } // namespace gg

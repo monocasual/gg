@@ -3,6 +3,7 @@
 #include "deps/mcl-utils/src/vector.hpp"
 #include "gg_const.hh"
 #include "gg_element.hh"
+#include "gg_style.hh"
 #include "gg_window.hh"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -23,6 +24,10 @@ bool running_ = false;
 Array of pointers to windows. */
 
 std::vector<Window*> windows_;
+
+Style style_;
+
+/* -------------------------------------------------------------------------- */
 
 /* cleanup()
 Cleans up the Window vector and quits the SDL app. */
@@ -91,6 +96,13 @@ void removeWindow(Window* w)
 {
 	w->hide();
 	utils::vector::removeIf(windows_, [w](const Window* o) { return o->id == w->id; });
+}
+
+/* -------------------------------------------------------------------------- */
+
+const Style& getStyle()
+{
+	return style_;
 }
 
 /* -------------------------------------------------------------------------- */

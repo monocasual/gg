@@ -4,6 +4,7 @@
 namespace gg
 {
 class Window;
+struct Style;
 
 /* init()
  * */
@@ -16,6 +17,8 @@ int init();
 void addWindow(Window* w);
 
 void removeWindow(Window* w);
+
+const Style& getStyle();
 
 /* run()
  * */

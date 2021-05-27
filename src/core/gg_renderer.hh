@@ -4,22 +4,13 @@
 #include "deps/geompp/src/rect.hpp"
 #include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
 #include "gg.hh"
+#include "gg_types.hh"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
 
 namespace gg
 {
-struct Color
-{
-	int r = 0;
-	int g = 0;
-	int b = 0;
-	int a = 255;
-};
-
-/* -------------------------------------------------------------------------- */
-
 class Renderer
 {
 public:

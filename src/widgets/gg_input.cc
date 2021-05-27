@@ -14,18 +14,18 @@ Input::Input()
 
 void Input::draw(Renderer& ren)
 {
-	ren.setColor(Color{0, 0, 0});
+	ren.setColor(gg::getStyle().inputBackgroundColor);
 	ren.fillRect(m_bounds);
 
 	if (!m_text.empty())
 	{
-		ren.setColor(Color{255, 255, 255});
+		ren.setColor(gg::getStyle().inputTextColor);
 		ren.drawText(m_text, m_bounds, Renderer::TextAlign::LEFT);
 	}
 
 	if (m_focus)
 	{
-		ren.setColor(Color{150, 150, 150});
+		ren.setColor(gg::getStyle().inputFocusColor);
 		ren.drawRect(m_bounds);
 		ren.drawLine(m_bounds.getHeightAsLine().withShiftedX(getCaretPx(ren)));
 	}

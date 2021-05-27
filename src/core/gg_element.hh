@@ -9,6 +9,7 @@ A generic base for everything.
 
 #include "deps/geompp/src/rect.hpp"
 #include "gg.hh"
+#include "gg_style.hh"
 #include <SDL2/SDL.h>
 #include <vector>
 
@@ -50,6 +51,8 @@ public:
 	Forces the redraw for this element and all its children. */
 
 	virtual void redraw();
+
+	//virtual const Style& getStyle() const;
 
 	/* add()
 	Adds a child widget to this element. */
@@ -103,10 +106,15 @@ protected:
 
 	std::vector<Element*> m_elements;
 
+	//Style m_style;
+
 	/* m_mouseDown
 	Tells whether the mouse has been held down on this element. */
 
 	bool m_mouseDown;
+
+	/* m_focus
+	Tells whether this element has focus. Focus is gained by clicling on it. */
 
 	bool m_focus;
 };

@@ -12,10 +12,10 @@ Box::Box(std::string t)
 
 void Box::draw(Renderer& ren)
 {
-	ren.setColor(Color{30, 30, 30});
+	ren.setColor(gg::getStyle().boxBackgroundColor);
 	ren.fillRect(m_bounds);
 
-	ren.setColor(Color{255, 255, 255});
+	ren.setColor(gg::getStyle().boxBoundaryColor);
 	ren.drawRect(m_bounds);
 
 	if (m_text != "")

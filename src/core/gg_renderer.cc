@@ -1,6 +1,7 @@
 #include "gg_renderer.hh"
 #include "deps/mcl-utils/src/log.hpp"
 #include "gg_const.hh"
+#include "gg_style.hh"
 #include <cassert>
 #include <new>
 
@@ -23,7 +24,7 @@ Renderer::Renderer(SDL_Window& win)
 		throw std::bad_alloc();
 	}
 
-	setFont(GG_DEFAULT_FONT_PATH, 16);
+	setFont(gg::getStyle().fontPath, gg::getStyle().fontSize);
 }
 
 /* -------------------------------------------------------------------------- */
