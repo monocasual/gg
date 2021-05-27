@@ -52,8 +52,6 @@ public:
 
 	virtual void redraw();
 
-	//virtual const Style& getStyle() const;
-
 	/* add()
 	Adds a child widget to this element. */
 
@@ -105,8 +103,6 @@ protected:
 	Lists of children elements contained into this Element. */
 
 	std::vector<Element*> m_elements;
-
-	//Style m_style;
 
 	/* m_mouseDown
 	Tells whether the mouse has been held down on this element. */
