@@ -1,8 +1,6 @@
 #ifndef GG_HH
 #define GG_HH
 
-#include <SDL2/SDL.h>
-
 namespace gg
 {
 class Window;

@@ -4,6 +4,7 @@
 #include "deps/geompp/src/point.hpp"
 #include "deps/geompp/src/rect.hpp"
 #include "gg.hh"
+#include <SDL2/SDL.h>
 
 namespace gg
 {
