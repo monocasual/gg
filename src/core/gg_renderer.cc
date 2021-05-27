@@ -6,6 +6,8 @@
 namespace gg
 {
 Renderer::Renderer(SDL_Window& win)
+: m_ren(nullptr)
+, m_font(nullptr)
 {
 	if (TTF_Init() == -1)
 	{
@@ -20,12 +22,7 @@ Renderer::Renderer(SDL_Window& win)
 		throw std::bad_alloc();
 	}
 
-	m_font = TTF_OpenFont("src/fonts/alterebro.ttf", 32);
-	if (m_font == nullptr)
-	{
-		GG_DEBUG("TTF_OpenFont: " << TTF_GetError());
-		throw std::bad_alloc();
-	}
+	setFont(GG_DEFAULT_FONT_PATH, 16);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -55,9 +52,16 @@ void Renderer::setColor(Color c)
 
 /* -------------------------------------------------------------------------- */
 
-void Renderer::setFont(const std::string& name, int size)
+void Renderer::setFont(const std::string& path, int size)
 {
-	// TODO
+	if (m_font != nullptr)
+		TTF_CloseFont(m_font);
+	m_font = TTF_OpenFont(path.c_str(), size);
+	if (m_font == nullptr)
+	{
+		GG_DEBUG("TTF_OpenFont: " << TTF_GetError());
+		throw std::bad_alloc();
+	}
 }
 
 /* -------------------------------------------------------------------------- */
@@ -119,9 +123,12 @@ void Renderer::fillRect(geompp::Rect<int> r)
 void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h,
     TextAlign align)
 {
-	SDL_Color fgcolor = {255, 255, 255};
+	SDL_Color fgcolor = {255, 255, 255, 0};
 
-	SDL_Surface* surf    = TTF_RenderUTF8_Solid(m_font, txt.c_str(), fgcolor);
+	/* Solid, shaded or blended font rendering: 
+	https://www.libsdl.org/projects/SDL_ttf/docs/SDL_ttf_42.html */
+
+	SDL_Surface* surf    = TTF_RenderUTF8_Blended(m_font, txt.c_str(), fgcolor);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_ren, surf);
 	SDL_FreeSurface(surf);
 
