@@ -123,7 +123,8 @@ void Renderer::fillRect(geompp::Rect<int> r)
 void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h,
     TextAlign align)
 {
-	SDL_Color fgcolor = {255, 255, 255, 0};
+	SDL_Color fgcolor;
+	SDL_GetRenderDrawColor(m_ren, &fgcolor.r, &fgcolor.g, &fgcolor.b, &fgcolor.a);
 
 	/* Solid, shaded or blended font rendering: 
 	https://www.libsdl.org/projects/SDL_ttf/docs/SDL_ttf_42.html */
