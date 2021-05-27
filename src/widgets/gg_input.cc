@@ -7,6 +7,7 @@ namespace gg
 Input::Input()
 : Element()
 , m_caret(0)
+, m_editable(true)
 {
 }
 
@@ -20,14 +21,14 @@ void Input::draw(Renderer& ren)
 	if (!m_text.empty())
 	{
 		ren.setColor(gg::getStyle().inputTextColor);
-		ren.drawText(m_text, m_bounds, Renderer::TextAlign::LEFT);
+		ren.drawText(m_text, m_bounds.reduced(5, 0), Renderer::TextAlign::LEFT);
 	}
 
-	if (m_focus)
+	if (m_focus && m_editable)
 	{
 		ren.setColor(gg::getStyle().inputFocusColor);
 		ren.drawRect(m_bounds);
-		ren.drawLine(m_bounds.getHeightAsLine().withShiftedX(getCaretPx(ren)));
+		ren.drawLine(m_bounds.reduced(5, 5).getHeightAsLine().withShiftedX(getCaretPx(ren)));
 	}
 }
 
@@ -35,6 +36,9 @@ void Input::draw(Renderer& ren)
 
 void Input::keyPress(const KeyEvent& e)
 {
+	if (!m_editable)
+		return;
+
 	switch (e.type)
 	{
 	case KeyEvent::Type::TEXT:
@@ -64,6 +68,11 @@ void Input::keyPress(const KeyEvent& e)
 		break;
 	}
 }
+
+/* -------------------------------------------------------------------------- */
+
+void Input::setEditable(bool v) { m_editable = v; }
+void Input::setText(const std::string& s) { m_text = s; }
 
 /* -------------------------------------------------------------------------- */
 
