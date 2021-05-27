@@ -1,4 +1,5 @@
 #include "gg_renderer.hh"
+#include "deps/mcl-utils/src/log.hpp"
 #include "gg_const.hh"
 #include <cassert>
 #include <new>
@@ -11,14 +12,14 @@ Renderer::Renderer(SDL_Window& win)
 {
 	if (TTF_Init() == -1)
 	{
-		GG_DEBUG("TTF_Init: " << TTF_GetError());
+		ML_DEBUG("TTF_Init: " << TTF_GetError());
 		throw std::bad_alloc();
 	}
 
 	m_ren = SDL_CreateRenderer(&win, -1, SDL_RENDERER_ACCELERATED);
 	if (m_ren == nullptr)
 	{
-		GG_DEBUG("SDL_CreateRenderer: " << SDL_GetError());
+		ML_DEBUG("SDL_CreateRenderer: " << SDL_GetError());
 		throw std::bad_alloc();
 	}
 
@@ -59,7 +60,7 @@ void Renderer::setFont(const std::string& path, int size)
 	m_font = TTF_OpenFont(path.c_str(), size);
 	if (m_font == nullptr)
 	{
-		GG_DEBUG("TTF_OpenFont: " << TTF_GetError());
+		ML_DEBUG("TTF_OpenFont: " << TTF_GetError());
 		throw std::bad_alloc();
 	}
 }
@@ -136,7 +137,7 @@ void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h
 	geompp::Rect<int> txtBounds = getTextBounds(txt);
 
 	if (txtBounds.w > w)
-		GG_DEBUG("String overflow (" << txtBounds.w - w << " px)");
+		ML_DEBUG("String overflow (" << txtBounds.w - w << " px)");
 
 	SDL_Rect rect = {x, y, w, h};
 	rect.y        = rect.y + (rect.h / 2) - (txtBounds.h / 2); // h-centered

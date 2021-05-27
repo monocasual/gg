@@ -1,4 +1,5 @@
 #include "gg_window.hh"
+#include "deps/mcl-utils/src/log.hpp"
 #include "gg_const.hh"
 #include <cstdio>
 #include <cstdlib>
@@ -21,7 +22,7 @@ Window::Window(const std::string& t, int x, int y, int w, int h)
 Window::~Window()
 {
 	SDL_DestroyWindow(m_win);
-	GG_DEBUG("Window destroyed");
+	ML_DEBUG("Window destroyed");
 }
 
 /* -------------------------------------------------------------------------- */

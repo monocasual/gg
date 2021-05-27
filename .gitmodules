@@ -4,3 +4,6 @@
 [submodule "src/deps/geompp"]
 	path = src/deps/geompp
 	url = git@github.com:monocasual/geompp.git
+[submodule "src/deps/mcl-utils"]
+	path = src/deps/mcl-utils
+	url = git@github.com:monocasual/mcl-utils.git

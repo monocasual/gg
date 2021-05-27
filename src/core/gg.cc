@@ -1,11 +1,14 @@
 #include "gg.hh"
+#include "deps/mcl-utils/src/log.hpp"
+#include "deps/mcl-utils/src/vector.hpp"
 #include "gg_const.hh"
 #include "gg_element.hh"
-#include "gg_utils.hh"
 #include "gg_window.hh"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <vector>
+
+using namespace mcl;
 
 namespace gg
 {
@@ -41,7 +44,7 @@ int init()
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		GG_DEBUG("Unable to initialize: " << SDL_GetError());
+		ML_DEBUG("Unable to initialize: " << SDL_GetError());
 		return 0;
 	}
 
@@ -62,7 +65,7 @@ void run()
 		SDL_WaitEvent(&ev);
 		if (ev.type == SDL_QUIT)
 		{
-			GG_DEBUG("SDL_QUIT event, stop event loop");
+			ML_DEBUG("SDL_QUIT event, stop event loop");
 			running_ = false;
 		}
 		else
@@ -87,7 +90,7 @@ void addWindow(Window* w)
 void removeWindow(Window* w)
 {
 	w->hide();
-	utils::eraseIf(windows_, [w](const Window* o) { return o->id == w->id; });
+	utils::vector::removeIf(windows_, [w](const Window* o) { return o->id == w->id; });
 }
 
 /* -------------------------------------------------------------------------- */

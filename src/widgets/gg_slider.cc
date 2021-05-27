@@ -1,9 +1,11 @@
 #include "gg_slider.hh"
 #include "core/gg_events.hh"
 #include "core/gg_renderer.hh"
-#include "core/gg_utils.hh"
+#include "deps/mcl-utils/src/math.hpp"
 #include <algorithm>
 #include <cassert>
+
+using namespace mcl;
 
 namespace gg
 {
@@ -27,12 +29,12 @@ void Slider::draw(Renderer& ren)
 
 	if (m_type == Type::VERTICAL)
 	{
-		int y = utils::map<float, int>(m_value, 0.0f, 1.0f, getH(), 0);
+		int y = utils::math::map<float, int>(m_value, 0.0f, 1.0f, getH(), 0);
 		ren.fillRect(getX(), getY() + y, getW(), getH() - y);
 	}
 	else
 	{
-		int x = utils::map<float, int>(m_value, 0.0f, 1.0f, 0, getW());
+		int x = utils::math::map<float, int>(m_value, 0.0f, 1.0f, 0, getW());
 		ren.fillRect(getX(), getY(), x, getH());
 	}
 }
@@ -56,9 +58,9 @@ void Slider::mouseDrag(const MouseEvent& e)
 void Slider::compute(int x, int y)
 {
 	if (m_type == Type::VERTICAL)
-		m_value = utils::map<int, float>(std::clamp(y - getY(), 0, getH()), 0, getH(), 1.0f, 0.0f);
+		m_value = utils::math::map<int, float>(std::clamp(y - getY(), 0, getH()), 0, getH(), 1.0f, 0.0f);
 	else
-		m_value = utils::map<int, float>(std::clamp(x - getX(), 0, getW()), 0, getW(), 0.0f, 1.0f);
+		m_value = utils::math::map<int, float>(std::clamp(x - getX(), 0, getW()), 0, getW(), 0.0f, 1.0f);
 
 	if (onChange != nullptr)
 		onChange();
