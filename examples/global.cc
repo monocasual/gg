@@ -11,12 +11,10 @@ struct Group : public gg::Element
 {
 	gg::Box    box;
 	gg::Button btn;
-	gg::Alert  alert;
 
 	Group()
 	: box("Inside.")
 	, btn("Quit")
-	, alert("Warning", "Quit: are you really sure?")
 	{
 		add(box);
 		add(btn);
@@ -26,7 +24,7 @@ struct Group : public gg::Element
 
 	void showAlert()
 	{
-		gg::addWindow(&alert);
+		gg::addWindow(std::make_unique<gg::Alert>("Warning", "Quit: are you really sure?"));
 	}
 
 	void draw(gg::Renderer& ren) override
@@ -109,8 +107,6 @@ struct myWindow : public gg::Window
 int main()
 {
 	gg::init();
-
-	std::unique_ptr<myWindow> w = std::make_unique<myWindow>();
-	gg::addWindow(w.get());
+	gg::addWindow(std::make_unique<myWindow>());
 	gg::run();
 }

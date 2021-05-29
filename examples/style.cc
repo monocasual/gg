@@ -60,8 +60,6 @@ struct myWindow : public gg::Window
 int main()
 {
 	gg::init();
-
-	std::unique_ptr<myWindow> w = std::make_unique<myWindow>();
-	gg::addWindow(w.get());
+	gg::addWindow(std::make_unique<myWindow>());
 	gg::run();
 }

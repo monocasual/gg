@@ -22,6 +22,6 @@ void Alert::resized()
 
 void Alert::closed()
 {
-	gg::removeWindow(this);
+	gg::removeWindow(*this);
 }
 } // namespace gg

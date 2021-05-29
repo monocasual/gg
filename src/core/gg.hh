@@ -14,11 +14,14 @@ struct Style;
 int init();
 
 /* addWindow()
- * */
+Adds a new window to the list. The window is set to visible. */
 
-void addWindow(Window* w);
+void addWindow(std::unique_ptr<Window> w);
 
-void removeWindow(Window* w);
+/* removeWindow
+Removes window 'w' from the list, and hides it. */
+
+void removeWindow(Window& w);
 
 const Style& getStyle();
 void         setStyle(std::unique_ptr<Style> s);

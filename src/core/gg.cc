@@ -23,7 +23,7 @@ bool running_ = false;
 /* windows
 Array of pointers to windows. */
 
-std::vector<Window*> windows_;
+std::vector<std::unique_ptr<Window>> windows_;
 
 std::unique_ptr<Style> style_;
 
@@ -76,7 +76,7 @@ void run()
 		}
 		else
 		{
-			for (Window* w : windows_)
+			for (std::unique_ptr<Window>& w : windows_)
 				w->handle(ev);
 		}
 	}
@@ -85,18 +85,18 @@ void run()
 
 /* -------------------------------------------------------------------------- */
 
-void addWindow(Window* w)
+void addWindow(std::unique_ptr<Window> w)
 {
 	w->show();
-	windows_.push_back(w);
+	windows_.push_back(std::move(w));
 }
 
 /* -------------------------------------------------------------------------- */
 
-void removeWindow(Window* w)
+void removeWindow(Window& w)
 {
-	w->hide();
-	utils::vector::removeIf(windows_, [w](const Window* o) { return o->id == w->id; });
+	w.hide();
+	utils::vector::removeIf(windows_, [id = w.id](const std::unique_ptr<Window>& o) { return o->id == id; });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -109,7 +109,7 @@ const Style& getStyle()
 void setStyle(std::unique_ptr<Style> s)
 {
 	style_ = std::move(s);
-	for (Window* w : windows_)
+	for (std::unique_ptr<Window>& w : windows_)
 	{
 		w->clear();
 		w->redraw();
