@@ -1,6 +1,8 @@
 #ifndef GG_HH
 #define GG_HH
 
+#include <memory>
+
 namespace gg
 {
 class Window;
@@ -19,6 +21,7 @@ void addWindow(Window* w);
 void removeWindow(Window* w);
 
 const Style& getStyle();
+void         setStyle(std::unique_ptr<Style> s);
 
 /* run()
  * */

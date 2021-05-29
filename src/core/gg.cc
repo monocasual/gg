@@ -25,7 +25,7 @@ Array of pointers to windows. */
 
 std::vector<Window*> windows_;
 
-Style style_;
+std::unique_ptr<Style> style_;
 
 /* -------------------------------------------------------------------------- */
 
@@ -56,6 +56,7 @@ int init()
 	/* Start accepting Unicode text input events. */
 	SDL_StartTextInput();
 
+	style_   = std::make_unique<Style>();
 	running_ = true;
 	return 1;
 }
@@ -102,7 +103,17 @@ void removeWindow(Window* w)
 
 const Style& getStyle()
 {
-	return style_;
+	return *style_;
+}
+
+void setStyle(std::unique_ptr<Style> s)
+{
+	style_ = std::move(s);
+	for (Window* w : windows_)
+	{
+		w->clear();
+		w->redraw();
+	}
 }
 
 /* -------------------------------------------------------------------------- */

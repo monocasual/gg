@@ -24,7 +24,7 @@ Renderer::Renderer(SDL_Window& win)
 		throw std::bad_alloc();
 	}
 
-	setFont(gg::getStyle().fontPath, gg::getStyle().fontSize);
+	setFont(gg::getStyle().fontPath(), gg::getStyle().fontSize());
 }
 
 /* -------------------------------------------------------------------------- */

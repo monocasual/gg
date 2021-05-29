@@ -30,9 +30,9 @@ void Button::mouseUp(const MouseEvent& e)
 
 void Button::drawUp(Renderer& ren)
 {
-	ren.setColor(gg::getStyle().buttonBackgroundColorUp);
+	ren.setColor(gg::getStyle().buttonBackgroundColorUp());
 	ren.fillRect(m_bounds);
-	ren.setColor(gg::getStyle().buttonBoundaryColor);
+	ren.setColor(gg::getStyle().buttonBoundaryColor());
 	ren.drawRect(m_bounds);
 
 	if (m_label != "")
@@ -43,7 +43,7 @@ void Button::drawUp(Renderer& ren)
 
 void Button::drawDown(Renderer& ren)
 {
-	ren.setColor(gg::getStyle().buttonBackgroundColorDown);
+	ren.setColor(gg::getStyle().buttonBackgroundColorDown());
 	ren.fillRect(m_bounds);
 }
 } // namespace gg

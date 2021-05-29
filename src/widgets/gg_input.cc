@@ -15,18 +15,18 @@ Input::Input()
 
 void Input::draw(Renderer& ren)
 {
-	ren.setColor(gg::getStyle().inputBackgroundColor);
+	ren.setColor(gg::getStyle().inputBackgroundColor());
 	ren.fillRect(m_bounds);
 
 	if (!m_text.empty())
 	{
-		ren.setColor(gg::getStyle().inputTextColor);
+		ren.setColor(gg::getStyle().inputTextColor());
 		ren.drawText(m_text, m_bounds.reduced(5, 0), Renderer::TextAlign::LEFT);
 	}
 
 	if (m_focus && m_editable)
 	{
-		ren.setColor(gg::getStyle().inputFocusColor);
+		ren.setColor(gg::getStyle().inputFocusColor());
 		ren.drawRect(m_bounds);
 		ren.drawLine(m_bounds.reduced(5, 5).getHeightAsLine().withShiftedX(getCaretPx(ren)));
 	}

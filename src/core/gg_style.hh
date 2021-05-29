@@ -9,24 +9,24 @@ namespace gg
 {
 struct Style
 {
-	std::string fontPath = GG_DEFAULT_FONT_PATH;
-	int         fontSize = 16;
+	virtual std::string fontPath() const { return GG_DEFAULT_FONT_PATH; }
+	virtual int         fontSize() const { return 16; }
 
-	Color windowBackgroundColor = Color{30, 30, 30};
+	virtual Color windowBackgroundColor() const { return Color{30, 30, 30}; }
 
-	Color boxBoundaryColor   = Color{255, 255, 255};
-	Color boxBackgroundColor = Color{30, 30, 30};
+	virtual Color boxBoundaryColor() const { return Color{255, 255, 255}; }
+	virtual Color boxBackgroundColor() const { return Color{30, 30, 30}; }
 
-	Color buttonBoundaryColor       = Color{255, 255, 255};
-	Color buttonBackgroundColorDown = Color{100, 100, 100};
-	Color buttonBackgroundColorUp   = Color{0, 0, 0};
+	virtual Color buttonBoundaryColor() const { return Color{255, 255, 255}; }
+	virtual Color buttonBackgroundColorDown() const { return Color{100, 100, 100}; }
+	virtual Color buttonBackgroundColorUp() const { return Color{0, 0, 0}; }
 
-	Color inputBackgroundColor = Color{10, 10, 10};
-	Color inputTextColor       = Color{255, 255, 255};
-	Color inputFocusColor      = Color{150, 150, 150};
+	virtual Color inputBackgroundColor() const { return Color{10, 10, 10}; }
+	virtual Color inputTextColor() const { return Color{255, 255, 255}; }
+	virtual Color inputFocusColor() const { return Color{150, 150, 150}; }
 
-	Color sliderBackgroundColor = Color{0, 0, 0};
-	Color sliderBodyColor       = Color{255, 255, 255};
+	virtual Color sliderBackgroundColor() const { return Color{0, 0, 0}; }
+	virtual Color sliderBodyColor() const { return Color{255, 255, 255}; }
 };
 } // namespace gg
 
