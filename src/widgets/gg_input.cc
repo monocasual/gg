@@ -4,8 +4,10 @@
 
 namespace gg
 {
-Input::Input()
+Input::Input(const std::string& s)
 : Element()
+, onChange(nullptr)
+, m_text(s)
 , m_caret(0)
 , m_editable(true)
 {
@@ -39,19 +41,26 @@ void Input::keyPress(const KeyEvent& e)
 	if (!m_editable)
 		return;
 
+	bool changed = false;
+
 	switch (e.type)
 	{
 	case KeyEvent::Type::TEXT:
 		m_text.insert(m_caret++, e.ch);
+		changed = true;
 		break;
 
 	case KeyEvent::Type::BACKSPACE:
 		if (m_caret > 0)
+		{
 			m_text.erase(--m_caret);
+			changed = true;
+		}
 		break;
 
 	case KeyEvent::Type::DELETE:
 		m_text.erase(m_caret);
+		changed = true;
 		break;
 
 	case KeyEvent::Type::ARROW_LEFT:
@@ -67,7 +76,14 @@ void Input::keyPress(const KeyEvent& e)
 	default:
 		break;
 	}
+
+	if (changed && onChange != nullptr)
+		onChange();
 }
+
+/* -------------------------------------------------------------------------- */
+
+std::string Input::getText() const { return m_text.cpp_str(); }
 
 /* -------------------------------------------------------------------------- */
 

@@ -10,13 +10,17 @@ class Renderer;
 class Input : public Element
 {
 public:
-	Input();
+	Input(const std::string& s = "");
 
 	void draw(Renderer& ren) override;
 	void keyPress(const KeyEvent& e) override;
 
+	std::string getText() const;
+
 	void setEditable(bool v);
 	void setText(const std::string& s);
+
+	std::function<void()> onChange;
 
 private:
 	int getCaretPx(const Renderer& ren) const;

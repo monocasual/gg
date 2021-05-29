@@ -12,14 +12,14 @@ struct myWindow : public gg::Window
 
 	myWindow()
 	: gg::Window("gg input example", 100, 100, 640, 250)
+	, input3("With pre-existing text.")
+	, input4("Read-only.")
 	{
 		add(input1);
 		add(input2);
 		add(input3);
 		add(input4);
 
-		input3.setText("With pre-existing text.");
-		input4.setText("Read-only.");
 		input4.setEditable(false);
 	}
 
