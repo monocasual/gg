@@ -175,6 +175,7 @@ void Element::drawChildren(Renderer& ren)
 {
 	/* TODO - damage flag: redraw only if damaged */
 	for (Element* e : m_elements)
-		e->draw(ren);
+		if (e->visible)
+			e->draw(ren);
 }
 } // namespace gg
