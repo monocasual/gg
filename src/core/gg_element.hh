@@ -79,6 +79,12 @@ public:
 
 	void clearFocus();
 
+	/* visible
+	Tells whether this elements should be visible or not. Invisible elements
+	don't receive events and can't have focus. */
+
+	bool visible;
+
 protected:
 	Element(geompp::Rect<int> r = {});
 

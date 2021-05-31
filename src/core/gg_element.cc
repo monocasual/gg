@@ -6,7 +6,8 @@
 namespace gg
 {
 Element::Element(geompp::Rect<int> r)
-: m_bounds(r)
+: visible(true)
+, m_bounds(r)
 , m_parent(nullptr)
 , m_mouseDown(false)
 , m_focus(false)
@@ -17,7 +18,7 @@ Element::Element(geompp::Rect<int> r)
 
 void Element::handle(const SDL_Event& e)
 {
-	if (e.window.windowID != getParentWindow()->id)
+	if (e.window.windowID != getParentWindow()->id || !visible)
 		return;
 
 	if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
@@ -118,6 +119,8 @@ void Element::redraw()
 
 void Element::draw(Renderer& ren)
 {
+	if (!visible)
+		return;
 	ren.setClip(m_bounds);
 	drawChildren(ren);
 	ren.unsetClip();
@@ -140,6 +143,8 @@ void Element::setBounds(geompp::Rect<int> b)
 
 void Element::setFocus()
 {
+	if (!visible)
+		return;
 	clearFocus();
 	m_focus = true;
 }
@@ -148,6 +153,8 @@ void Element::setFocus()
 
 void Element::clearFocus()
 {
+	if (!visible)
+		return;
 	for (Element* el : m_elements)
 		el->m_focus = false;
 	m_focus = false;
