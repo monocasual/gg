@@ -1,6 +1,6 @@
 #include "core/gg.hh"
 #include "core/gg_window.hh"
-#include "widgets/gg_input.hh"
+#include "widgets/atoms/gg_input.hh"
 #include <memory>
 
 struct myWindow : public gg::Window

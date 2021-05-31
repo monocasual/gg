@@ -32,11 +32,12 @@ list(APPEND GG_SOURCES
 	${CMAKE_SOURCE_DIR}/src/core/gg_renderer.cc
 	${CMAKE_SOURCE_DIR}/src/core/gg_element.cc
 	${CMAKE_SOURCE_DIR}/src/core/gg_window.cc
-	${CMAKE_SOURCE_DIR}/src/widgets/gg_button.cc
-	${CMAKE_SOURCE_DIR}/src/widgets/gg_box.cc
-	${CMAKE_SOURCE_DIR}/src/widgets/gg_slider.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/atoms/gg_button.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/atoms/gg_box.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/atoms/gg_slider.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/atoms/gg_input.cc
 	${CMAKE_SOURCE_DIR}/src/widgets/gg_alert.cc
-	${CMAKE_SOURCE_DIR}/src/widgets/gg_input.cc)
+)
 
 # ------------------------------------------------------------------------------
 

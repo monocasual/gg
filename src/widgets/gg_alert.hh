@@ -1,8 +1,8 @@
 #ifndef GG_ALERT_HH
 #define GG_ALERT_HH
 
+#include "atoms/gg_box.hh"
 #include "core/gg_window.hh"
-#include "gg_box.hh"
 #include <functional>
 
 namespace gg

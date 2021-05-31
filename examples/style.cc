@@ -1,7 +1,7 @@
 #include "core/gg.hh"
 #include "core/gg_window.hh"
-#include "widgets/gg_box.hh"
-#include "widgets/gg_button.hh"
+#include "widgets/atoms/gg_box.hh"
+#include "widgets/atoms/gg_button.hh"
 #include <memory>
 
 struct CustomStyle : public gg::Style
