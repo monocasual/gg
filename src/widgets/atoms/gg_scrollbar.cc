@@ -73,8 +73,8 @@ void Scrollbar::setValue(float v, bool fireCallback)
 void Scrollbar::set(const MouseEvent& e)
 {
 	if (m_type == Type::VERTICAL)
-		setValue(utils::math::map(e.position.y - getY(), 0, getH(), m_range.a, m_range.b));
+		setValue(utils::math::map(e.position.y - getY(), 0, getH() - m_handleSize, m_range.a, m_range.b));
 	else
-		setValue(utils::math::map(e.position.x - getX(), 0, getW(), m_range.a, m_range.b));
+		setValue(utils::math::map(e.position.x - getX(), 0, getW() - m_handleSize, m_range.a, m_range.b));
 }
 } // namespace gg
