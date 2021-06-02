@@ -13,6 +13,7 @@ Scrollbar::Scrollbar(Type t)
 , m_type(t)
 , m_range(MIN_DEFAULT_RANGE, MAX_DEFAULT_RANGE)
 , m_value(0.0f)
+, m_handleSize(MIN_HANDLE_SIZE)
 {
 }
 
@@ -28,13 +29,13 @@ void Scrollbar::draw(Renderer& ren)
 
 	if (m_type == Type::VERTICAL)
 	{
-		int y = utils::math::map(m_value, m_range.a, m_range.b, 0, getH() - MIN_HANDLE_SIZE);
-		ren.fillRect(getX(), getY() + y, getW(), MIN_HANDLE_SIZE);
+		int y = utils::math::map(m_value, m_range.a, m_range.b, 0, getH() - m_handleSize);
+		ren.fillRect(getX(), getY() + y, getW(), m_handleSize);
 	}
 	else
 	{
-		int x = utils::math::map(m_value, m_range.a, m_range.b, 0, getW() - MIN_HANDLE_SIZE);
-		ren.fillRect(getX() + x, getY(), MIN_HANDLE_SIZE, getH());
+		int x = utils::math::map(m_value, m_range.a, m_range.b, 0, getW() - m_handleSize);
+		ren.fillRect(getX() + x, getY(), m_handleSize, getH());
 	}
 }
 
@@ -53,6 +54,10 @@ float Scrollbar::getValue() const { return m_value; }
 /* -------------------------------------------------------------------------- */
 
 void Scrollbar::setRange(geompp::Range<float> r) { m_range = r; }
+
+/* -------------------------------------------------------------------------- */
+
+void Scrollbar::setHandleSize(int s) { m_handleSize = s; }
 
 /* -------------------------------------------------------------------------- */
 

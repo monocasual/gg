@@ -22,6 +22,8 @@ struct myWindow : public gg::Window
 		add(scrollbar3);
 		add(output);
 
+		scrollbar1.setHandleSize(140);
+
 		scrollbar2.setRange({0.0f, 2.0f});
 
 		scrollbar1.onChange = [this](float v) {

@@ -27,6 +27,7 @@ public:
 
 	void setValue(float v, bool fireCallback = true);
 	void setRange(geompp::Range<float> r);
+	void setHandleSize(int s);
 
 	std::function<void(float)> onChange;
 
@@ -40,6 +41,7 @@ private:
 	Type                 m_type;
 	geompp::Range<float> m_range;
 	float                m_value;
+	int                  m_handleSize;
 };
 } // namespace gg
 
