@@ -10,28 +10,28 @@ namespace gg
 struct Style
 {
 	virtual std::string fontPath() const { return GG_DEFAULT_FONT_PATH; }
-	virtual int         fontSize() const { return 16; }
+	virtual int         fontSize() const { return GG_DEFAULT_FONT_SIZE; }
 
-	virtual Color windowBackgroundColor() const { return Color{30, 30, 30}; }
+	virtual Color windowBackgroundColor() const { return GG_WINDOW_BACKGROUND_COLOR; }
 
-	virtual Color boxBoundaryColor() const { return Color{255, 255, 255}; }
-	virtual Color boxBackgroundColor() const { return Color{30, 30, 30}; }
+	virtual Color boxBoundaryColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
+	virtual Color boxBackgroundColor() const { return GG_ELEMENT_BACKGROUND_COLOR; }
 
-	virtual Color buttonBoundaryColor() const { return Color{255, 255, 255}; }
+	virtual Color buttonBoundaryColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
 	virtual Color buttonBackgroundColorDown() const { return Color{100, 100, 100}; }
-	virtual Color buttonBackgroundColorUp() const { return Color{0, 0, 0}; }
+	virtual Color buttonBackgroundColorUp() const { return GG_ELEMENT_BACKGROUND_COLOR; }
 
-	virtual Color inputBackgroundColor() const { return Color{10, 10, 10}; }
-	virtual Color inputTextColor() const { return Color{255, 255, 255}; }
+	virtual Color inputBackgroundColor() const { return GG_ELEMENT_BACKGROUND_COLOR; }
+	virtual Color inputTextColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
 	virtual Color inputFocusColor() const { return Color{150, 150, 150}; }
 
-	virtual Color sliderBackgroundColor() const { return Color{0, 0, 0}; }
-	virtual Color sliderBodyColor() const { return Color{255, 255, 255}; }
+	virtual Color sliderBackgroundColor() const { return GG_ELEMENT_BACKGROUND_COLOR; }
+	virtual Color sliderBodyColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
 
-	virtual Color scrollbarBackgroundColor() const { return Color{20, 20, 20}; }
-	virtual Color scrollbarBodyColor() const { return Color{220, 220, 220}; }
+	virtual Color scrollbarBackgroundColor() const { return GG_ELEMENT_BACKGROUND_COLOR; }
+	virtual Color scrollbarBodyColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
 
-	virtual Color viewportBoundaryColor() const { return Color{255, 255, 255}; }
+	virtual Color viewportBoundaryColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
 };
 } // namespace gg
 
