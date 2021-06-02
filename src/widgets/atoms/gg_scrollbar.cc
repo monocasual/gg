@@ -57,7 +57,7 @@ void Scrollbar::setRange(geompp::Range<float> r) { m_range = r; }
 
 /* -------------------------------------------------------------------------- */
 
-void Scrollbar::setHandleSize(int s) { m_handleSize = s; }
+void Scrollbar::setHandleSize(int s) { m_handleSize = std::max(s, MIN_HANDLE_SIZE); }
 
 /* -------------------------------------------------------------------------- */
 
