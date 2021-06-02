@@ -52,12 +52,6 @@ public:
 
 	virtual void redraw();
 
-	/* add()
-	Adds a child widget to this element. */
-
-	void add(Element* w);
-	void add(Element& w);
-
 	int               getX() const { return m_bounds.x; }
 	int               getY() const { return m_bounds.y; }
 	int               getW() const { return m_bounds.w; }
@@ -65,6 +59,18 @@ public:
 	int               getXW() const { return m_bounds.xw; }
 	int               getYH() const { return m_bounds.yh; }
 	geompp::Rect<int> getBounds() const { return m_bounds; }
+
+	/* countElements()
+	Returns the number of elements contained in this Element. Useful only if its
+	a group. */
+
+	int countElements() const;
+
+	/* add()
+	Adds a child element to this element. */
+
+	void add(Element* w);
+	void add(Element& w);
 
 	void setBounds(int x, int y, int w, int h);
 	void setBounds(geompp::Rect<int> b);

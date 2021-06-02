@@ -90,6 +90,13 @@ void Element::handle(const SDL_Event& e)
 
 /* -------------------------------------------------------------------------- */
 
+int Element::countElements() const
+{
+	return m_elements.size();
+}
+
+/* -------------------------------------------------------------------------- */
+
 void Element::add(Element& e)
 {
 	add(&e);
