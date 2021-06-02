@@ -27,6 +27,11 @@ struct Style
 
 	virtual Color sliderBackgroundColor() const { return Color{0, 0, 0}; }
 	virtual Color sliderBodyColor() const { return Color{255, 255, 255}; }
+
+	virtual Color scrollbarBackgroundColor() const { return Color{20, 20, 20}; }
+	virtual Color scrollbarBodyColor() const { return Color{220, 220, 220}; }
+
+	virtual Color viewportBoundaryColor() const { return Color{255, 255, 255}; }
 };
 } // namespace gg
 
