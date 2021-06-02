@@ -12,7 +12,7 @@ Scrollbar::Scrollbar(Type t)
 , onChange(nullptr)
 , m_type(t)
 , m_range(MIN_DEFAULT_RANGE, MAX_DEFAULT_RANGE)
-, m_value(0.0f)
+, m_value(MIN_DEFAULT_RANGE)
 , m_handleSize(MIN_HANDLE_SIZE)
 {
 }
