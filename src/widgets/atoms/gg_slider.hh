@@ -24,12 +24,12 @@ public:
 
 	float getValue() const;
 
-	void setValue(float v);
+	void setValue(float v, bool fireCallback = true);
 
 	std::function<void()> onChange;
 
 private:
-	void compute(int x, int y);
+	void set(const MouseEvent& e);
 
 	float m_value;
 	Type  m_type;

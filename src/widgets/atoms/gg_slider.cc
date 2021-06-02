@@ -29,12 +29,12 @@ void Slider::draw(Renderer& ren)
 
 	if (m_type == Type::VERTICAL)
 	{
-		int y = utils::math::map<float, int>(m_value, 0.0f, 1.0f, getH(), 0);
+		int y = utils::math::map(m_value, 0.0f, 1.0f, getH(), 0);
 		ren.fillRect(getX(), getY() + y, getW(), getH() - y);
 	}
 	else
 	{
-		int x = utils::math::map<float, int>(m_value, 0.0f, 1.0f, 0, getW());
+		int x = utils::math::map(m_value, 0.0f, 1.0f, 0, getW());
 		ren.fillRect(getX(), getY(), x, getH());
 	}
 }
@@ -43,27 +43,14 @@ void Slider::draw(Renderer& ren)
 
 void Slider::mouseDown(const MouseEvent& e)
 {
-	compute(e.position.x, e.position.y);
+	set(e);
 }
 
 /* -------------------------------------------------------------------------- */
 
 void Slider::mouseDrag(const MouseEvent& e)
 {
-	compute(e.position.x, e.position.y);
-}
-
-/* -------------------------------------------------------------------------- */
-
-void Slider::compute(int x, int y)
-{
-	if (m_type == Type::VERTICAL)
-		m_value = utils::math::map<int, float>(std::clamp(y - getY(), 0, getH()), 0, getH(), 1.0f, 0.0f);
-	else
-		m_value = utils::math::map<int, float>(std::clamp(x - getX(), 0, getW()), 0, getW(), 0.0f, 1.0f);
-
-	if (onChange != nullptr)
-		onChange();
+	set(e);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -72,10 +59,20 @@ float Slider::getValue() const { return m_value; }
 
 /* -------------------------------------------------------------------------- */
 
-void Slider::setValue(float v)
+void Slider::setValue(float v, bool fireCallback)
 {
 	m_value = std::clamp(v, 0.0f, 1.0f);
-	if (onChange != nullptr)
+	if (onChange != nullptr && fireCallback)
 		onChange();
+}
+
+/* -------------------------------------------------------------------------- */
+
+void Slider::set(const MouseEvent& e)
+{
+	if (m_type == Type::VERTICAL)
+		setValue(utils::math::map(e.position.y - getY(), 0, getH(), 1.0f, 0.0f));
+	else
+		setValue(utils::math::map(e.position.x - getX(), 0, getW(), 0.0f, 1.0f));
 }
 } // namespace gg
