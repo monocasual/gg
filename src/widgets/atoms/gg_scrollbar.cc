@@ -72,6 +72,12 @@ void Scrollbar::setValue(float v, bool fireCallback)
 
 void Scrollbar::set(const MouseEvent& e)
 {
+	/* Don't set value if handle fits the scrollbar entirely. */
+
+	if ((m_type == Type::HORIZONTAL && m_handleSize == getW()) ||
+	    (m_type == Type::VERTICAL && m_handleSize == getH()))
+		return;
+
 	if (m_type == Type::VERTICAL)
 		setValue(utils::math::map(e.position.y - getY(), 0, getH() - m_handleSize, m_range.a, m_range.b));
 	else
