@@ -7,6 +7,7 @@ endfunction()
 
 gg_make_example(global global.cc)
 gg_make_example(box box.cc)
+gg_make_example(button button.cc)
 gg_make_example(input input.cc)
 gg_make_example(style style.cc)
 gg_make_example(group group.cc)

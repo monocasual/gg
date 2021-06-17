@@ -11,6 +11,7 @@ Element::Element(geompp::Rect<int> r)
 , m_parent(nullptr)
 , m_mouseDown(false)
 , m_focus(false)
+, m_enabled(true)
 {
 }
 
@@ -18,7 +19,7 @@ Element::Element(geompp::Rect<int> r)
 
 void Element::handle(const SDL_Event& e)
 {
-	if (e.window.windowID != getParentWindow()->id || !visible)
+	if (e.window.windowID != getParentWindow()->id || !visible || !m_enabled)
 		return;
 
 	if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
@@ -165,6 +166,14 @@ void Element::clearFocus()
 	for (Element* el : m_elements)
 		el->m_focus = false;
 	m_focus = false;
+}
+
+/* -------------------------------------------------------------------------- */
+
+void Element::setEnabled(bool v)
+{
+	m_enabled = v;
+	redraw();
 }
 
 /* -------------------------------------------------------------------------- */

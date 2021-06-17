@@ -32,7 +32,7 @@ void Button::drawUp(Renderer& ren)
 {
 	ren.setColor(gg::getStyle().buttonBackgroundColorUp());
 	ren.fillRect(m_bounds);
-	ren.setColor(gg::getStyle().buttonBoundaryColor());
+	ren.setColor(m_enabled ? gg::getStyle().buttonBoundaryColor() : gg::getStyle().buttonBoundaryColorDisabled());
 	ren.drawRect(m_bounds);
 
 	if (m_label != "")

@@ -85,6 +85,11 @@ public:
 
 	void clearFocus();
 
+	/* setEnabled()
+	Enables or disables this element. */
+
+	void setEnabled(bool v);
+
 	/* visible
 	Tells whether this elements should be visible or not. Invisible elements
 	don't receive events and can't have focus. */
@@ -125,6 +130,12 @@ protected:
 	Tells whether this element has focus. Focus is gained by clicling on it. */
 
 	bool m_focus;
+
+	/* m_enabled
+	Tells whether this element is enabled. Disabled elements don't receive
+	events. */
+
+	bool m_enabled;
 };
 } // namespace gg
 

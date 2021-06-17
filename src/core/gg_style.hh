@@ -18,6 +18,7 @@ struct Style
 	virtual Color boxBackgroundColor() const { return GG_ELEMENT_BACKGROUND_COLOR; }
 
 	virtual Color buttonBoundaryColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
+	virtual Color buttonBoundaryColorDisabled() const { return GG_ELEMENT_BOUNDARY_COLOR_DISABLED; }
 	virtual Color buttonBackgroundColorDown() const { return Color{100, 100, 100}; }
 	virtual Color buttonBackgroundColorUp() const { return GG_ELEMENT_BACKGROUND_COLOR; }
 
