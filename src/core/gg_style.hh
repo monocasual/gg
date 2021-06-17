@@ -32,6 +32,10 @@ struct Style
 	virtual Color scrollbarBackgroundColor() const { return GG_ELEMENT_BACKGROUND_COLOR; }
 	virtual Color scrollbarBodyColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
 
+	virtual Color checkboxBoundaryColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
+	virtual Color checkboxBoundaryColorDisabled() const { return GG_ELEMENT_BOUNDARY_COLOR_DISABLED; }
+	virtual Color checkboxBackgroundColor() const { return GG_ELEMENT_BACKGROUND_COLOR; }
+
 	virtual Color viewportBoundaryColor() const { return GG_ELEMENT_BOUNDARY_COLOR; }
 };
 } // namespace gg
