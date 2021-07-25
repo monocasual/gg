@@ -39,6 +39,7 @@ list(APPEND GG_SOURCES
 	${CMAKE_SOURCE_DIR}/src/widgets/atoms/gg_scrollbar.cc
 	${CMAKE_SOURCE_DIR}/src/widgets/atoms/gg_checkbox.cc
 	${CMAKE_SOURCE_DIR}/src/widgets/gg_alert.cc
+	${CMAKE_SOURCE_DIR}/src/widgets/gg_viewport.cc
 )
 
 # ------------------------------------------------------------------------------
