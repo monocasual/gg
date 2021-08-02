@@ -52,13 +52,15 @@ public:
 
 	virtual void redraw();
 
-	int               getX() const { return m_bounds.x; }
-	int               getY() const { return m_bounds.y; }
-	int               getW() const { return m_bounds.w; }
-	int               getH() const { return m_bounds.h; }
-	int               getXW() const { return m_bounds.xw; }
-	int               getYH() const { return m_bounds.yh; }
-	geompp::Rect<int> getBounds() const { return m_bounds; }
+	int getX() const { return m_bounds.x; }
+	int getY() const { return m_bounds.y; }
+	int getW() const { return m_bounds.w; }
+	int getH() const { return m_bounds.h; }
+	int getXW() const { return m_bounds.xw; }
+	int getYH() const { return m_bounds.yh; }
+
+	geompp::Rect<int>  getBounds() const { return m_bounds; }
+	geompp::Point<int> getPosition() const { return m_bounds.getPosition(); }
 
 	/* countElements()
 	Returns the number of elements contained in this Element. Useful only if its
@@ -74,6 +76,14 @@ public:
 
 	void setBounds(int x, int y, int w, int h);
 	void setBounds(geompp::Rect<int> b);
+
+	void setX(int x);
+	void setY(int y);
+	void setW(int w);
+	void setH(int h);
+
+	void setPosition(int x, int y);
+	void setPosition(geompp::Point<int> p);
 
 	/* setFocus()
 	Set focus to this element. Other children lose their focus. */

@@ -138,13 +138,32 @@ void Element::draw(Renderer& ren)
 
 void Element::setBounds(int x, int y, int w, int h)
 {
-	m_bounds = geompp::Rect<int>(x, y, w, h);
+	m_bounds = {x, y, w, h};
 	resized();
 }
 
 void Element::setBounds(geompp::Rect<int> b)
 {
 	setBounds(b.x, b.y, b.w, b.h);
+}
+
+/* -------------------------------------------------------------------------- */
+
+void Element::setX(int x) { setBounds(getBounds().withX(x)); }
+void Element::setY(int y) { setBounds(getBounds().withY(y)); }
+void Element::setW(int w) { setBounds(getBounds().withW(w)); }
+void Element::setH(int h) { setBounds(getBounds().withH(h)); }
+
+/* -------------------------------------------------------------------------- */
+
+void Element::setPosition(int x, int y)
+{
+	setBounds(getBounds().withPosition({x, y}));
+}
+
+void Element::setPosition(geompp::Point<int> p)
+{
+	setBounds(getBounds().withPosition(p));
 }
 
 /* -------------------------------------------------------------------------- */
