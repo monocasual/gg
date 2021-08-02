@@ -59,7 +59,19 @@ public:
 	int getXW() const { return m_bounds.xw; }
 	int getYH() const { return m_bounds.yh; }
 
-	geompp::Rect<int>  getBounds() const { return m_bounds; }
+	/* getBounds()
+	Returns the bounding box of this Element. */
+
+	geompp::Rect<int> getBounds() const { return m_bounds; }
+
+	/* getLocalBounds()
+	Returns the bounding box of this Element at position {0, 0}. */
+
+	geompp::Rect<int> getLocalBounds() const { return {0, 0, getW(), getH()}; }
+
+	/* getPosition
+	Returns the top-left corner of this Element as a Point. */
+
 	geompp::Point<int> getPosition() const { return m_bounds.getPosition(); }
 
 	/* countElements()
