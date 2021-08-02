@@ -18,6 +18,13 @@ bool MouseEvent::isOver(geompp::Rect<int> r) const
 
 /* -------------------------------------------------------------------------- */
 
+MouseEvent MouseEvent::relativeTo(const Element& e) const
+{
+	return {position.x - e.getX(), position.y - e.getY()};
+}
+
+/* -------------------------------------------------------------------------- */
+
 MouseEvent makeMouseEvent()
 {
 	int mx, my;

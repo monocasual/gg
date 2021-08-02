@@ -14,7 +14,8 @@ struct MouseEvent
 {
 	MouseEvent(int x, int y);
 
-	bool isOver(geompp::Rect<int> r) const;
+	bool       isOver(geompp::Rect<int> r) const;
+	MouseEvent relativeTo(const Element& e) const;
 
 	geompp::Point<int> position;
 };
