@@ -20,11 +20,13 @@ public:
 	Scrollbar(Type t = Type::VERTICAL);
 
 	void draw(Renderer& ren) override;
+	void resized() override;
 	void mouseDrag(const MouseEvent& e) override;
 	void mouseDown(const MouseEvent& e) override;
 
 	float getValue() const;
 
+	void setPosition(int p, bool fireCallback = true);
 	void setValue(float v, bool fireCallback = true);
 	void setRange(geompp::Range<float> r);
 	void setHandleSize(int s);
@@ -32,14 +34,15 @@ public:
 	std::function<void(float)> onChange;
 
 private:
-	static constexpr int   MIN_HANDLE_SIZE   = 20;
-	static constexpr float MIN_DEFAULT_RANGE = 0.0f;
-	static constexpr float MAX_DEFAULT_RANGE = 1.0f;
+	static constexpr int                  MIN_HANDLE_SIZE = 20;
+	static constexpr geompp::Range<float> DEFAULT_RANGE   = {0.0f, 1.0f};
 
-	void set(const MouseEvent& e);
+	int getMaxPosition() const;
+	int getAxis(geompp::Point<int> p) const;
 
 	Type                 m_type;
 	geompp::Range<float> m_range;
+	int                  m_position;
 	float                m_value;
 	int                  m_handleSize;
 };
