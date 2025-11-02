@@ -1,9 +1,9 @@
 [submodule "src/deps/tiny-utf8"]
 	path = src/deps/tiny-utf8
-	url = git@github.com:DuffsDevice/tiny-utf8.git
+	url = https://github.com/DuffsDevice/tiny-utf8.git
 [submodule "src/deps/geompp"]
 	path = src/deps/geompp
-	url = git@github.com:monocasual/geompp.git
+	url = https://github.com/monocasual/geompp.git
 [submodule "src/deps/mcl-utils"]
 	path = src/deps/mcl-utils
-	url = git@github.com:monocasual/mcl-utils.git
+	url = https://github.com/monocasual/mcl-utils.git
