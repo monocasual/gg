@@ -35,6 +35,7 @@ void Scrollbar::draw(Renderer& ren)
 }
 
 /* -------------------------------------------------------------------------- */
+
 void Scrollbar::resized()
 {
 	// Make sure handle doesn't overflow in case it has been set manually.
