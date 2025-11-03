@@ -144,12 +144,6 @@ void Viewport::resized()
 	m_frame.setBounds(m_bounds.withTrimmedRight(SCROLLBAR_SIZE).withTrimmedBottom(SCROLLBAR_SIZE));
 	m_vscrollbar.setBounds(m_bounds.withTrimmedBottom(SCROLLBAR_SIZE).withTrimmedLeft(m_frame.getBounds().w));
 	m_hscrollbar.setBounds(m_bounds.withTrimmedRight(SCROLLBAR_SIZE).withTrimmedTop(m_frame.getBounds().h));
-
-	float hratio = m_hscrollbar.getW() / static_cast<float>(m_frame.getContent()->getBounds().w);
-	float vratio = m_vscrollbar.getH() / static_cast<float>(m_frame.getContent()->getBounds().h);
-
-	m_hscrollbar.setHandleSize(utils::math::map(hratio, 1.0f, m_hscrollbar.getW()));
-	m_vscrollbar.setHandleSize(utils::math::map(vratio, 1.0f, m_vscrollbar.getH()));
 }
 
 /* -------------------------------------------------------------------------- */
