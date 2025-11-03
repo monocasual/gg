@@ -42,9 +42,8 @@ private:
 
 	Type                 m_type;
 	geompp::Range<float> m_range;
-	int                  m_position;
+	geompp::Range<int>   m_handle;
 	float                m_value;
-	int                  m_handleSize;
 };
 } // namespace gg
 
