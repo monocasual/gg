@@ -21,7 +21,7 @@ list(APPEND GG_INCLUDE_DIRS
 	${CMAKE_SOURCE_DIR}/src)
 list(APPEND GG_COMPILER_OPTIONS)
 list(APPEND GG_LIBRARIES)
-list(APPEND GG_COMPILER_FEATURES cxx_std_17)
+list(APPEND GG_COMPILER_FEATURES cxx_std_23)
 list(APPEND GG_TARGET_PROPERTIES)
 
 # ------------------------------------------------------------------------------
