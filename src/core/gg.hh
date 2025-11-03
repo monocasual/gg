@@ -9,7 +9,7 @@ class Window;
 struct Style;
 
 /* init()
- * */
+Initializes the library. Call this at the beginning of your program. */
 
 int init();
 
