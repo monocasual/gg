@@ -139,6 +139,7 @@ void Scrollbar::setPosition(int p, bool fireCallback)
 		return;
 
 	m_handle.move(std::min(std::max(0, p), getMaxPosition()));
+	m_value = getValue();
 
 	if (onChange != nullptr && fireCallback)
 		onChange(getValue());
