@@ -73,17 +73,20 @@ void Viewport::Frame::setContent(Element& e, int w, int h)
 
 void Viewport::Frame::moveContent(geompp::Point<int> p)
 {
-	onContent([bp = getPosition(), p](Element& e) { e.setPosition(bp + p); });
+	onContent([bp = getPosition(), p](Element& e)
+	    { e.setPosition(bp + p); });
 }
 
 void Viewport::Frame::moveContentX(int x)
 {
-	onContent([bx = m_bounds.x, x](Element& e) { e.setX(bx + x); });
+	onContent([bx = m_bounds.x, x](Element& e)
+	    { e.setX(bx + x); });
 }
 
 void Viewport::Frame::moveContentY(int y)
 {
-	onContent([by = m_bounds.y, y](Element& e) { e.setY(by + y); });
+	onContent([by = m_bounds.y, y](Element& e)
+	    { e.setY(by + y); });
 }
 
 /* -------------------------------------------------------------------------- */
@@ -117,16 +120,19 @@ Viewport::Viewport(Direction d)
 	if (m_direction == Direction::HORIZONTAL || m_direction == Direction::BOTH)
 		add(m_hscrollbar);
 
-	m_frame.onMovedContent = [this](geompp::Point<int>) {
+	m_frame.onMovedContent = [this](geompp::Point<int>)
+	{
 		m_hscrollbar.setValue(0.0f, /*fireCallback=*/false);
 		m_vscrollbar.setValue(0.0f, /*fireCallback=*/false);
 	};
 
-	m_hscrollbar.onChange = [this](float v) {
+	m_hscrollbar.onChange = [this](float v)
+	{
 		m_frame.moveContentX(-utils::math::map(v, 1.0f, m_frame.getCoveredPoint().x));
 	};
 
-	m_vscrollbar.onChange = [this](float v) {
+	m_vscrollbar.onChange = [this](float v)
+	{
 		m_frame.moveContentY(-utils::math::map(v, 1.0f, m_frame.getCoveredPoint().y));
 	};
 }
