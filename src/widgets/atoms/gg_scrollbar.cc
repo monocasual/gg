@@ -14,6 +14,7 @@ Scrollbar::Scrollbar(Type t)
 , m_range(DEFAULT_RANGE)
 , m_handle(0, MIN_HANDLE_SIZE)
 , m_value(m_range.getA())
+, m_pinch(0)
 {
 }
 
@@ -45,14 +46,44 @@ void Scrollbar::resized()
 
 void Scrollbar::mouseDown(const MouseEvent& e)
 {
-	setPosition(getAxis(e.relativeTo(*this).position));
+	const int mousePos = getAxis(e.relativeTo(*this).position);
+
+	/* Update pinch point: the point where the cursor lies within the handle. */
+
+	m_pinch = mousePos - m_handle.getA();
+
+	/* Not much to do if the mouse is over the handle: no position change is necessary. */
+
+	if (m_handle.contains(mousePos))
+		return;
+
+	/* If the mouse is NOT over the handle, just move the handle there so that
+	the mouse cursor is right at the middle point. This requires the pinch point
+	to be updated accordingly. */
+
+	const int handleHalf = m_handle.getLength() / 2;
+	const int handlePos  = mousePos - handleHalf;
+
+	m_pinch = handleHalf;
+
+	setPosition(handlePos);
 }
 
 /* -------------------------------------------------------------------------- */
 
 void Scrollbar::mouseDrag(const MouseEvent& e)
 {
-	setPosition(getAxis(e.relativeTo(*this).position));
+	const int mousePos = getAxis(e.relativeTo(*this).position);
+	const int position = mousePos - m_pinch;
+
+	setPosition(position);
+}
+
+/* -------------------------------------------------------------------------- */
+
+void Scrollbar::mouseUp(const MouseEvent&)
+{
+	m_pinch = 0;
 }
 
 /* -------------------------------------------------------------------------- */

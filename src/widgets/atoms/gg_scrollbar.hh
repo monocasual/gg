@@ -23,6 +23,7 @@ public:
 	void resized() override;
 	void mouseDrag(const MouseEvent& e) override;
 	void mouseDown(const MouseEvent& e) override;
+	void mouseUp(const MouseEvent& e) override;
 
 	float getValue() const;
 
@@ -44,6 +45,7 @@ private:
 	geompp::Range<float> m_range;
 	geompp::Range<int>   m_handle;
 	float                m_value;
+	int                  m_pinch;
 };
 } // namespace gg
 
