@@ -17,7 +17,7 @@ void Checkbox::draw(Renderer& ren)
 	const Style& style      = gg::getStyle();
 	const int    padding    = 10;
 	const auto   boxBounds  = m_bounds.withW(m_bounds.h);
-	const auto   textBounds = m_bounds.reduced(m_bounds.h + padding, 0);
+	const auto   textBounds = m_bounds.reduced({m_bounds.h + padding, 0});
 
 	ren.setColor(m_status ? m_enabled ? style.checkboxBoundaryColor() : style.checkboxBoundaryColorDisabled()
 	                      : style.checkboxBackgroundColor());

@@ -23,14 +23,14 @@ void Input::draw(Renderer& ren)
 	if (!m_text.empty())
 	{
 		ren.setColor(gg::getStyle().inputTextColor());
-		ren.drawText(m_text, m_bounds.reduced(5, 0), Renderer::TextAlign::LEFT);
+		ren.drawText(m_text, m_bounds.reduced({5, 0}), Renderer::TextAlign::LEFT);
 	}
 
 	if (m_focus && m_editable)
 	{
 		ren.setColor(gg::getStyle().inputFocusColor());
 		ren.drawRect(m_bounds);
-		ren.drawLine(m_bounds.reduced(5, 5).getHeightAsLine().withShiftedX(getCaretPx(ren)));
+		ren.drawLine(m_bounds.reduced({5, 5}).getHeightAsLine().withShiftedX(getCaretPx(ren)));
 	}
 }
 
