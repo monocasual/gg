@@ -13,7 +13,7 @@ Scrollbar::Scrollbar(Type t)
 , m_type(t)
 , m_range(DEFAULT_RANGE)
 , m_position(0)
-, m_value(m_range.a)
+, m_value(m_range.getA())
 , m_handleSize(MIN_HANDLE_SIZE)
 {
 }
@@ -42,7 +42,7 @@ void Scrollbar::resized()
 	m_handleSize = std::min(m_handleSize, m_type == Type::HORIZONTAL ? getW() : getH());
 
 	// Update position here, in case value has been set manually.
-	m_position = utils::math::map(m_value, m_range.a, m_range.b, 0, getMaxPosition());
+	m_position = utils::math::map(m_value, m_range.getA(), m_range.getB(), 0, getMaxPosition());
 }
 
 /* -------------------------------------------------------------------------- */
@@ -63,7 +63,7 @@ void Scrollbar::mouseDrag(const MouseEvent& e)
 
 float Scrollbar::getValue() const
 {
-	return utils::math::map(m_position, 0, getMaxPosition(), m_range.a, m_range.b);
+	return utils::math::map(m_position, 0, getMaxPosition(), m_range.getA(), m_range.getB());
 }
 
 /* -------------------------------------------------------------------------- */
@@ -81,7 +81,7 @@ void Scrollbar::setHandleSize(int s)
 
 void Scrollbar::setValue(float v, bool fireCallback)
 {
-	m_value = std::clamp(v, m_range.a, m_range.b);
+	m_value = std::clamp(v, m_range.getA(), m_range.getB());
 
 	if (onChange != nullptr && fireCallback)
 		onChange(m_value);
