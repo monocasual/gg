@@ -1,0 +1,6 @@
+{
+  "name": "gg",
+  "version": "0.0.0",
+  "description": "Ultra minimalistic, cross-platform GUI toolkit based on SDL.",
+  "dependencies": ["sdl2", "sdl2-ttf"]
+}

@@ -64,18 +64,12 @@ endif()
 
 # Dependencies
 
-find_library(LIB_SDL2 SDL2)
-find_library(LIB_SDL2_TTF SDL2_ttf)
+find_package(SDL2 CONFIG REQUIRED)
+find_package(SDL2_ttf CONFIG REQUIRED)
 
-if (NOT LIB_SDL2)
-	message(FATAL_ERROR "SDL2 not found")
-endif()
-if (NOT LIB_SDL2_TTF)
-	message(FATAL_ERROR "SDL2_ttf not found")
-endif()
-
-find_package(SDL2 REQUIRED)
-list(APPEND GG_LIBRARIES SDL2 SDL2_ttf)
+list(APPEND GG_LIBRARIES
+    SDL2::SDL2
+    SDL2_ttf)
 
 # ------------------------------------------------------------------------------
 

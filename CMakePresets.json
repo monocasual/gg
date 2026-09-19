@@ -1,0 +1,107 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "common",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        }
+      }
+    },
+    {
+      "name": "common-linux",
+      "inherits": "common",
+      "hidden": true,
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "common-windows",
+      "inherits": "common",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "common-macos",
+      "inherits": "common",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "debug-linux",
+      "inherits": "common-linux",
+      "displayName": "Debug configuration for Linux",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release-linux",
+      "inherits": "common-linux",
+      "binaryDir": "${sourceDir}/build/release",
+      "displayName": "Release configuration for Linux",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug-windows",
+      "inherits": "common-windows",
+      "displayName": "Debug configuration for Windows"
+    },
+    {
+      "name": "release-windows",
+      "inherits": "common-windows",
+      "displayName": "Release configuration for Windows"
+    },
+    {
+      "name": "debug-macos-default",
+      "inherits": "common-macos",
+      "displayName": "Debug configuration for macOS, default generator",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release-macos-default",
+      "inherits": "common-macos",
+      "displayName": "Release configuration for macOS, default generator",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug-macos-xcode",
+      "inherits": "common-macos",
+      "generator": "Xcode",
+      "displayName": "Debug configuration for macOS, Xcode generator"
+    },
+    {
+      "name": "release-macos-xcode",
+      "inherits": "common-macos",
+      "generator": "Xcode",
+      "displayName": "Release configuration for macOS, Xcode generator"
+    }
+  ]
+}
