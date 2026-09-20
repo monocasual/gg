@@ -69,7 +69,7 @@ find_package(SDL2_ttf CONFIG REQUIRED)
 
 list(APPEND GG_LIBRARIES
     SDL2::SDL2
-    SDL2_ttf)
+    SDL2_ttf::SDL2_ttf)
 
 # ------------------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ target_compile_features(gg PRIVATE ${GG_COMPILER_FEATURES})
 target_sources(gg PRIVATE ${GG_SOURCES})
 target_compile_definitions(gg PRIVATE ${GG_PREPROCESSOR_DEFS})
 target_include_directories(gg PRIVATE ${GG_INCLUDE_DIRS})
-target_link_libraries(gg PRIVATE ${GG_LIBRARIES})
+target_link_libraries(gg PUBLIC ${GG_LIBRARIES})
 target_compile_options(gg PRIVATE ${GG_COMPILER_OPTIONS})
 
 set_target_properties(gg PROPERTIES VERSION ${PROJECT_VERSION})

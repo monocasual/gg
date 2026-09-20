@@ -2,7 +2,6 @@
 #define GG_RENDERER_HH
 
 #include "deps/geompp/src/rect.hpp"
-#include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
 #include "gg.hh"
 #include "gg_types.hh"
 #include <SDL2/SDL.h>
@@ -24,7 +23,7 @@ public:
 	Renderer(SDL_Window& win);
 	~Renderer();
 
-	geompp::Rect<int> getTextBounds(const tiny_utf8::string& txt) const;
+	geompp::Rect<int> getTextBounds(const std::string& txt) const;
 
 	void setColor(Color c);
 	void setFont(const std::string& name, int size);
@@ -34,8 +33,8 @@ public:
 
 	void drawRect(int x, int y, int w, int h);
 	void drawRect(geompp::Rect<int> r);
-	void drawText(const tiny_utf8::string& txt, int x, int y, int w, int h, TextAlign t = TextAlign::CENTER);
-	void drawText(const tiny_utf8::string& txt, geompp::Rect<int> r, TextAlign t = TextAlign::CENTER);
+	void drawText(const std::string& txt, int x, int y, int w, int h, TextAlign t = TextAlign::CENTER);
+	void drawText(const std::string& txt, geompp::Rect<int> r, TextAlign t = TextAlign::CENTER);
 	void fillRect(int x, int y, int w, int h);
 	void fillRect(geompp::Rect<int> r);
 
@@ -43,13 +42,13 @@ public:
 	void drawLine(geompp::Line<int> l) const;
 
 	/* clear
-    Clears the entire screen to currently selected color. */
+	Clears the entire screen to currently selected color. */
 
 	void clear();
 
 	/* render
-    Updates the screen with any rendering performed since the previous call.
-    Call this to actually display things on screen. */
+	Updates the screen with any rendering performed since the previous call.
+	Call this to actually display things on screen. */
 
 	void render();
 
@@ -57,14 +56,14 @@ private:
 	Color getCurrentColor() const;
 
 	/* Info on SDL renderer:
-    http://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer */
+	http://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer */
 
 	SDL_Renderer* m_ren;
 
 	/* font
-    Pointer to a TTF resource. 
-    TODO - I don't think each renderer needs a TTF_Font pointer. One per
-    app instance should be enough. To be investigated... */
+	Pointer to a TTF resource.
+	TODO - I don't think each renderer needs a TTF_Font pointer. One per
+	app instance should be enough. To be investigated... */
 
 	TTF_Font* m_font;
 };

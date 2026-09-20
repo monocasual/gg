@@ -7,3 +7,6 @@
 [submodule "src/deps/mcl-utils"]
 	path = src/deps/mcl-utils
 	url = https://github.com/monocasual/mcl-utils.git
+[submodule "src/deps/utfcpp"]
+	path = src/deps/utfcpp
+	url = https://github.com/nemtrif/utfcpp

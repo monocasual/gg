@@ -38,7 +38,7 @@ Renderer::~Renderer()
 
 /* -------------------------------------------------------------------------- */
 
-geompp::Rect<int> Renderer::getTextBounds(const tiny_utf8::string& txt) const
+geompp::Rect<int> Renderer::getTextBounds(const std::string& txt) const
 {
 	int tw, th;
 	TTF_SizeUTF8(m_font, txt.c_str(), &tw, &th);
@@ -122,13 +122,13 @@ void Renderer::fillRect(geompp::Rect<int> r)
 
 /* -------------------------------------------------------------------------- */
 
-void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h,
+void Renderer::drawText(const std::string& txt, int x, int y, int w, int h,
     TextAlign align)
 {
 	SDL_Color fgcolor;
 	SDL_GetRenderDrawColor(m_ren, &fgcolor.r, &fgcolor.g, &fgcolor.b, &fgcolor.a);
 
-	/* Solid, shaded or blended font rendering: 
+	/* Solid, shaded or blended font rendering:
 	https://www.libsdl.org/projects/SDL_ttf/docs/SDL_ttf_42.html */
 
 	SDL_Surface* surf    = TTF_RenderUTF8_Blended(m_font, txt.c_str(), fgcolor);
@@ -154,7 +154,7 @@ void Renderer::drawText(const tiny_utf8::string& txt, int x, int y, int w, int h
 	SDL_DestroyTexture(texture);
 }
 
-void Renderer::drawText(const tiny_utf8::string& txt, geompp::Rect<int> r, TextAlign t)
+void Renderer::drawText(const std::string& txt, geompp::Rect<int> r, TextAlign t)
 {
 	drawText(txt, r.x, r.y, r.w, r.h, t);
 }
