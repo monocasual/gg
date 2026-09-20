@@ -68,6 +68,13 @@ public:
 private:
 	static constexpr int SCROLLBAR_SIZE = 20;
 
+	/* updateScrollbars
+	Resizes the scrollbar handles according to the ratio between the frame
+	size and the content size, so that fully visible content yields a full
+	(non-scrollable) handle. */
+
+	void updateScrollbars();
+
 	Direction m_direction;
 	Frame     m_frame;
 	Scrollbar m_vscrollbar;

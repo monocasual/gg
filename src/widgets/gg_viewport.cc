@@ -1,6 +1,7 @@
 #include "gg_viewport.hh"
 #include "core/gg_renderer.hh"
 #include "deps/mcl-utils/src/math.hpp"
+#include <algorithm>
 
 using namespace mcl;
 
@@ -144,6 +145,8 @@ void Viewport::resized()
 	m_frame.setBounds(m_bounds.withTrimmedRight(SCROLLBAR_SIZE).withTrimmedBottom(SCROLLBAR_SIZE));
 	m_vscrollbar.setBounds(m_bounds.withTrimmedBottom(SCROLLBAR_SIZE).withTrimmedLeft(m_frame.getBounds().w));
 	m_hscrollbar.setBounds(m_bounds.withTrimmedRight(SCROLLBAR_SIZE).withTrimmedTop(m_frame.getBounds().h));
+
+	updateScrollbars();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -151,6 +154,8 @@ void Viewport::resized()
 void Viewport::setContent(Element& e, int w, int h)
 {
 	m_frame.setContent(e, w, h);
+
+	updateScrollbars();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -158,5 +163,20 @@ void Viewport::setContent(Element& e, int w, int h)
 Element* Viewport::getContent()
 {
 	return m_frame.getContent();
+}
+
+/* -------------------------------------------------------------------------- */
+
+void Viewport::updateScrollbars()
+{
+	const Element* content  = m_frame.getContent();
+	const int      contentW = content != nullptr ? content->getBounds().w : m_frame.getBounds().w;
+	const int      contentH = content != nullptr ? content->getBounds().h : m_frame.getBounds().h;
+
+	const float hRatio = contentW > 0 ? std::min(1.0f, static_cast<float>(m_frame.getBounds().w) / contentW) : 1.0f;
+	const float vRatio = contentH > 0 ? std::min(1.0f, static_cast<float>(m_frame.getBounds().h) / contentH) : 1.0f;
+
+	m_hscrollbar.setHandleSize(static_cast<int>(m_hscrollbar.getBounds().w * hRatio));
+	m_vscrollbar.setHandleSize(static_cast<int>(m_vscrollbar.getBounds().h * vRatio));
 }
 } // namespace gg
