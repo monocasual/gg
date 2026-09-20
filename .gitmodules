@@ -1,6 +1,3 @@
-[submodule "src/deps/tiny-utf8"]
-	path = src/deps/tiny-utf8
-	url = https://github.com/DuffsDevice/tiny-utf8.git
 [submodule "src/deps/geompp"]
 	path = src/deps/geompp
 	url = https://github.com/monocasual/geompp.git
