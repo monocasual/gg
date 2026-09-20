@@ -128,7 +128,7 @@ void Renderer::drawText(const std::string& txt, int x, int y, int w, int h,
 	SDL_Color fgcolor;
 	SDL_GetRenderDrawColor(m_ren, &fgcolor.r, &fgcolor.g, &fgcolor.b, &fgcolor.a);
 
-	/* Solid, shaded or blended font rendering: 
+	/* Solid, shaded or blended font rendering:
 	https://www.libsdl.org/projects/SDL_ttf/docs/SDL_ttf_42.html */
 
 	SDL_Surface* surf    = TTF_RenderUTF8_Blended(m_font, txt.c_str(), fgcolor);
