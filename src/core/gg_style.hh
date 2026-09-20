@@ -9,6 +9,8 @@ namespace gg
 {
 struct Style
 {
+	virtual ~Style() = default;
+
 	virtual std::string fontPath() const { return GG_DEFAULT_FONT_PATH; }
 	virtual int         fontSize() const { return GG_DEFAULT_FONT_SIZE; }
 
