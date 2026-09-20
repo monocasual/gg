@@ -7,7 +7,7 @@ namespace gg
 Input::Input(const std::string& s)
 : Element()
 , onChange(nullptr)
-, m_text(s)
+, m_text(utf8::utf8to32(s))
 , m_caret(0)
 , m_editable(true)
 {
@@ -23,7 +23,7 @@ void Input::draw(Renderer& ren)
 	if (!m_text.empty())
 	{
 		ren.setColor(gg::getStyle().inputTextColor());
-		ren.drawText(m_text, m_bounds.reduced({5, 0}), Renderer::TextAlign::LEFT);
+		ren.drawText(utf8::utf32to8(m_text), m_bounds.reduced({5, 0}), Renderer::TextAlign::LEFT);
 	}
 
 	if (m_focus && m_editable)
@@ -46,20 +46,20 @@ void Input::keyPress(const KeyEvent& e)
 	switch (e.type)
 	{
 	case KeyEvent::Type::TEXT:
-		m_text.insert(m_caret++, e.ch);
+		m_text.insert(m_caret++, utf8::utf8to32(std::string(e.ch)));
 		changed = true;
 		break;
 
 	case KeyEvent::Type::BACKSPACE:
 		if (m_caret > 0)
 		{
-			m_text.erase(--m_caret);
+			m_text.erase(--m_caret, 1);
 			changed = true;
 		}
 		break;
 
 	case KeyEvent::Type::DELETE:
-		m_text.erase(m_caret);
+		m_text.erase(m_caret, 1);
 		changed = true;
 		break;
 
@@ -83,17 +83,17 @@ void Input::keyPress(const KeyEvent& e)
 
 /* -------------------------------------------------------------------------- */
 
-std::string Input::getText() const { return m_text.cpp_str(); }
+std::string Input::getText() const { return utf8::utf32to8(m_text); }
 
 /* -------------------------------------------------------------------------- */
 
 void Input::setEditable(bool v) { m_editable = v; }
-void Input::setText(const std::string& s) { m_text = s; }
+void Input::setText(const std::string& s) { m_text = utf8::utf8to32(s); }
 
 /* -------------------------------------------------------------------------- */
 
 int Input::getCaretPx(const Renderer& ren) const
 {
-	return ren.getTextBounds(m_text.substr(0, m_caret)).xw;
+	return ren.getTextBounds(utf8::utf32to8(m_text.substr(0, m_caret))).xw;
 }
 } // namespace gg

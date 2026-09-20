@@ -2,7 +2,8 @@
 #define GG_INPUT_HH
 
 #include "core/gg_element.hh"
-#include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
+#include "deps/utfcpp/source/utf8.h"
+#include <functional>
 
 namespace gg
 {
@@ -25,9 +26,9 @@ public:
 private:
 	int getCaretPx(const Renderer& ren) const;
 
-	tiny_utf8::string            m_text;
-	tiny_utf8::string::size_type m_caret;
-	bool                         m_editable;
+	std::u32string            m_text;
+	std::u32string::size_type m_caret;
+	bool                      m_editable;
 };
 } // namespace gg
 

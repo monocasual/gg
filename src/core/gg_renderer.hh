@@ -2,7 +2,6 @@
 #define GG_RENDERER_HH
 
 #include "deps/geompp/src/rect.hpp"
-#include "deps/tiny-utf8/include/tinyutf8/tinyutf8.h"
 #include "gg.hh"
 #include "gg_types.hh"
 #include <SDL2/SDL.h>
@@ -24,7 +23,7 @@ public:
 	Renderer(SDL_Window& win);
 	~Renderer();
 
-	geompp::Rect<int> getTextBounds(const tiny_utf8::string& txt) const;
+	geompp::Rect<int> getTextBounds(const std::string& txt) const;
 
 	void setColor(Color c);
 	void setFont(const std::string& name, int size);
@@ -34,8 +33,8 @@ public:
 
 	void drawRect(int x, int y, int w, int h);
 	void drawRect(geompp::Rect<int> r);
-	void drawText(const tiny_utf8::string& txt, int x, int y, int w, int h, TextAlign t = TextAlign::CENTER);
-	void drawText(const tiny_utf8::string& txt, geompp::Rect<int> r, TextAlign t = TextAlign::CENTER);
+	void drawText(const std::string& txt, int x, int y, int w, int h, TextAlign t = TextAlign::CENTER);
+	void drawText(const std::string& txt, geompp::Rect<int> r, TextAlign t = TextAlign::CENTER);
 	void fillRect(int x, int y, int w, int h);
 	void fillRect(geompp::Rect<int> r);
 
